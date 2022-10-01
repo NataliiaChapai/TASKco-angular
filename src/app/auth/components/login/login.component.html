@@ -1,0 +1,27 @@
+<section class="login">
+    <div class="login__google">
+        <a class="login__google-link" [href]="url">
+            <img src="../../../assets/images/google-logo.png" alt="google logo" class="goole-logo" width="20">
+            Google
+        </a>
+    </div>
+    <form [formGroup]="form" class="login__form">
+        <fieldset>
+            <div [ngClass]="{invalid: form.controls['email'].touched && form.controls['email'].invalid}">
+                <input formControlName="email" type="email" class="login__input" placeholder="Email">
+                <div class="validation" *ngIf="form.controls['email'].touched && form.controls['email'].invalid">
+                    <small *ngIf="form.controls['email']">Email address must be valid</small>
+                </div>
+            </div>
+            <div [ngClass]="{invalid: form.controls['password'].touched && form.controls['password'].invalid}">
+                <input formControlName="password" type="password" class="login__input" placeholder="Password">
+                <div class="validation" *ngIf="form.controls['password'].touched && form.controls['password'].invalid">
+                    <small *ngIf="form.controls['email']">Password length must be at least 8 characters</small>
+                </div>
+            </div>
+        </fieldset>
+        <p class="error" *ngIf="auth.error$ | async as error">{{error}}</p>
+        <p class="forgot-password" *ngIf="auth.error$ | async as error">Forgot password</p>
+        <button (click)="login()" [disabled]="!form.valid || submitted" class="login__btn">Login</button>
+    </form>
+</section>

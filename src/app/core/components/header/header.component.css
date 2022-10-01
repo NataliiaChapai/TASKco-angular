@@ -1,0 +1,25 @@
+.header {
+    background-color:lightseagreen;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 50px;
+    font-size: 20px;
+    color: azure;
+}
+
+.header__link {
+    color: azure;
+}
+
+.header__container {
+    display: flex;
+    justify-content:space-around;
+}
+
+.header__link {
+    margin: 0 10px;
+}
+
+.active {
+    color: green
+}
