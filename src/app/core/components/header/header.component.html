@@ -1,10 +1,8 @@
 <section class="header">
     <div class="header__container">
-        <a [routerLink]="['/']" class="header__link">Home</a>
+        <a [routerLink]="['/']" class="header__link">TASKco</a>
     </div>
     <div class="header__container" >
-        <a *ngIf="isLoggedOut$ | async" [routerLink]="['/register']" routerLinkActive="active" class="header__link">Register</a>
-        <a *ngIf="isLoggedOut$ | async" [routerLink]="['/login']" routerLinkActive="active" class="header__link">Login</a>
         <a *ngIf="isLoggedIn$ | async" [routerLink]="['/dashboard']" routerLinkActive="active" class="header__link">Dashboard</a>
         <a *ngIf="(user$ | async) as user" class="header__link" >{{user.email}}</a>
         <a *ngIf="isLoggedIn$ | async" [routerLink]="['/']" (click)="logout($event)" class="header__link">Logout</a>

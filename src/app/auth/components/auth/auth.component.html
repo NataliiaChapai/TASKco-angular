@@ -1,11 +1,11 @@
-<section class="register">
-    <div class="register__google">
-        <a class="register__google-link" [href]="url">
+<section class="login">
+    <div class="login__google">
+        <a class="login__google-link" [href]="url">
             <img src="../../../assets/images/google-logo.png" alt="google logo" class="goole-logo" width="20">
             Google
         </a>
     </div>
-    <form [formGroup]="form" class="register__form">
+    <form [formGroup]="form" class="login__form">
         <fieldset>
             <div [ngClass]="{invalid: form.controls['email'].touched && form.controls['email'].invalid}">
                 <input formControlName="email" type="email" class="login__input" placeholder="Email">
@@ -20,6 +20,9 @@
                 </div>
             </div>
         </fieldset>
-        <button (click)="register()" [disabled]="!form.valid || submitted" class="register__btn">Register</button>
+        <p class="error" *ngIf="auth.error$ | async as error">{{error}}</p>
+        <p class="forgot-password" *ngIf="auth.error$ | async as error">Forgot password</p>
+        <button (click)="register()" [disabled]="!form.valid || submitted" class="login__btn">Register</button>
+        <button (click)="login()" [disabled]="!form.valid || submitted" class="login__btn">Login</button>
     </form>
 </section>

@@ -6,11 +6,12 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { LoginRes } from '../models/loginRes';
 import { environment } from 'src/environments/environment';
 import { CurrentUser } from '../models/currentUser';
+import { Router } from '@angular/router';
 
 const ANONYMOUS_USER: CurrentUser = {
-        email: null,
-        avatarUrl: null
-    }
+  email: null,
+  avatarUrl: null,
+};
 
 @Injectable({
   providedIn: 'root',
@@ -20,16 +21,15 @@ export class AuthService {
 
   public error$: Subject<string> = new Subject();
 
-  user$: Observable<CurrentUser> = this.subject.asObservable().pipe(filter(user => !!user));
+  user$: Observable<CurrentUser> = this.subject
+    .asObservable()
+    .pipe(filter(user => !!user));
+  isLoggedIn$: Observable<boolean> = this.user$.pipe(map(user => !!user.email));
+  isLoggedOut$: Observable<boolean> = this.isLoggedIn$.pipe(
+    map(loggedIn => !loggedIn)
+  );
 
-  isLoggedIn$: Observable<boolean>;
-  isLoggedOut$: Observable<boolean>;
-
-  constructor(private http: HttpClient) {
-    this.isLoggedIn$ = this.user$.pipe(map(user => !!user.email));
-
-    this.isLoggedOut$ = this.isLoggedIn$.pipe(map(loggedIn => !loggedIn));
-
+  constructor(private http: HttpClient, private router: Router) {
     const user = localStorage.getItem('user');
 
     if (user) {
@@ -53,8 +53,8 @@ export class AuthService {
       tap(res => {
         const { token } = res;
         const { user } = res;
-        const {email, avatarUrl} = user;
-        const currentUser = {email, avatarUrl};
+        const { email, avatarUrl } = user;
+        const currentUser = { email, avatarUrl };
         this.subject.next(currentUser);
         localStorage.setItem('token', JSON.stringify(token));
         localStorage.setItem('user', JSON.stringify(user));
@@ -68,18 +68,17 @@ export class AuthService {
     const url = environment.apiUrl + '/auth/logout';
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    this.router.navigateByUrl('/');
     return this.http.get(url).pipe(
-        tap(() => this.subject.next(ANONYMOUS_USER)),
-        shareReplay())
+      shareReplay(),
+      tap(() => this.subject.next(ANONYMOUS_USER))
+    );
   }
 
   private handleError(error: HttpErrorResponse) {
     const { message } = error.error;
-    this.error$.next(message)
+    this.error$.next(message);
     return throwError(error);
   }
 
-  // isLogin(): boolean {
-  //   return !!this.token;
-  // }
 }
