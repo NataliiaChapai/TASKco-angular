@@ -16,8 +16,9 @@ const ANONYMOUS_USER: CurrentUser = {
 @Injectable({
   providedIn: 'root',
 })
+
 export class AuthService {
-  private subject = new BehaviorSubject<CurrentUser>(ANONYMOUS_USER);
+  public subject = new BehaviorSubject<CurrentUser>(ANONYMOUS_USER);
 
   public error$: Subject<string> = new Subject();
 
@@ -33,6 +34,7 @@ export class AuthService {
     const user = localStorage.getItem('user');
 
     if (user) {
+      console.log(user);
       this.subject.next(JSON.parse(user));
     }
   }
@@ -48,6 +50,7 @@ export class AuthService {
   }
 
   login(data: User) {
+
     const url = environment.apiUrl + '/auth/login';
     return this.http.post<LoginRes>(url, data).pipe(
       tap(res => {
@@ -57,7 +60,7 @@ export class AuthService {
         const currentUser = { email, avatarUrl };
         this.subject.next(currentUser);
         localStorage.setItem('token', JSON.stringify(token));
-        localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('user', JSON.stringify(currentUser));
       }),
       catchError(this.handleError.bind(this)),
       shareReplay()
@@ -65,14 +68,17 @@ export class AuthService {
   }
 
   logout() {
+    this.subject.next(ANONYMOUS_USER)
     const url = environment.apiUrl + '/auth/logout';
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     this.router.navigateByUrl('/');
-    return this.http.get(url).pipe(
-      shareReplay(),
-      tap(() => this.subject.next(ANONYMOUS_USER))
-    );
+    return this.http.get(url)
+  }
+
+  getToken() {
+    const token = localStorage.getItem('token');
+    return token;
   }
 
   private handleError(error: HttpErrorResponse) {
