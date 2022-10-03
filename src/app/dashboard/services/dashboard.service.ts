@@ -9,8 +9,6 @@ import { Board } from '../models/board.interface';
 })
 export class DashboardService {
 
-  
-
   constructor(private http: HttpClient) { }
 
   getBoards(): Observable<Board[]> {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, of as observableOf } from 'rxjs';
-import { catchError, filter, finalize } from 'rxjs/operators';
+import { catchError, filter, finalize, tap } from 'rxjs/operators';
 
 import { Board } from '../../models/board.interface';
 import { DashboardService } from '../../services/dashboard.service';
@@ -28,8 +28,6 @@ export class BoardComponent implements OnInit {
   deleteBoard(id: string) {
     this.isLoaded = false;
     this.dashboard.deleteBoard(id)
-    .pipe(finalize(() => this.isLoaded = true),
-    catchError(err => observableOf([])));
-    // .pipe(filter(board => board.id !== id))
+    .subscribe(() => this.boards$ = this.boards$.pipe(filter(board => board[0].id !== id)))
   }
 }

@@ -8,6 +8,7 @@
     </div>
     
 </div>
+<app-loader *ngIf="!isLoaded" class="loader"></app-loader>
 <div class="boards">
     <div *ngFor="let board of boards$ | async | filter: filterByName" class="board">
     <h3 class="board__name">{{board.name}}</h3>
@@ -18,7 +19,6 @@
         <button class="board__btn" (click)="deleteBoard(board._id)">Delete</button>
     </div>
 </div>
-<app-loader *ngIf="!isLoaded"></app-loader>
 </div>
 
 <!-- [routerLink]="['/board', board._id]" -->
