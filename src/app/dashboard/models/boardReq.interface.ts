@@ -1,4 +1,4 @@
-export interface NewBoard {
+export interface BoardReq {
     name: string;
     description?: string;
 }

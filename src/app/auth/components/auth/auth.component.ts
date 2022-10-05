@@ -44,10 +44,10 @@ export class AuthComponent implements OnInit {
   }
 
   register(): void {
-    const val = this.form.value;
+    const value = this.form.value;
     this.submitted = true;
 
-    this.auth.register(val).subscribe(
+    this.auth.register(value).subscribe(
       () => {
         this.router.navigateByUrl('/');
         this.submitted = false;
@@ -57,10 +57,10 @@ export class AuthComponent implements OnInit {
   }
 
   login() {
-    const val = this.form.value;
+    const value = this.form.value;
     this.submitted = true;
 
-    this.auth.login(val).subscribe(
+    this.auth.login(value).subscribe(
       () => {
         this.router.navigateByUrl('/dashboard');
         this.submitted = false;

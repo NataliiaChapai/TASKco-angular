@@ -3,7 +3,8 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Board } from '../models/board.interface';
-import { NewBoard } from '../models/newBoard.interface';
+import { BoardReq } from '../models/boardReq.interface';
+import { ModalService } from './modal.service';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,7 @@ export class DashboardService {
     return this.http.delete<void>(url)
   }
 
-  addBoard(board: NewBoard): Observable<void> {
+  addBoard(board: BoardReq): Observable<void> {
     const url = environment.apiUrl + `/boards`;
     return this.http.post<void>(url, board)
   }

@@ -9,6 +9,7 @@ import { AuthService } from '../auth/services/auth.service';
 import { BoardComponent } from './components/board/board.component';
 import { LoaderModule } from '../shared/components/loader/loader.module';
 import { PipesModule } from '../shared/pipes/pipes.module';
+import { ModalComponent } from './components/modal/modal.component';
 
 
 const routes: Routes = [
@@ -23,6 +24,7 @@ const routes: Routes = [
   declarations: [
     DashboardComponent,
     BoardComponent,
+    ModalComponent,
   ],
   imports: [
     CommonModule,
