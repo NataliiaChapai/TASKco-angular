@@ -1,0 +1,102 @@
+:host {
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+    align-items: center;
+}
+
+.login {
+    box-shadow: 0px 10px 20px rgba(103, 108, 120, 0.4);
+    width: 30%;
+    text-align: center;
+    height: 400px;
+    padding: 50px;
+    border-radius: 20px;
+    background-color: azure;
+}
+
+.login__google {
+    padding: 20px;
+    text-align: center;
+}
+
+.login p {
+    margin-bottom: 20px;
+}
+
+.login__google-link, .register__btn {
+    margin: 0 auto;
+    max-width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: lightseagreen;
+    background-color: azure;
+    box-shadow: 0px 10px 20px rgba(103, 108, 120, 0.4);
+    border: 1px solid lightseagreen;
+    border-radius: 7px;
+    cursor: pointer;
+}
+.register__btn {
+    display: inline;
+}
+
+.goole-logo {
+    margin-right: 10px;
+}
+
+.login__google-link:hover, .register__btn:hover {
+    background-color: lightseagreen;
+    color: azure;
+    box-shadow: 0px 10px 20px rgba(103, 108, 120, 0.6);
+}
+
+.login__input {
+    border-radius: 7px;
+    border: 1px solid lightseagreen;
+    padding: 10px;
+    width: 75%;
+    margin: 10px 0;
+    box-shadow: 0px 10px 20px rgba(103, 108, 120, 0.4);
+    outline: none;
+}
+
+.login__input:focus {
+    outline: 2px solid lightseagreen;
+}
+
+.validation {
+    color: red;
+
+    text-align: left;
+    padding-left: 50px;
+}
+
+.login__btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: azure;
+    background-color: lightseagreen;
+    border-radius: 7px;
+    cursor: pointer;
+    box-shadow: 0px 10px 20px rgba(103, 108, 120, 0.4);
+    display: inline;
+    margin-left: 20px;
+    margin-top: 20px;
+    border: 1px solid lightseagreen;
+}
+
+.btn__wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+*:disabled, *:disabled:hover {
+    background-color: dimgrey;
+    color: linen;
+    opacity: 0.4;
+    box-shadow: 0px 10px 20px rgba(103, 108, 120, 0.4);
+    cursor: auto;
+}

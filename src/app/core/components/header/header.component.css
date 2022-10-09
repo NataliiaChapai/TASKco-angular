@@ -6,6 +6,7 @@
     padding: 15px 50px;
     font-size: 20px;
     color: azure;
+    box-shadow: 0px 10px 20px rgba(103, 108, 120, 0.4);
 }
 
 .header__link {

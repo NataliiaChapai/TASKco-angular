@@ -1,10 +1,12 @@
 <section class="login">
     <div class="login__google">
+        <p>You can log in with your Google Account:</p>
         <a class="login__google-link" [href]="url">
             <img src="../../../assets/images/google-logo.png" alt="google logo" class="goole-logo" width="20">
             Google
         </a>
     </div>
+    <p>Or log in using an email and password, after registering:</p>
     <form [formGroup]="form" class="login__form">
             <div [ngClass]="{invalid: form.controls['email'].touched && form.controls['email'].invalid}">
                 <input formControlName="email" type="email" class="login__input" placeholder="Email">
@@ -20,7 +22,7 @@
             </div>
         <p class="error" *ngIf="auth.error$ | async as error">{{error}}</p>
         <p class="forgot-password" *ngIf="auth.error$ | async as error">Forgot password</p>
-        <button (click)="register()" [disabled]="!form.valid || submitted" class="login__btn">Register</button>
+        <button (click)="register()" [disabled]="!form.valid || submitted" class="register__btn">Register</button>
         <button (click)="login()" [disabled]="!form.valid || submitted" class="login__btn">Login</button>
     </form>
 </section>
