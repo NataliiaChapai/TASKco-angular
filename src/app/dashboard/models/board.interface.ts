@@ -1,5 +1,5 @@
 export interface Board {
-    id: string;
+    _id: string;
     name: string;
     description?: string;
     createdAt: string;

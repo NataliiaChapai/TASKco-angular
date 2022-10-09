@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Observable, of as observableOf } from 'rxjs';
 import { catchError, filter, finalize} from 'rxjs/operators';
 
@@ -12,9 +12,13 @@ import { ModalService } from '../../services/modal.service';
   styleUrls: ['./board.component.css'],
 })
 export class BoardComponent implements OnInit {
+  
   boards$: Observable<Board[]>;
   isLoaded: boolean;
   filterByName = '';
+  showModal = false;
+  boardId = '';
+  submitted = false;
 
   constructor(private dashboard: DashboardService, public modal: ModalService) {
     this.isLoaded = false;
@@ -29,7 +33,23 @@ export class BoardComponent implements OnInit {
   deleteBoard(id: string) {
     this.isLoaded = false;
     this.dashboard.deleteBoard(id)
-    .subscribe(() => this.boards$ = this.boards$.pipe(filter(board => board[0].id !== id)))
+    .subscribe(() => this.boards$ = this.boards$.pipe(filter(board => board[0]._id !== id)))
+  }
+
+  editBoard(id: string) {
+    this.boardId = id;    
+    this.modal.showEdit();
+  }
+
+  updateBoard(name: any) {
+    this.dashboard.updateBoard(this.boardId, name).subscribe(
+        () => {
+          this.submitted = false;
+          this.modal.closeEdit();
+        },
+        () => (this.submitted = false)
+      );
+    
   }
 
 }

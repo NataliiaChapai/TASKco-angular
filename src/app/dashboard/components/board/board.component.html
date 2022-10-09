@@ -13,10 +13,10 @@
   </div>
 </div>
 <app-loader *ngIf="!isLoaded" class="loader"></app-loader>
-<div class="boards">
+<div class="boards" >
   <div
     *ngFor="let board of boards$ | async | filter: filterByName"
-    class="board"
+    class="board" 
   >
     <h3 class="board__name">{{ board.name }}</h3>
     <p class="board__description">{{ board.description }}</p>
@@ -35,12 +35,12 @@
           </li>
         </ul>
       </div>
-      <button class="board__btn">Edit</button>
+      <button class="board__btn" (click)="editBoard(board._id)" >Edit</button>
       <button class="board__btn" (click)="deleteBoard(board._id)">
         Delete
       </button>
     </div>
   </div>
 </div>
-
+<app-edit-modal (onUpdate)="updateBoard($event)" *ngIf="modal.showEditModal"></app-edit-modal>
 <!-- [routerLink]="['/board', board._id]" -->

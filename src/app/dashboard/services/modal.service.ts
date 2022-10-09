@@ -5,6 +5,8 @@ import { Injectable } from '@angular/core';
 })
 export class ModalService {
   showModal = false;
+  showEditModal = false;
+
   constructor() { }
 
   show() {
@@ -13,5 +15,13 @@ export class ModalService {
 
   close() {
     this.showModal = false;
+  }
+
+  showEdit() {
+    this.showEditModal = true;
+  }
+
+  closeEdit() {
+    this.showEditModal = false;
   }
 }

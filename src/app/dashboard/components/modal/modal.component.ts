@@ -30,7 +30,8 @@ export class ModalComponent implements OnInit {
     addBoard() {
       const value = this.form.value;
       this.submitted = true;
-      this.dashboard.addBoard(value).subscribe(
+      this.dashboard.addBoard(value)
+      .subscribe(
         () => {
           this.submitted = false;
           this.modal.close();

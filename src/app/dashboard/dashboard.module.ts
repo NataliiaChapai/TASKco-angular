@@ -10,6 +10,8 @@ import { BoardComponent } from './components/board/board.component';
 import { LoaderModule } from '../shared/components/loader/loader.module';
 import { PipesModule } from '../shared/pipes/pipes.module';
 import { ModalComponent } from './components/modal/modal.component';
+import { EditModalComponent } from './components/edit-modal/edit-modal.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 const routes: Routes = [
@@ -25,6 +27,7 @@ const routes: Routes = [
     DashboardComponent,
     BoardComponent,
     ModalComponent,
+    EditModalComponent,
   ],
   imports: [
     CommonModule,
@@ -33,7 +36,8 @@ const routes: Routes = [
     HttpClientModule,
     LoaderModule,
     PipesModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ],
   providers: [AuthGuard, AuthService]
 })
