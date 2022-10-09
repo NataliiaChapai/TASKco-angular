@@ -15,8 +15,7 @@ export class TokenInterceptorService implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     const token = this.authService.getToken();
     if (token) {
-      console.log(token);
-      
+  
       request = request.clone({
         setHeaders: {
           Authorization: `Bearer ${JSON.parse(token)}`,

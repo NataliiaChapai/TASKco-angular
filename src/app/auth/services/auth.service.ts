@@ -34,7 +34,6 @@ export class AuthService {
     const user = localStorage.getItem('user');
 
     if (user) {
-      console.log(user);
       this.subject.next(JSON.parse(user));
     }
   }

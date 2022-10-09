@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Observable, of as observableOf } from 'rxjs';
-import { catchError, filter, finalize} from 'rxjs/operators';
+import { catchError, filter, finalize, tap} from 'rxjs/operators';
 
 import { Board } from '../../models/board.interface';
 import { DashboardService } from '../../services/dashboard.service';
@@ -46,10 +46,14 @@ export class BoardComponent implements OnInit {
         () => {
           this.submitted = false;
           this.modal.closeEdit();
+          this.boards$ = this.boards$.pipe(tap(board => {
+            if (board[0]._id === this.boardId) {
+             board[0].name = name;
+            }
+           }))
         },
         () => (this.submitted = false)
       );
-    
   }
 
 }
