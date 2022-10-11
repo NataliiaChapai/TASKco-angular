@@ -25,7 +25,7 @@ export class HeaderComponent implements OnInit {
     this.user$ = this.auth.user$.pipe(map(res => res));
     this.avatarUrl$ = this.auth.user$.pipe(map(res => {
       if(!res.avatarUrl && res.email) {
-        return '../../../../assets/images/avatarka.png';
+        return './assets/images/avatarka.png';
       }
       return res.avatarUrl;
     }));
