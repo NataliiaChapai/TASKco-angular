@@ -7,7 +7,14 @@
       placeholder="Filter boards..."
       [(ngModel)]="filterByName"
     />
-    <button class="toolbar__btn">Sort By Dropdown</button>
+    <select name="sort" (change)="sort('$event.target.value')">
+      <option value="" hidden>Sort by ...</option>
+      <option value="name">name</option>
+      <option value="date" >date</option>
+      <option value="todo">"Todo"</option>
+      <option value="inprogress">"In progress"</option>
+      <option value="done">"Done"</option>
+    </select>
     <button class="toolbar__btn">ASC</button>
     <button class="toolbar__btn">DESC</button>
   </div>

@@ -5,7 +5,7 @@ import { Board } from 'src/app/dashboard/models/board.interface';
   name: 'filter',
 })
 export class FilterPipe implements PipeTransform {
-  transform(list: Board[] | null, filterText: string): any {
+  transform(list: Board[] | null, filterText: string): Board[] | null {
     if (filterText === '') {
       return list;
     } else if (list) {

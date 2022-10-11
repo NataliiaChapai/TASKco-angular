@@ -3,4 +3,9 @@ export interface Board {
     name: string;
     description?: string;
     createdAt: string;
+    taskCount: {
+        todo: string,
+        inprogress: string,
+        done: string
+    }
 }

@@ -56,4 +56,8 @@ export class BoardComponent implements OnInit {
       );
   }
 
+  sort(value: string): void {
+
+  }
+
 }
