@@ -10,6 +10,10 @@ import { SortPipe } from './sort/sort.pipe';
   imports: [
     CommonModule
   ],
-  exports: [FilterPipe]
+  exports: [
+    FilterPipe,
+    SortPipe
+  
+  ]
 })
 export class PipesModule { }

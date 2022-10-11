@@ -3,6 +3,7 @@ import { Board } from 'src/app/dashboard/models/board.interface';
 
 @Pipe({
   name: 'filter',
+  pure: true
 })
 export class FilterPipe implements PipeTransform {
   transform(list: Board[] | null, filterText: string): Board[] | null {

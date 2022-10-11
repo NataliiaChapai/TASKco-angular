@@ -7,7 +7,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from '../auth/services/auth.service';
 import { BoardComponent } from './components/board/board.component';
-import { LoaderModule } from '../shared/components/loader/loader.module';
 import { PipesModule } from '../shared/pipes/pipes.module';
 import { ModalComponent } from './components/modal/modal.component';
 import { EditModalComponent } from './components/edit-modal/edit-modal.component';
@@ -34,7 +33,6 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     ReactiveFormsModule,
     HttpClientModule,
-    LoaderModule,
     PipesModule,
     FormsModule,
     SharedModule

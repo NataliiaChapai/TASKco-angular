@@ -16,6 +16,7 @@ export class BoardComponent implements OnInit {
   boards$: Observable<Board[]>;
   isLoaded: boolean;
   filterByName = '';
+  sort = '';
   showModal = false;
   boardId = '';
   submitted = false;
@@ -56,8 +57,8 @@ export class BoardComponent implements OnInit {
       );
   }
 
-  sort(value: string): void {
+  // sort(value: string): void {
 
-  }
+  // }
 
 }

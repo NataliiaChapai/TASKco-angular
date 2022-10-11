@@ -3,7 +3,7 @@
     justify-content: space-around;
     text-align: center;
     flex-wrap: wrap;
-    padding: 30px;
+    padding: 50px;
 }
 
 .board {
@@ -11,25 +11,12 @@
     border-radius: 20px;
     padding: 20px;
     margin-bottom: 30px;
-    background-color: rgb(214, 249, 247);
+    background-color: azure;
     color: rgb(24, 93, 93);
+    box-shadow: 0px 10px 20px rgba(103, 108, 120, 0.4);
 }
 
-.toolbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    padding: 20px;
-}
-
-.toolbar__group {
-    width: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-}
-
-.toolbar__btn, .board__btn {
+.board__btn {
     padding: 10px 20px;
     font-size: 16px;
     color: azure;
@@ -42,17 +29,6 @@
     margin-right: 10px;
 }
 
-.toolbar__input {
-    border-radius: 7px;
-    border: 1px solid lightseagreen;
-    padding: 10px;
-}
-
-.loader {
-
- margin: 0 auto;
-}
-
 .stat__list {
     display: flex;
     justify-content: space-evenly;
@@ -60,6 +36,42 @@
     border-bottom: 1px solid #000;
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+.toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 20px;
+    box-shadow: 0px 10px 20px rgba(103, 108, 120, 0.2);
+    border-bottom-left-radius: 50px;
+}
+
+.toolbar__group {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.toolbar__btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: azure;
+    background-color: lightseagreen;
+    border-radius: 7px;
+    cursor: pointer;
+} 
+
+.toolbar__input {
+    border-radius: 7px;
+    border: 1px solid lightseagreen;
+    padding: 10px;
+    outline: none;
+}
+
+.toolbar__input:focus {
+    outline: 2px solid lightseagreen;
 }
 
 select {
@@ -71,4 +83,8 @@ select {
     cursor: pointer;
     border: none;
     outline: none;
+}
+
+.loader {
+    margin: 0 auto;
 }
