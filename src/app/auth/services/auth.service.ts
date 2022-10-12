@@ -7,6 +7,7 @@ import { LoginRes } from '../models/loginRes';
 import { environment } from 'src/environments/environment';
 import { CurrentUser } from '../models/currentUser';
 import { Router } from '@angular/router';
+import { MessagesService } from 'src/app/shared/services/messages.service';
 
 const ANONYMOUS_USER: CurrentUser = {
   email: null,
@@ -20,7 +21,7 @@ const ANONYMOUS_USER: CurrentUser = {
 export class AuthService {
   public subject = new BehaviorSubject<CurrentUser>(ANONYMOUS_USER);
 
-  public error$: Subject<string> = new Subject();
+  private subjectError = new BehaviorSubject<string[]>([]);
 
   user$: Observable<CurrentUser> = this.subject
     .asObservable()
@@ -30,7 +31,11 @@ export class AuthService {
     map(loggedIn => !loggedIn)
   );
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(
+    private http: HttpClient, 
+    private router: Router,
+    private messages: MessagesService
+    ) {
     const user = localStorage.getItem('user');
 
     if (user) {
@@ -43,6 +48,10 @@ export class AuthService {
     return this.http.post<CurrentUser>(url, data).pipe(
       tap(res => {
         this.subject.next(res);
+      }),
+      catchError(err => {
+        this.messages.showErrors(err);
+        return throwError(err);
       }),
       shareReplay()
     );
@@ -61,7 +70,10 @@ export class AuthService {
         localStorage.setItem('token', JSON.stringify(token));
         localStorage.setItem('user', JSON.stringify(currentUser));
       }),
-      catchError(this.handleError.bind(this)),
+      catchError(err => {
+        this.messages.showErrors(err);
+        return throwError(err);
+      }),
       shareReplay()
     );
   }
@@ -80,10 +92,14 @@ export class AuthService {
     return token;
   }
 
-  private handleError(error: HttpErrorResponse) {
-    const { message } = error.error;
-    this.error$.next(message);
-    return throwError(error);
-  }
+//   showErrors(...errors: string[]) {
+//     this.subject.next(errors);
+// }
+  // handleError(error: HttpErrorResponse) {
+  //   const { message } = error.error;
+  //   this.error$.next(message);
+  //   console.log(message);
+  //   return throwError(error);
+  // }
 
 }

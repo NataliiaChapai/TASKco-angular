@@ -36,7 +36,7 @@ export class SortPipe implements PipeTransform {
         }
       return( ( a.taskCount.inprogress < b.taskCount.inprogress ) ? -1 : 1 )}
     )}
-    if (sort === 'todo' && list) {
+    if (sort === 'done' && list) {
       list.sort((a, b) => {
         if ( a.taskCount.done === b.taskCount.done ) {
         return 0;
