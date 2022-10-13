@@ -4,7 +4,6 @@ import { map, Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Board } from '../models/board.interface';
 import { BoardReq } from '../models/boardReq.interface';
-import { ModalService } from './modal.service';
 
 @Injectable({
   providedIn: 'root'

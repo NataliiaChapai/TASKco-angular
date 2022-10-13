@@ -15,14 +15,14 @@
       <option value="inprogress">"In progress"</option>
       <option value="done">"Done"</option>
     </select>
-    <button class="toolbar__btn">ASC</button>
-    <button class="toolbar__btn">DESC</button>
+    <button class="toolbar__btn" appSortParams (click)="direction='asc'">ASC</button>
+    <button class="toolbar__btn" appSortParams (click)="direction='desc'">DESC</button>
   </div>
 </div>
 <app-loader *ngIf="!isLoaded" class="loader"></app-loader>
 <div class="boards" >
   <div
-    *ngFor="let board of boards$ | async | filter: filterByName | sort: sort"
+    *ngFor="let board of boards$ | async | filter: filterByName | sort: sort: direction"
     class="board" 
   >
     <h3 class="board__name">{{ board.name }}</h3>

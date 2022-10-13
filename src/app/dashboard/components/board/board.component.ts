@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Observable, of as observableOf } from 'rxjs';
-import { catchError, filter, finalize, tap} from 'rxjs/operators';
+import { catchError, filter, finalize, ignoreElements, tap} from 'rxjs/operators';
 
 import { Board } from '../../models/board.interface';
 import { DashboardService } from '../../services/dashboard.service';
@@ -20,7 +20,8 @@ export class BoardComponent implements OnInit {
   showModal = false;
   boardId = '';
   submitted = false;
-
+  direction = 'asc';
+ 
   constructor(private dashboard: DashboardService, public modal: ModalService) {
     this.isLoaded = false;
     this.boards$ = this.dashboard
@@ -56,5 +57,7 @@ export class BoardComponent implements OnInit {
         () => (this.submitted = false)
       );
   }
+
+
 
 }
