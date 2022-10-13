@@ -22,6 +22,8 @@ export class BoardComponent implements OnInit {
   submitted = false;
   direction = 'asc';
  
+ 
+
   constructor(private dashboard: DashboardService, public modal: ModalService) {
     this.isLoaded = false;
     this.boards$ = this.dashboard

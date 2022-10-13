@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { HeaderComponent } from './core/components/header/header.component';
 import { TokenInterceptorService } from './shared/services/token-interceptor.service';
+import { TasksComponent } from './board/components/tasks/tasks.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
+    TasksComponent,
   ],
   imports: [
     BrowserModule,

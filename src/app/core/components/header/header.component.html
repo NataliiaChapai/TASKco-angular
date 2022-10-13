@@ -1,6 +1,6 @@
 <section class="header">
     <div class="header__container">
-        <a [routerLink]="['/dashboard']" class="header__link">TASKco</a>
+        <a [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="header__link">TASKco</a>
     </div>
     <div class="header__container" >
         <a *ngIf="isLoggedIn$ | async" [routerLink]="['/dashboard']" routerLinkActive="active" class="header__link">Dashboard</a>

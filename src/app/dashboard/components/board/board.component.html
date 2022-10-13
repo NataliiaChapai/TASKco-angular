@@ -25,12 +25,12 @@
     *ngFor="let board of boards$ | async | filter: filterByName | sort: sort: direction"
     class="board" 
   >
-    <h3 class="board__name">{{ board.name }}</h3>
+    <h3 [routerLink]="['/board', board._id]" class="board__name">{{ board.name }}</h3>
     <p class="board__description">{{ board.description }}</p>
-    <p class="board__date">{{ board.createdAt | date: 'dd.MM.YYYY' }}</p>
+    
     <div class="board__tools">
-      <div class="board__stat">
-        <ul class="stat__list">
+      <div class="board__stat" >
+        <ul class="stat__list" >
           <li class="stat__item">
             <span>Todo: {{board.taskCount.todo}}</span>
           </li>
@@ -42,10 +42,15 @@
           </li>
         </ul>
       </div>
-      <button class="board__btn" (click)="editBoard(board._id)" >Edit</button>
-      <button class="board__btn" (click)="deleteBoard(board._id)">
-        Delete
-      </button>
+      <div class="board__btn-wrapper">
+        <p class="board__date">{{ board.createdAt | date: 'dd.MM.YYYY' }}</p>
+        <div>
+          <button class="board__btn" (click)="editBoard(board._id)" >&#9998;</button>
+          <button class="board__btn" (click)="deleteBoard(board._id)">🗑</button>
+        </div>
+        
+      </div>
+     
     </div>
   </div>
 </div>

@@ -25,7 +25,14 @@
 }
 
 .active {
-    color: green
+    font-weight: 800;
+    text-decoration: underline;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    background-color: #fff;
+    color: lightseagreen;
+    padding: 10px 20px;
+    box-shadow: inset 0px 10px 20px rgba(103, 108, 120, 0.4);;
 }
 
 .header__avatar {

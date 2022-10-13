@@ -14,28 +14,58 @@
     background-color: azure;
     color: rgb(24, 93, 93);
     box-shadow: 0px 10px 20px rgba(103, 108, 120, 0.4);
+    transition: all 1s ease-out;
 }
 
-.board__btn {
-    padding: 10px 20px;
-    font-size: 16px;
-    color: azure;
-    background-color: lightseagreen;
-    border-radius: 7px;
+.board:hover {
+    scale: 1.05;
+    background-color: #fff;
+}
+
+.board {
     cursor: pointer;
 }
 
 .board__btn {
+    font-size: 25px;
+    color: lightseagreen;
+    background-color: transparent;
+    cursor: pointer;
+    transition: all 0.5s ease-out;
     margin-right: 10px;
+}
+
+.board__name {
+    text-shadow: 1px 1px 1px rgb(0, 0, 0);
+    color: lightseagreen;
+    font-weight: 800;
+    font-size: 24px;
+    text-decoration: underline;
+}
+
+.board__btn:hover {
+    scale: 1.2;
+}
+
+.board__btn-wrapper {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.board__description {
+    min-height: 20px;
+    margin-top: 10px;
 }
 
 .stat__list {
     display: flex;
     justify-content: space-evenly;
-    border-top: 1px solid #000;
-    border-bottom: 1px solid #000;
+    border-top: 1px solid lightseagreen;
+    border-bottom: 1px solid lightseagreen;
     margin-top: 10px;
     margin-bottom: 10px;
+    color: lightseagreen;
 }
 
 .toolbar {
@@ -61,13 +91,21 @@
     background-color: lightseagreen;
     border-radius: 7px;
     cursor: pointer;
+    box-shadow: 5px 5px 10px rgba(103, 108, 120, 0.4);
+    transition: all 0.5s ease-out;
 } 
+
+.toolbar__btn:hover {
+    background-color: #fff;
+    color: lightseagreen;
+}
 
 .toolbar__input {
     border-radius: 7px;
     border: 1px solid lightseagreen;
     padding: 10px;
     outline: none;
+    box-shadow: 5px 5px 10px rgba(103, 108, 120, 0.4);
 }
 
 .toolbar__input:focus {
@@ -83,6 +121,13 @@ select {
     cursor: pointer;
     border: none;
     outline: none;
+    box-shadow: 5px 5px 10px rgba(103, 108, 120, 0.4);
+    transition: all 0.5s ease-out;
+}
+
+select:hover {
+    background-color: #fff;
+    color: lightseagreen;
 }
 
 .loader {
