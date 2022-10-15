@@ -4,7 +4,6 @@ import { BackdropComponent } from './components/backdrop/backdrop.component';
 import { ButtonComponent } from './components/button/button.component';
 import { ErrorMessageComponent } from './components/error-message/error-message.component';
 import { InputComponent } from './components/input/input.component';
-import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { LoaderComponent } from './components/loader/loader.component';
 
 
@@ -15,14 +14,12 @@ import { LoaderComponent } from './components/loader/loader.component';
     InputComponent,
     BackdropComponent,
     ErrorMessageComponent,
-    ToolbarComponent,
     LoaderComponent
   ],
   imports: [
     CommonModule
   ], 
-  exports: [
-    ToolbarComponent, 
+  exports: [ 
     LoaderComponent
   ]
 })

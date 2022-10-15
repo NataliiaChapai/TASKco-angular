@@ -14,7 +14,7 @@
     position: relative;
     width: 30%;
     height: 250px;
-    border-radius: 7px;
+    border-radius: 20px;
     background-color: #fff;
     padding: 30px;
     text-align: center;
@@ -37,12 +37,12 @@
     font-size: 16px;
     color: azure;
     background-color: lightseagreen;
-    border-radius: 7px;
+    border-radius: 20px;
     cursor: pointer;
 }
 
 .modal__input {
-    border-radius: 7px;
+    border-radius: 20px;
     border: 1px solid lightseagreen;
     padding: 20px;
     width: 80%;

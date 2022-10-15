@@ -21,8 +21,6 @@ const ANONYMOUS_USER: CurrentUser = {
 export class AuthService {
   public subject = new BehaviorSubject<CurrentUser>(ANONYMOUS_USER);
 
-  private subjectError = new BehaviorSubject<string[]>([]);
-
   user$: Observable<CurrentUser> = this.subject
     .asObservable()
     .pipe(filter(user => !!user));
@@ -91,15 +89,5 @@ export class AuthService {
     const token = localStorage.getItem('token');
     return token;
   }
-
-//   showErrors(...errors: string[]) {
-//     this.subject.next(errors);
-// }
-  // handleError(error: HttpErrorResponse) {
-  //   const { message } = error.error;
-  //   this.error$.next(message);
-  //   console.log(message);
-  //   return throwError(error);
-  // }
 
 }

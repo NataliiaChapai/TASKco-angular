@@ -6,20 +6,22 @@ import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { HeaderComponent } from './core/components/header/header.component';
 import { TokenInterceptorService } from './shared/services/token-interceptor.service';
-import { TasksComponent } from './board/components/tasks/tasks.component';
+import { DashboardModule } from './dashboard/dashboard.module';
+import { BoardModule } from './board/board.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    TasksComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AuthModule,
     HttpClientModule,
+    DashboardModule,
+    BoardModule
   ],
   providers: [{
       provide: HTTP_INTERCEPTORS,

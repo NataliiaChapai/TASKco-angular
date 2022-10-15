@@ -1,1 +1,50 @@
-<p>tasks works!</p>
+<app-toolbar [boardName$]="boardName$"></app-toolbar>
+<div class="tasks__list">
+  <div class="tasks__column">
+    <h2 class="tasks__title">TODO</h2>
+    <button class="tasks__btn">+</button>
+    <div *ngFor="let task of todoTasks$ | async" class="tasks__item">
+      <div>
+        <h2>{{ task.name }}</h2>
+        <p>{{ task.createdAt | date: 'dd.MM.YYYY' }}</p>
+      </div>
+      <div class="tasks__menu">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tasks__column">
+    <h2 class="tasks__title">IN PROGRESS</h2>
+    <button class="tasks__btn">+</button>
+    <div *ngFor="let task of inProgressTasks$ | async" class="tasks__item">
+      <div>
+        <h2>{{ task.name }}</h2>
+        <p>{{ task.createdAt | date: 'dd.MM.YYYY' }}</p>
+      </div>
+      <div class="tasks__menu">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tasks__column">
+    <h2 class="tasks__title">DONE</h2>
+    <button class="tasks__btn">+</button>
+    <div *ngFor="let task of doneTasks$ | async" class="tasks__item">
+      <div>
+        <h2>{{ task.name }}</h2>
+        <p>{{ task.createdAt | date: 'dd.MM.YYYY' }}</p>
+      </div>
+      <div class="tasks__menu">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -46,7 +46,7 @@ const routes: Routes = [
     SharedModule,
   ],
   exports: [
-    RouterModule
+    RouterModule,
   ],
   providers: [AuthGuard, AuthService]
 })

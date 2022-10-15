@@ -26,13 +26,14 @@ export class BoardComponent implements OnInit {
 
   constructor(private dashboard: DashboardService, public modal: ModalService) {
     this.isLoaded = false;
+  }
+
+  ngOnInit(): void { 
     this.boards$ = this.dashboard
     .getBoards()
     .pipe(finalize(() => this.isLoaded = true),
     catchError(err => observableOf([])));
   }
-
-  ngOnInit(): void {}
 
   deleteBoard(id: string) {
     this.isLoaded = false;
