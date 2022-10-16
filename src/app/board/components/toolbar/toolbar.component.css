@@ -6,10 +6,13 @@
 }
 
 .toolbar__name {
-    width: 200px;
-    padding: 10px;
+    padding: 10px 20px;
     margin-right: 10px;
     text-align: center;
+    background-color: #fff;
+    box-shadow: 0px 10px 20px rgba(103, 108, 120, 0.3);
+    border-radius: 40px;
+    font-size: 22px;
 }
 
 .toolbar__add {

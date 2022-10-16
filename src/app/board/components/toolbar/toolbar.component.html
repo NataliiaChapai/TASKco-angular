@@ -1,21 +1,14 @@
 <div class="toolbar">
-    <div class="toolbar__add">
-        <h3 class="toolbar__name">{{boardName$ | async}}</h3>
-        <button class="toolbar__btn">+</button>
-    </div>
-    
-    <div class="toolbar__group">
-      <input
-        type="text"
-        class="toolbar__input"
-        placeholder="Filter tasks..."
-      />
-      <select name="sort">
-        <option value="" hidden>Sort by ...</option>
-        <option value="name">name</option>
-        <option value="date" >date</option>
-      </select>
-      <button class="toolbar__btn">ASC</button>
-      <button class="toolbar__btn">DESC</button>
-    </div>
+  <h3 class="toolbar__name">{{ boardName$ | async }}</h3>
+
+  <div class="toolbar__group">
+    <input type="text" class="toolbar__input" placeholder="Filter tasks..." />
+    <select name="sort">
+      <option value="" hidden>Sort by ...</option>
+      <option value="name">name</option>
+      <option value="date">date</option>
+    </select>
+    <button class="toolbar__btn">ASC</button>
+    <button class="toolbar__btn">DESC</button>
   </div>
+</div>

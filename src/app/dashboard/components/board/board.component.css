@@ -7,7 +7,7 @@
 }
 
 .board {
-    width: 20%;
+    width: 25%;
     border-radius: 40px;
     padding: 20px;
     margin-bottom: 30px;
@@ -33,12 +33,18 @@
 }
 
 .board__name {
-    text-shadow: 1px 1px 1px rgb(0, 0, 0);
-    color: lightseagreen;
     font-weight: 800;
     font-size: 24px;
-    text-decoration: underline;
     cursor: pointer;
+    padding: 10px 20px;
+    background-color: #fff;
+    box-shadow: 0px 10px 20px rgba(103, 108, 120, 0.2);
+    border-radius: 40px;
+    transition: all 1s ease-out;
+}
+
+.board__name:hover {
+    box-shadow: inset 0px 10px 20px rgba(103, 108, 120, 0.2);
 }
 
 .board__btn:hover {
