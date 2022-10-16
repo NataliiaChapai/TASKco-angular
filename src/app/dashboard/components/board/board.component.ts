@@ -1,6 +1,13 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Observable, of as observableOf } from 'rxjs';
-import { catchError, filter, finalize, ignoreElements, tap} from 'rxjs/operators';
+import {
+  catchError,
+  filter,
+  finalize,
+  ignoreElements,
+  tap,
+} from 'rxjs/operators';
+import { LoadingService } from 'src/app/shared/services/loading.service';
 
 import { Board } from '../../models/board.interface';
 import { DashboardService } from '../../services/dashboard.service';
@@ -12,55 +19,56 @@ import { ModalService } from '../../services/modal.service';
   styleUrls: ['./board.component.css'],
 })
 export class BoardComponent implements OnInit {
-  
   boards$: Observable<Board[]>;
-  isLoaded: boolean;
   filterByName = '';
   sort = '';
   showModal = false;
   boardId = '';
   submitted = false;
   direction = 'asc';
- 
- 
 
-  constructor(private dashboard: DashboardService, public modal: ModalService) {
-    this.isLoaded = false;
-  }
+  constructor(private dashboard: DashboardService, public modal: ModalService, private loader: LoadingService) {}
 
-  ngOnInit(): void { 
-    this.boards$ = this.dashboard
-    .getBoards()
-    .pipe(finalize(() => this.isLoaded = true),
-    catchError(err => observableOf([])));
+  ngOnInit(): void {
+    this.loader.loadingOn();
+    this.boards$ = this.dashboard.getBoards().pipe(
+      finalize(() => (this.loader.loadingOff())),
+      catchError(err => observableOf([]))
+    );
   }
 
   deleteBoard(id: string) {
-    this.isLoaded = false;
-    this.dashboard.deleteBoard(id)
-    .subscribe(() => this.boards$ = this.boards$.pipe(filter(board => board[0]._id !== id)))
+    this.loader.loadingOn();
+    this.dashboard
+      .deleteBoard(id)
+      .subscribe(
+        () =>
+          (this.boards$ = this.boards$.pipe(
+            filter(board => board[0]._id !== id),
+            finalize(() => this.loader.loadingOff())
+          ))
+      );
   }
 
   editBoard(id: string) {
-    this.boardId = id;    
+    this.boardId = id;
     this.modal.showEdit();
   }
 
   updateBoard(name: any) {
     this.dashboard.updateBoard(this.boardId, name).subscribe(
-        () => {
-          this.submitted = false;
-          this.modal.closeEdit();
-          this.boards$ = this.boards$.pipe(tap(board => {
+      () => {
+        this.submitted = false;
+        this.modal.closeEdit();
+        this.boards$ = this.boards$.pipe(
+          tap(board => {
             if (board[0]._id === this.boardId) {
-             board[0].name = name;
+              board[0].name = name;
             }
-           }))
-        },
-        () => (this.submitted = false)
-      );
+          })
+        );
+      },
+      () => (this.submitted = false)
+    );
   }
-
-
-
 }

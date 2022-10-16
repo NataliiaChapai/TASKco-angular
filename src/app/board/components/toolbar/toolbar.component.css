@@ -2,10 +2,13 @@
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+    margin: 0 auto;
     padding: 20px;
 }
 
 .toolbar__name {
+    width: 20%;
+    min-height: 25px;
     padding: 10px 20px;
     margin-right: 10px;
     text-align: center;

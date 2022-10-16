@@ -19,7 +19,7 @@
     <button class="toolbar__btn" appSortParams (click)="direction='desc'">DESC</button>
   </div>
 </div>
-<app-loader *ngIf="!isLoaded" class="loader"></app-loader>
+<app-loader class="loader"></app-loader>
 <div class="boards" >
   <div
     *ngFor="let board of boards$ | async | filter: filterByName | sort: sort: direction"

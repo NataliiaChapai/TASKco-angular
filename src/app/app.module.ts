@@ -8,6 +8,7 @@ import { HeaderComponent } from './core/components/header/header.component';
 import { TokenInterceptorService } from './shared/services/token-interceptor.service';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { BoardModule } from './board/board.module';
+import { SharedModule } from './shared/shared.module';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { BoardModule } from './board/board.module';
     AuthModule,
     HttpClientModule,
     DashboardModule,
-    BoardModule
+    BoardModule,
+    SharedModule
   ],
   providers: [{
       provide: HTTP_INTERCEPTORS,
