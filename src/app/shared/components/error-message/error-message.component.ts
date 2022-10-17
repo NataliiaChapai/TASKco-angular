@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable, tap } from 'rxjs';
+import { MessagesService } from '../../services/messages.service';
 
 @Component({
   selector: 'app-error-message',
@@ -7,9 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ErrorMessageComponent implements OnInit {
 
-  constructor() { }
+  showMessages = false;
+
+  errors$: Observable<string[]>;
+
+  constructor(public messages: MessagesService) { }
 
   ngOnInit(): void {
+    this.errors$ = this.messages.errors$
+    .pipe(tap(() => {
+      this.showMessages = true;
+      this.hideMessage();
+    }))
+    this.hideMessage();
   }
 
+  hideMessage() {
+    setTimeout(() => {
+      this.showMessages = false;
+    }, 5000);
+  }
 }

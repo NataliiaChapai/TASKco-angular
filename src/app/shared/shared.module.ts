@@ -14,13 +14,14 @@ import { LoaderComponent } from './components/loader/loader.component';
     InputComponent,
     BackdropComponent,
     ErrorMessageComponent,
-    LoaderComponent
+    LoaderComponent,
   ],
   imports: [
     CommonModule
   ], 
   exports: [ 
-    LoaderComponent
+    LoaderComponent,
+    ErrorMessageComponent
   ]
 })
 export class SharedModule { }
