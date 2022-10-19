@@ -1,20 +1,16 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  OnInit,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { catchError, finalize, map, Observable, throwError } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { BoardService } from '../../services/board.service';
 import { Task } from '../../models/task.interface';
 import { LoadingService } from 'src/app/shared/services/loading.service';
-import { MessagesService } from 'src/app/shared/services/messages.service';
+import { BoardStore } from '../../services/board.store';
 
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.css'],
+  providers: [BoardStore],
 })
 export class TasksComponent implements OnInit {
   todoTasks$: Observable<Task[]>;
@@ -28,7 +24,7 @@ export class TasksComponent implements OnInit {
     private board: BoardService,
     private route: ActivatedRoute,
     private loader: LoadingService,
-    private messages: MessagesService
+    private store: BoardStore
   ) {}
 
   ngOnInit() {
@@ -37,39 +33,20 @@ export class TasksComponent implements OnInit {
 
   reloadTasks() {
     this.loader.loadingOn();
+
     this.route.params.subscribe(params => (this.boardId = params['id']));
-
-    const tasks$ = this.board.getAllTasks(this.boardId).pipe(
-      map(tasks => tasks),
-      catchError(err => {
-        const message = 'Could not load tasks :('
-        this.messages.showErrors(message);
-        console.log(err);        
-        return throwError(err);
-      })
-    );
-
-    const loadTasks$ = this.loader.showLoaderUntilCompleted(tasks$);
 
     const name$ = this.board
       .getBoardName(this.boardId)
       .pipe(map(board => board));
 
-    this.todoTasks$ = loadTasks$.pipe(
-      map(tasks => tasks.filter(task => task.status === 'Todo'))
-    );
+    this.todoTasks$ = this.store.filterByStatus('Todo');
 
-    this.inProgressTasks$ = loadTasks$.pipe(
-      map(tasks => tasks.filter(task => task.status === 'In progress'))
-    );
+    this.inProgressTasks$ = this.store.filterByStatus('In progress');
 
-    this.doneTasks$ = loadTasks$.pipe(
-      map(tasks => tasks.filter(task => task.status === 'Done'))
-    );
+    this.doneTasks$ = this.store.filterByStatus('Done');
 
-    this.archiveTasks$ = loadTasks$.pipe(
-      map(tasks => tasks.filter(task => task.status === 'Archive'))
-    );
+    this.archiveTasks$ = this.store.filterByStatus('Archive');
 
     this.boardName$ = name$.pipe(map(board => board.name));
   }

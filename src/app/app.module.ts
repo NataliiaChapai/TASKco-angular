@@ -9,6 +9,7 @@ import { TokenInterceptorService } from './shared/services/token-interceptor.ser
 import { DashboardModule } from './dashboard/dashboard.module';
 import { BoardModule } from './board/board.module';
 import { SharedModule } from './shared/shared.module';
+import { BoardStore } from './board/services/board.store';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { SharedModule } from './shared/shared.module';
       useClass: TokenInterceptorService,
       multi: true,
     },
+    BoardStore
   ],
   bootstrap: [AppComponent]
 })

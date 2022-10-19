@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { DashboardModule } from '../dashboard/dashboard.module';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { BoardStore } from './services/board.store';
 
 
 
@@ -30,6 +31,5 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
   exports: [
     RouterModule,
   ],
-  providers: [AuthGuard, AuthService]
 })
 export class BoardModule { }
