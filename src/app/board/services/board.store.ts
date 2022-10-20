@@ -45,7 +45,7 @@ export class BoardStore {
     .subscribe();
   }
 
-  saveChandes(id: string, changes: Partial<Task>): Observable<any> {
+  saveChanges(id: string, changes: Partial<Task>): Observable<any> {
     
     const tasks = this.subject.getValue();
     const index = tasks.findIndex(task => task._id == id);

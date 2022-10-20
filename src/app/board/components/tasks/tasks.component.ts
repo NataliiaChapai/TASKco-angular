@@ -56,6 +56,6 @@ export class TasksComponent implements OnInit {
     if (!changes.name) {
       return;
     }
-    this.store.saveChandes(id, changes).subscribe();
+    this.store.saveChanges(id, changes).subscribe();
   }
 }
