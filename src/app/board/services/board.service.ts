@@ -29,12 +29,17 @@ export class BoardService {
   getAllTasks(id: string): Observable<Task[]> {
     const url = environment.apiUrl + `/board/${id}`;
     this.boardId = id;
-    return this.http.get<any>(url).pipe(map(data => data.tasks), shareReplay())
+    return this.http.get<any>(url).pipe(map(data => data.tasks), shareReplay());
   }
 
   getBoardName(id: string) {
     const url = environment.apiUrl + `/boards/${id}`;
-    return this.http.get<any>(url).pipe(map(data => data.board), shareReplay())
+    return this.http.get<any>(url).pipe(map(data => data.board), shareReplay());
+  }
+
+  updateBoard(id: string, changes: Partial<Task>) {
+    const url = environment.apiUrl + `/board/tasks/${id}`;
+    return this.http.put<any>(url, changes);
   }
 
 }

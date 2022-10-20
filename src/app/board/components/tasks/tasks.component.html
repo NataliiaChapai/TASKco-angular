@@ -4,15 +4,28 @@
   <div class="tasks__column">
     <h2 class="tasks__title">TODO</h2>
     <button class="tasks__btn">+</button>
-    <div *ngFor="let task of todoTasks$ | async" class="tasks__item">
-      <div>
-        <h2>{{ task.name }}</h2>
-        <p>{{ task.createdAt | date: 'dd.MM.YYYY' }}</p>
-      </div>
-      <div class="tasks__menu">
-        <div class="circle"></div>
-        <div class="circle"></div>
-        <div class="circle"></div>
+    <div class="tasks__block">
+      <div *ngFor="let task of todoTasks$ | async" class="tasks__item">
+        <div>
+          <h2>{{ task.name }}</h2>
+          <form *ngIf="task.canEdit" #name = "ngForm" class="tasks__edit" (ngSubmit)="saveChanges(name.value, task._id)">
+            <input class="tasks__input" placeholder="Task name" name="name" ngModel>
+            <button class="tasks__btn" type="submit">Save</button>
+            <button class="tasks__btn" type="button" (click)="task.canEdit = false">Close</button>
+          </form>
+          <p>{{ task.createdAt | date: 'dd.MM.YYYY' }}</p>
+        </div>
+        <div class="tasks__menu">
+          <div class="circle"></div>
+          <div class="circle"></div>
+          <div class="circle"></div>
+        </div>
+        <div class="task__menu">
+          <ul class="task__menu-list">
+            <li class="task__menu-item" (click)="task.canEdit = true">Edit</li>
+            <li class="task__menu-item">Delete</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -20,15 +33,28 @@
   <div class="tasks__column">
     <h2 class="tasks__title">IN PROGRESS</h2>
     <button class="tasks__btn">+</button>
-    <div *ngFor="let task of inProgressTasks$ | async" class="tasks__item">
-      <div>
-        <h2>{{ task.name }}</h2>
-        <p>{{ task.createdAt | date: 'dd.MM.YYYY' }}</p>
-      </div>
-      <div class="tasks__menu">
-        <div class="circle"></div>
-        <div class="circle"></div>
-        <div class="circle"></div>
+    <div class="tasks__block">
+      <div *ngFor="let task of inProgressTasks$ | async" class="tasks__item">
+        <div>
+          <h2>{{ task.name }}</h2>
+          <form *ngIf="task.canEdit" #name = "ngForm" class="tasks__edit" (ngSubmit)="saveChanges(name.value, task._id)" (ngSubmit)="task.canEdit = false">
+            <input class="tasks__input" placeholder="Task name" name="name" ngModel>
+            <button class="tasks__btn" type="submit">Save</button>
+            <button class="tasks__btn" type="button" (click)="task.canEdit = false">Close</button>
+          </form>
+          <p>{{ task.createdAt | date: 'dd.MM.YYYY' }}</p>
+        </div>
+        <div class="tasks__menu">
+          <div class="circle"></div>
+          <div class="circle"></div>
+          <div class="circle"></div>
+        </div>
+        <div class="task__menu">
+          <ul class="task__menu-list">
+            <li class="task__menu-item" (click)="task.canEdit = true">Edit</li>
+            <li class="task__menu-item">Delete</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -36,15 +62,29 @@
   <div class="tasks__column">
     <h2 class="tasks__title">DONE</h2>
     <button class="tasks__btn">+</button>
-    <div *ngFor="let task of doneTasks$ | async" class="tasks__item">
-      <div>
-        <h2>{{ task.name }}</h2>
-        <p>{{ task.createdAt | date: 'dd.MM.YYYY' }}</p>
-      </div>
-      <div class="tasks__menu">
-        <div class="circle"></div>
-        <div class="circle"></div>
-        <div class="circle"></div>
+    <div class="tasks__block">
+      <div *ngFor="let task of doneTasks$ | async" class="tasks__item">
+        <div>
+          <h2>{{ task.name }}</h2>
+          <form *ngIf="task.canEdit" #name = "ngForm" class="tasks__edit" (ngSubmit)="saveChanges(name.value, task._id)" (ngSubmit)="task.canEdit = false">
+            <input class="tasks__input" placeholder="Task name" name="name" ngModel>
+            <button class="tasks__btn" type="submit">Save</button>
+            <button class="tasks__btn" type="button" (click)="task.canEdit = false">Close</button>
+          </form>          
+          <p>{{ task.createdAt | date: 'dd.MM.YYYY' }}</p>
+        </div>
+        <div class="tasks__menu">
+          <div class="circle"></div>
+          <div class="circle"></div>
+          <div class="circle"></div>
+        </div>
+        <div class="task__menu">
+          <ul class="task__menu-list">
+            <li class="task__menu-item" (click)="task.canEdit = true">Edit</li>
+            <li class="task__menu-item">Delete</li>
+            <li class="task__menu-item">Archive</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>

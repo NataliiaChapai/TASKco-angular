@@ -12,6 +12,7 @@ import { BoardStore } from '../../services/board.store';
   styleUrls: ['./tasks.component.css'],
   providers: [BoardStore],
 })
+
 export class TasksComponent implements OnInit {
   todoTasks$: Observable<Task[]>;
   inProgressTasks$: Observable<Task[]>;
@@ -49,5 +50,12 @@ export class TasksComponent implements OnInit {
     this.archiveTasks$ = this.store.filterByStatus('Archive');
 
     this.boardName$ = name$.pipe(map(board => board.name));
+  }
+
+  saveChanges(changes: Partial<Task>, id: string) {
+    if (!changes.name) {
+      return;
+    }
+    this.store.saveChandes(id, changes).subscribe();
   }
 }

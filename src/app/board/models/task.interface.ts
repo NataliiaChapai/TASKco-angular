@@ -1,4 +1,5 @@
 export interface Task {
+    _id: string;
     name: string;
     status: string;
     boardId: string;
@@ -7,4 +8,5 @@ export interface Task {
         message?: string,
         time?: string 
     ];
+    canEdit?: boolean;
   }
