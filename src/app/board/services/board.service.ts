@@ -42,4 +42,14 @@ export class BoardService {
     return this.http.put<any>(url, changes);
   }
 
+  addTask(id: string, task: Partial<Task>) {
+    const url = environment.apiUrl + `/board/${id}`;
+    return this.http.post<any>(url, task).pipe(map(data => data.task), shareReplay());
+  }
+
+  deleteTask(id:string) {
+    const url = environment.apiUrl + `/board/tasks/${id}`;
+    return this.http.delete<any>(url);
+  }
+
 }

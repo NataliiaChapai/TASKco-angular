@@ -3,7 +3,12 @@
 <div class="tasks__list">
   <div class="tasks__column">
     <h2 class="tasks__title">TODO</h2>
-    <button class="tasks__btn">+</button>
+    <button class="tasks__btn" (click)="canAdd[0]=true">+</button>
+    <form *ngIf="canAdd[0]" #name = "ngForm" class="tasks__edit" (ngSubmit)="addTask(name.value, 'Todo')">
+      <input class="tasks__input" placeholder="Task name" name="name" ngModel>
+      <button class="tasks__btn" type="submit">Add</button>
+      <button class="tasks__btn" type="button" (click)="canAdd[0] = false">Cansel</button>
+    </form>
     <div class="tasks__block">
       <div *ngFor="let task of todoTasks$ | async" class="tasks__item">
         <div>
@@ -23,7 +28,7 @@
         <div class="task__menu">
           <ul class="task__menu-list">
             <li class="task__menu-item" (click)="task.canEdit = true">Edit</li>
-            <li class="task__menu-item">Delete</li>
+            <li class="task__menu-item" (click)="deleteTask(task._id)">Delete</li>
           </ul>
         </div>
       </div>
@@ -32,12 +37,17 @@
 
   <div class="tasks__column">
     <h2 class="tasks__title">IN PROGRESS</h2>
-    <button class="tasks__btn">+</button>
+    <button class="tasks__btn" (click)="canAdd[1]=true">+</button>
+    <form *ngIf="canAdd[1]" #name = "ngForm" class="tasks__edit" (ngSubmit)="addTask(name.value, 'In progress')">
+        <input class="tasks__input" placeholder="Task name" name="name" ngModel>
+        <button class="tasks__btn" type="submit">Add</button>
+        <button class="tasks__btn" type="button" (click)="canAdd[1] = false">Cansel</button>
+      </form>
     <div class="tasks__block">
       <div *ngFor="let task of inProgressTasks$ | async" class="tasks__item">
         <div>
           <h2>{{ task.name }}</h2>
-          <form *ngIf="task.canEdit" #name = "ngForm" class="tasks__edit" (ngSubmit)="saveChanges(name.value, task._id)" (ngSubmit)="task.canEdit = false">
+          <form *ngIf="task.canEdit" #name = "ngForm" class="tasks__edit" (ngSubmit)="saveChanges(name.value, task._id)">
             <input class="tasks__input" placeholder="Task name" name="name" ngModel>
             <button class="tasks__btn" type="submit">Save</button>
             <button class="tasks__btn" type="button" (click)="task.canEdit = false">Close</button>
@@ -52,7 +62,7 @@
         <div class="task__menu">
           <ul class="task__menu-list">
             <li class="task__menu-item" (click)="task.canEdit = true">Edit</li>
-            <li class="task__menu-item">Delete</li>
+            <li class="task__menu-item" (click)="deleteTask(task._id)">Delete</li>
           </ul>
         </div>
       </div>
@@ -61,12 +71,17 @@
 
   <div class="tasks__column">
     <h2 class="tasks__title">DONE</h2>
-    <button class="tasks__btn">+</button>
+    <button class="tasks__btn" (click)="canAdd[2]=true">+</button>
+    <form *ngIf="canAdd[2]" #name = "ngForm" class="tasks__edit" (ngSubmit)="addTask(name.value, 'Done')">
+      <input class="tasks__input" placeholder="Task name" name="name" ngModel>
+      <button class="tasks__btn" type="submit">Add</button>
+      <button class="tasks__btn" type="button" (click)="canAdd[2] = false">Cansel</button>
+    </form>
     <div class="tasks__block">
       <div *ngFor="let task of doneTasks$ | async" class="tasks__item">
         <div>
           <h2>{{ task.name }}</h2>
-          <form *ngIf="task.canEdit" #name = "ngForm" class="tasks__edit" (ngSubmit)="saveChanges(name.value, task._id)" (ngSubmit)="task.canEdit = false">
+          <form *ngIf="task.canEdit" #name = "ngForm" class="tasks__edit" (ngSubmit)="saveChanges(name.value, task._id)">
             <input class="tasks__input" placeholder="Task name" name="name" ngModel>
             <button class="tasks__btn" type="submit">Save</button>
             <button class="tasks__btn" type="button" (click)="task.canEdit = false">Close</button>
@@ -81,7 +96,7 @@
         <div class="task__menu">
           <ul class="task__menu-list">
             <li class="task__menu-item" (click)="task.canEdit = true">Edit</li>
-            <li class="task__menu-item">Delete</li>
+            <li class="task__menu-item" (click)="deleteTask(task._id)">Delete</li>
             <li class="task__menu-item">Archive</li>
           </ul>
         </div>

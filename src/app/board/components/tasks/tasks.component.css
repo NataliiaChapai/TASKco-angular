@@ -46,9 +46,8 @@
 }
 
 .tasks__block {
-    height: 45vh;
+    height: 40vh;
     overflow: auto;
-    scrollbar-color: rebeccapurple green;
 }
 
 .tasks__item {

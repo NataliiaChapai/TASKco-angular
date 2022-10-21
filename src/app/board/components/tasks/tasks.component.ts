@@ -20,6 +20,8 @@ export class TasksComponent implements OnInit {
   archiveTasks$: Observable<Task[]>;
   boardId: string;
   boardName$: Observable<string>;
+  canAddTodo = false;
+  canAdd = [false, false, false];
 
   constructor(
     private board: BoardService,
@@ -57,5 +59,18 @@ export class TasksComponent implements OnInit {
       return;
     }
     this.store.saveChanges(id, changes).subscribe();
+  }
+
+  addTask(changes: Partial<Task>, status: string) {
+    const task = {
+      ...changes,
+      status
+    }
+    this.store.addTask(task).subscribe();
+    this.canAdd = [false, false, false];
+  }
+
+  deleteTask(id: string) {
+    this.store.deleteTask(id).subscribe();
   }
 }
