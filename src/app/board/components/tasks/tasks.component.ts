@@ -23,7 +23,7 @@ export class TasksComponent implements OnInit {
   boardName$: Observable<string>;
   canAddTodo = false;
   canAdd = [false, false, false];
-  colorSet = ['white', 'beige', 'yellow', 'orange', 'orangered','lightsalon',  'lightpink', 'deeppink', 'red', 'purple', 
+  colorSet = ['white', 'beige', 'yellow', 'orange', 'orangered','lightsalmon',  'lightpink', 'deeppink', 'red', 'purple', 
   'azure', 'lightgreen', 'green', 'mediumslateblue', 'blue'];
   todoColor: string;
   inprogressColor: string;
