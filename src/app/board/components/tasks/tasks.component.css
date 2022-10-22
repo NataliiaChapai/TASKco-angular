@@ -6,7 +6,7 @@
 .tasks__list {
     display: flex;
     justify-content: space-around;
-    padding: 30px;
+    padding: 15px 30px;
 }
 
 .tasks__column {
@@ -142,4 +142,52 @@
     font-size: 14px;
     padding: 10px;
     margin-left: 5px;
+}
+
+.tasks__column-color {
+ text-align: right;
+ position: relative;
+}
+
+.tasks__column-color span {
+    border-radius: 50%;
+    font-size: 30px;
+    width: 20px;
+}
+
+.tasks__column-color span:hover {
+    cursor: pointer;
+    font-weight: 800;
+}
+
+.tasks__colors {
+    display: none;
+    justify-content: center;
+    width: 120px;
+    flex-wrap: wrap;
+    position: absolute;
+    background-color: #fff;
+    border-radius: 10px;
+    border: 1px solid gainsboro;
+    padding: 3px;
+    right: 30px;
+    top: 0;
+}
+
+.tasks__color {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid;
+    margin-right: 2px;
+    margin-bottom: 2px;
+    cursor: pointer;
+}
+
+.tasks__color:hover {
+    border: 1px solid #fff;
+}
+
+.tasks__column-color span:hover + .tasks__colors, .tasks__colors:hover {
+    display: flex;
 }

@@ -1,7 +1,7 @@
 <app-toolbar [boardName$]="boardName$"></app-toolbar>
 <app-loader class="loader"></app-loader>
 <div class="tasks__list">
-  <div class="tasks__column">
+  <div class="tasks__column" [ngStyle]="{'background-color': todoColor}">
     <h2 class="tasks__title">TODO</h2>
     <button class="tasks__btn" (click)="canAdd[0]=true">+</button>
     <form *ngIf="canAdd[0]" #name = "ngForm" class="tasks__edit" (ngSubmit)="addTask(name.value, 'Todo')">
@@ -33,9 +33,17 @@
         </div>
       </div>
     </div>
+    <div class="tasks__column-color">
+      <span>🖌</span>
+      <div class="tasks__colors">
+        <div *ngFor="let color of colorSet" >
+          <div [ngStyle]="{'background-color': color}" class="tasks__color" (click)="changeColor('todo', color)"></div>
+        </div>
+      </div>
+    </div>  
   </div>
 
-  <div class="tasks__column">
+  <div class="tasks__column" [ngStyle]="{'background-color': inprogressColor}">
     <h2 class="tasks__title">IN PROGRESS</h2>
     <button class="tasks__btn" (click)="canAdd[1]=true">+</button>
     <form *ngIf="canAdd[1]" #name = "ngForm" class="tasks__edit" (ngSubmit)="addTask(name.value, 'In progress')">
@@ -67,9 +75,17 @@
         </div>
       </div>
     </div>
+    <div class="tasks__column-color">
+      <span>🖌</span>
+      <div class="tasks__colors">
+        <div *ngFor="let color of colorSet" >
+          <div [ngStyle]="{'background-color': color}" class="tasks__color" (click)="changeColor('inprogress', color)"></div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="tasks__column">
+  <div class="tasks__column" [ngStyle]="{'background-color': doneColor}">
     <h2 class="tasks__title">DONE</h2>
     <button class="tasks__btn" (click)="canAdd[2]=true">+</button>
     <form *ngIf="canAdd[2]" #name = "ngForm" class="tasks__edit" (ngSubmit)="addTask(name.value, 'Done')">
@@ -99,6 +115,14 @@
             <li class="task__menu-item" (click)="deleteTask(task._id)">Delete</li>
             <li class="task__menu-item" (click)="archiveTask(task._id)">Archive</li>
           </ul>
+        </div>
+      </div>
+    </div>
+    <div class="tasks__column-color">
+      <span>🖌</span>
+      <div class="tasks__colors">
+        <div *ngFor="let color of colorSet" >
+          <div [ngStyle]="{'background-color': color}" class="tasks__color" (click)="changeColor('done', color)"></div>
         </div>
       </div>
     </div>

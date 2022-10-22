@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { map, Observable } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
+
 import { BoardService } from '../../services/board.service';
 import { Task } from '../../models/task.interface';
 import { LoadingService } from 'src/app/shared/services/loading.service';
@@ -22,6 +23,11 @@ export class TasksComponent implements OnInit {
   boardName$: Observable<string>;
   canAddTodo = false;
   canAdd = [false, false, false];
+  colorSet = ['white', 'beige', 'yellow', 'orange', 'orangered','lightsalon',  'lightpink', 'deeppink', 'red', 'purple', 
+  'azure', 'lightgreen', 'green', 'mediumslateblue', 'blue'];
+  todoColor: string;
+  inprogressColor: string;
+  doneColor: string;
 
   constructor(
     private board: BoardService,
@@ -36,7 +42,6 @@ export class TasksComponent implements OnInit {
 
   reloadTasks() {
     this.loader.loadingOn();
-
     this.route.params.subscribe(params => (this.boardId = params['id']));
 
     const name$ = this.board
@@ -52,6 +57,12 @@ export class TasksComponent implements OnInit {
     this.archiveTasks$ = this.store.filterByStatus('Archive');
 
     this.boardName$ = name$.pipe(map(board => board.name));
+    
+    this.store.colors$.subscribe(colors => {
+      this.todoColor = colors.todo;
+      this.inprogressColor = colors.inprogress;
+      this.doneColor = colors.done;
+      });
   }
 
   saveChanges(changes: Partial<Task>, id: string) {
@@ -79,5 +90,9 @@ export class TasksComponent implements OnInit {
 
   archiveTask(id: string) {
     this.store.changeStatus(id, 'Archive').subscribe();
+  }
+
+  changeColor(column: string, color: string,) {
+    this.store.changeColor(column, color).subscribe();
   }
 }

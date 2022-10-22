@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-// import { ActivatedRoute } from '@angular/router';
-import { map, Observable, shareReplay, tap } from 'rxjs';
-import { Task } from '../models/task.interface';
+import { map, Observable, shareReplay } from 'rxjs';
 import { environment } from 'src/environments/environment';
-// import { Board } from 'src/app/dashboard/models/board.interface';
+
+import { Task } from '../models/task.interface';
+import { Colors } from '../models/colors.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +21,11 @@ export class BoardService {
     const url = environment.apiUrl + `/board/${id}`;
     this.boardId = id;
     return this.http.get<any>(url).pipe(map(data => data.tasks), shareReplay());
+  }
+
+  getColors(id: string): Observable<Colors> {
+    const url = environment.apiUrl + `/board/colors/${id}`;
+    return this.http.get<Colors>(url).pipe(map(data => data), shareReplay());
   }
 
   getBoardName(id: string) {
@@ -43,9 +48,14 @@ export class BoardService {
     return this.http.delete<any>(url);
   }
 
-  changeStatus(id: string, status: Partial<Task>) {
+  updateStatus(id: string, status: Partial<Task>) {
     const url = environment.apiUrl + `/board/tasks/${id}`;
     return this.http.patch<any>(url, status);
+  }
+
+  updateColor(id: string, column: string, color: string) {
+    const url = environment.apiUrl + `/board/colors/${id}`;
+    return this.http.patch<any>(url, {column, color});
   }
 
 }

@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
@@ -11,37 +10,43 @@ import {
   tap,
   throwError,
 } from 'rxjs';
+
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { MessagesService } from 'src/app/shared/services/messages.service';
-import { environment } from 'src/environments/environment';
 import { Task } from '../models/task.interface';
 import { BoardService } from './board.service';
+import { Colors } from '../models/colors.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BoardStore {
   private subject = new BehaviorSubject<Task[]>([]);
+  public colorSubject = new BehaviorSubject<Colors>({
+    todo: 'azure',
+    inprogress: 'azure',
+    done: 'azure',
+    archive: 'azure',
+  });
 
   tasks$: Observable<Task[]> = this.subject.asObservable();
+  colors$: Observable<Colors> = this.colorSubject.asObservable();
   boardId: string;
 
   constructor(
-    private http: HttpClient,
     private loader: LoadingService,
     private messages: MessagesService,
     private route: ActivatedRoute,
     private board: BoardService
   ) {
     this.route.params.subscribe(params => (this.boardId = params['id']));
+    this.getColors().subscribe();
     this.loadAllTasks();
   }
 
   private loadAllTasks() {
-    const url = environment.apiUrl + `/board/${this.boardId}`;
-
-    const loadTasks$ = this.http.get<any>(url).pipe(
-      map(res => res.tasks),
+    const loadTasks$ = this.board.getAllTasks(this.boardId).pipe(
+      map(res => res),
       catchError(err => {
         const message = 'Could not load tasks';
         this.messages.showErrors(message);
@@ -51,6 +56,20 @@ export class BoardStore {
       tap(tasks => this.subject.next(tasks))
     );
     this.loader.showLoaderUntilCompleted(loadTasks$).subscribe();
+  }
+
+  getColors(): Observable<Colors> {
+    return this.board.getColors(this.boardId).pipe(
+      map(res => res),
+      catchError(err => {
+        const message = 'Could not load colors';
+        this.messages.showErrors(message);
+        console.log(message, err);
+        return throwError(err);
+      }),
+      tap(col => this.colorSubject.next(col)),
+      shareReplay()
+    );
   }
 
   saveChanges(id: string, changes: Partial<Task>): Observable<any> {
@@ -110,19 +129,39 @@ export class BoardStore {
     const index = tasks.findIndex(task => task._id == id);
     const updatedTask: Task = {
       ...tasks[index],
-      ...{status},
+      ...{ status },
     };
     const updateTasks: Task[] = tasks.slice(0);
     updateTasks[index] = updatedTask;
     this.subject.next(updateTasks);
-    return this.board.changeStatus(id, {status})
-    .pipe(
+    return this.board.updateStatus(id, { status }).pipe(
       catchError(err => {
-        const message = 'Could not delete task';
+        const message = 'Could not change status';
         this.messages.showErrors(message);
         console.log(message, err);
         return throwError(err);
       }),
+      shareReplay()
+    );
+  }
+
+  changeColor(column: string, color: string) {
+    const colorSet = this.colorSubject.getValue();
+    const newColor = {
+      [column]: color,
+    };
+    const newColorSet = {
+      ...colorSet,
+      ...newColor,
+    };
+    return this.board.updateColor(this.boardId, column, color).pipe(
+      catchError(err => {
+        const message = 'Could not change color';
+        this.messages.showErrors(message);
+        console.log(message, err);
+        return throwError(err);
+      }),
+      finalize(() => this.colorSubject.next(newColorSet)),
       shareReplay()
     );
   }
