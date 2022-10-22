@@ -62,6 +62,9 @@ export class TasksComponent implements OnInit {
   }
 
   addTask(changes: Partial<Task>, status: string) {
+    if (changes.name === '') {
+      return;
+    }
     const task = {
       ...changes,
       status

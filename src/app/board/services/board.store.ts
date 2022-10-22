@@ -76,7 +76,7 @@ export class BoardStore {
 
   addTask(task: Partial<Task>): Observable<any> {
     const tasks = this.subject.getValue();
-    let updatedTasks: Task[];
+    let updatedTasks: Task[] = [];
     return this.board.addTask(this.boardId, task).pipe(
       tap(newTask => (updatedTasks = [...tasks, newTask])),
       catchError(err => {
