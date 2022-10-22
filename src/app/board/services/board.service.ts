@@ -11,20 +11,11 @@ import { environment } from 'src/environments/environment';
 })
 export class BoardService {
 
-  // boardId: any;
   boardId = ''
 
   constructor(
     private http: HttpClient,
-    // private route: ActivatedRoute,
-  ) { 
-    // this.boardId = this.getBoardId();
-  }
-
-  // getBoardId() {
-  //   this.route.params.subscribe(params => this.boardId = params['id'])
-  //   console.log(this.boardId);
-  // }
+  ) { }
 
   getAllTasks(id: string): Observable<Task[]> {
     const url = environment.apiUrl + `/board/${id}`;
@@ -50,6 +41,11 @@ export class BoardService {
   deleteTask(id:string) {
     const url = environment.apiUrl + `/board/tasks/${id}`;
     return this.http.delete<any>(url);
+  }
+
+  changeStatus(id: string, status: Partial<Task>) {
+    const url = environment.apiUrl + `/board/tasks/${id}`;
+    return this.http.patch<any>(url, status);
   }
 
 }

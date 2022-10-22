@@ -76,4 +76,8 @@ export class TasksComponent implements OnInit {
   deleteTask(id: string) {
     this.store.deleteTask(id).subscribe();
   }
+
+  archiveTask(id: string) {
+    this.store.changeStatus(id, 'Archive').subscribe();
+  }
 }

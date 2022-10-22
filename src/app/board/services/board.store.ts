@@ -105,6 +105,28 @@ export class BoardStore {
     );
   }
 
+  changeStatus(id: string, status: string) {
+    const tasks = this.subject.getValue();
+    const index = tasks.findIndex(task => task._id == id);
+    const updatedTask: Task = {
+      ...tasks[index],
+      ...{status},
+    };
+    const updateTasks: Task[] = tasks.slice(0);
+    updateTasks[index] = updatedTask;
+    this.subject.next(updateTasks);
+    return this.board.changeStatus(id, {status})
+    .pipe(
+      catchError(err => {
+        const message = 'Could not delete task';
+        this.messages.showErrors(message);
+        console.log(message, err);
+        return throwError(err);
+      }),
+      shareReplay()
+    );
+  }
+
   filterByStatus(status: string): Observable<Task[]> {
     return this.tasks$.pipe(
       map(tasks => tasks.filter(task => task.status == status))

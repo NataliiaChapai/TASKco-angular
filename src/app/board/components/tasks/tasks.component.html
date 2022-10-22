@@ -97,7 +97,7 @@
           <ul class="task__menu-list">
             <li class="task__menu-item" (click)="task.canEdit = true">Edit</li>
             <li class="task__menu-item" (click)="deleteTask(task._id)">Delete</li>
-            <li class="task__menu-item">Archive</li>
+            <li class="task__menu-item" (click)="archiveTask(task._id)">Archive</li>
           </ul>
         </div>
       </div>
