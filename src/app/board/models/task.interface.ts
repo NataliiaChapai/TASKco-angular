@@ -9,4 +9,5 @@ export interface Task {
         time?: string 
     ];
     canEdit?: boolean;
+    canComment?: boolean;
   }

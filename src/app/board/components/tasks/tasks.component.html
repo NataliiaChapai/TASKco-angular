@@ -1,24 +1,109 @@
-<app-toolbar [boardName$]="boardName$" (filterByName)="getFilterValue($event)" (sort)="getSortValue($event)" (direction)="getDirectionValue($event)"></app-toolbar>
+<app-toolbar
+  [boardName$]="boardName$"
+  (filterByName)="getFilterValue($event)"
+  (sort)="getSortValue($event)"
+  (direction)="getDirectionValue($event)"
+></app-toolbar>
 <app-loader class="loader"></app-loader>
 <div class="tasks__list">
-  <div class="tasks__column" [ngStyle]="{'background-color': todoColor}">
+  <div class="tasks__column" [ngStyle]="{ 'background-color': todoColor }">
     <h2 class="tasks__title">TODO</h2>
-    <button class="tasks__btn" (click)="canAdd[0]=true">+</button>
-    <form *ngIf="canAdd[0]" #name = "ngForm" class="tasks__edit" (ngSubmit)="addTask(name.value, 'Todo')">
-      <input class="tasks__input" placeholder="Task name" name="name" ngModel>
+    <button class="tasks__btn" (click)="canAdd[0] = true">+</button>
+    <form
+      *ngIf="canAdd[0]"
+      #name="ngForm"
+      class="tasks__edit"
+      (ngSubmit)="addTask(name.value, 'Todo')"
+    >
+      <input class="tasks__input" placeholder="Task name" name="name" ngModel />
       <button class="tasks__btn" type="submit">Add</button>
-      <button class="tasks__btn" type="button" (click)="canAdd[0] = false">Cansel</button>
+      <button class="tasks__btn" type="button" (click)="canAdd[0] = false">
+        Cansel
+      </button>
     </form>
-    <div class="tasks__block" [ngStyle]="{'height': canAdd[0] ? '38.4vh': '45vh'}">
-      <div *ngFor="let task of todoTasks$ | async | filter: filterByName | sort: sort: direction" class="tasks__item">
+    <div
+      class="tasks__block"
+      [ngStyle]="{ height: canAdd[0] ? '38.4vh' : '45vh' }"
+    >
+      <div
+        *ngFor="
+          let task of todoTasks$
+            | async
+            | filter: filterByName
+            | sort: sort:direction
+        "
+        class="tasks__item"
+      >
         <div>
           <h2>{{ task.name }}</h2>
-          <form *ngIf="task.canEdit" #name = "ngForm" class="tasks__edit" (ngSubmit)="saveChanges(name.value, task._id)">
-            <input class="tasks__input" placeholder="Task name" name="name" ngModel>
+          <form
+            *ngIf="task.canEdit"
+            #name="ngForm"
+            class="tasks__edit"
+            (ngSubmit)="saveChanges(name.value, task._id)"
+          >
+            <input
+              class="tasks__input"
+              placeholder="Task name"
+              name="name"
+              ngModel
+            />
             <button class="tasks__btn" type="submit">Save</button>
-            <button class="tasks__btn" type="button" (click)="task.canEdit = false">Close</button>
+            <button
+              class="tasks__btn"
+              type="button"
+              (click)="task.canEdit = false"
+            >
+              Close
+            </button>
           </form>
-          <p>{{ task.createdAt | date: 'dd.MM.YYYY' }}</p>
+          <div class="tasks__date">
+            <p>{{ task.createdAt | date: 'dd.MM.YYYY' }}</p>
+            <img
+              src="./assets/images/message.png"
+              width="30"
+              (click)="task.canComment = true"
+            />
+            <span>{{ task.comments.length }}</span>
+          </div>
+          <form
+            *ngIf="task.canComment"
+            #message="ngForm"
+            class="tasks__comments"
+            (ngSubmit)="addComment(task._id, message.value)"
+          >
+            <p
+              *ngIf="!task.comments.length"
+              else
+              comments
+              class="tasks__comment"
+            >
+              There are no comments yet
+            </p>
+            <div class="tasks__comment">
+              <div #comments *ngFor="let comment of task.comments">
+                <p>- {{ comment.message }}</p>
+              </div>
+              <span  *ngIf="task.comments.length" class="tasks__comment-bin" (click)="deleteComment(task._id)">🗑</span>
+            </div>
+
+            <div class="tasks__edit">
+              <input
+                class="tasks__input"
+                placeholder="New comment"
+                name="message"
+                ngModel
+              />
+              <button class="tasks__btn" type="submit">Add</button>
+              <button
+                class="tasks__btn"
+                type="button"
+                (click)="task.canComment = false"
+              >
+                Close
+              </button>
+            </div>
+          </form>
         </div>
         <div class="tasks__menu">
           <div class="circle"></div>
@@ -28,7 +113,9 @@
         <div class="task__menu">
           <ul class="task__menu-list">
             <li class="task__menu-item" (click)="task.canEdit = true">Edit</li>
-            <li class="task__menu-item" (click)="deleteTask(task._id)">Delete</li>
+            <li class="task__menu-item" (click)="deleteTask(task._id)">
+              Delete
+            </li>
           </ul>
         </div>
       </div>
@@ -36,31 +123,118 @@
     <div class="tasks__column-color">
       <span>🖌</span>
       <div class="tasks__colors">
-        <div *ngFor="let color of colorSet" >
-          <div [ngStyle]="{'background-color': color}" class="tasks__color" (click)="changeColor('todo', color)"></div>
+        <div *ngFor="let color of colorSet">
+          <div
+            [ngStyle]="{ 'background-color': color }"
+            class="tasks__color"
+            (click)="changeColor('todo', color)"
+          ></div>
         </div>
       </div>
-    </div>  
+    </div>
   </div>
 
-  <div class="tasks__column" [ngStyle]="{'background-color': inprogressColor}">
+  <div
+    class="tasks__column"
+    [ngStyle]="{ 'background-color': inprogressColor }"
+  >
     <h2 class="tasks__title">IN PROGRESS</h2>
-    <button class="tasks__btn" (click)="canAdd[1]=true">+</button>
-    <form *ngIf="canAdd[1]" #name = "ngForm" class="tasks__edit" (ngSubmit)="addTask(name.value, 'In progress')">
-        <input class="tasks__input" placeholder="Task name" name="name" ngModel>
-        <button class="tasks__btn" type="submit">Add</button>
-        <button class="tasks__btn" type="button" (click)="canAdd[1] = false">Cansel</button>
-      </form>
-    <div class="tasks__block" [ngStyle]="{'height': canAdd[1] ? '38.4vh': '45vh'}">
-      <div *ngFor="let task of inProgressTasks$ | async | filter: filterByName | sort: sort: direction" class="tasks__item">
+    <button class="tasks__btn" (click)="canAdd[1] = true">+</button>
+    <form
+      *ngIf="canAdd[1]"
+      #name="ngForm"
+      class="tasks__edit"
+      (ngSubmit)="addTask(name.value, 'In progress')"
+    >
+      <input class="tasks__input" placeholder="Task name" name="name" ngModel />
+      <button class="tasks__btn" type="submit">Add</button>
+      <button class="tasks__btn" type="button" (click)="canAdd[1] = false">
+        Cansel
+      </button>
+    </form>
+    <div
+      class="tasks__block"
+      [ngStyle]="{ height: canAdd[1] ? '38.4vh' : '45vh' }"
+    >
+      <div
+        *ngFor="
+          let task of inProgressTasks$
+            | async
+            | filter: filterByName
+            | sort: sort:direction
+        "
+        class="tasks__item"
+      >
         <div>
           <h2>{{ task.name }}</h2>
-          <form *ngIf="task.canEdit" #name = "ngForm" class="tasks__edit" (ngSubmit)="saveChanges(name.value, task._id)">
-            <input class="tasks__input" placeholder="Task name" name="name" ngModel>
+          <form
+            *ngIf="task.canEdit"
+            #name="ngForm"
+            class="tasks__edit"
+            (ngSubmit)="saveChanges(name.value, task._id)"
+          >
+            <input
+              class="tasks__input"
+              placeholder="Task name"
+              name="name"
+              ngModel
+            />
             <button class="tasks__btn" type="submit">Save</button>
-            <button class="tasks__btn" type="button" (click)="task.canEdit = false">Close</button>
+            <button
+              class="tasks__btn"
+              type="button"
+              (click)="task.canEdit = false"
+            >
+              Close
+            </button>
           </form>
-          <p>{{ task.createdAt | date: 'dd.MM.YYYY' }}</p>
+          <div class="tasks__date">
+            <p>{{ task.createdAt | date: 'dd.MM.YYYY' }}</p>
+            <img
+              src="./assets/images/message.png"
+              width="30"
+              (click)="task.canComment = true"
+            />
+            <span>{{ task.comments.length }}</span>
+          </div>
+          <form
+            *ngIf="task.canComment"
+            #message="ngForm"
+            class="tasks__comments"
+            (ngSubmit)="addComment(task._id, message.value)"
+          >
+            <p
+              *ngIf="!task.comments.length"
+              else
+              comments
+              class="tasks__comment"
+            >
+              There are no comments yet
+            </p>
+            <div class="tasks__comment">
+              <div #comments *ngFor="let comment of task.comments">
+                <p>- {{ comment.message }}</p>
+              </div>
+              <span  *ngIf="task.comments.length" class="tasks__comment-bin" (click)="deleteComment(task._id)">🗑</span>
+            </div>
+
+            <div class="tasks__edit">
+              <input
+                class="tasks__input"
+                placeholder="New comment"
+                name="message"
+                ngModel
+              />
+              <button class="tasks__btn" type="submit">Add</button>
+              <button
+                class="tasks__btn"
+                type="button"
+                (click)="task.canComment = false"
+              >
+                Close
+              </button>
+            </div>
+          </form>
         </div>
         <div class="tasks__menu">
           <div class="circle"></div>
@@ -70,7 +244,9 @@
         <div class="task__menu">
           <ul class="task__menu-list">
             <li class="task__menu-item" (click)="task.canEdit = true">Edit</li>
-            <li class="task__menu-item" (click)="deleteTask(task._id)">Delete</li>
+            <li class="task__menu-item" (click)="deleteTask(task._id)">
+              Delete
+            </li>
           </ul>
         </div>
       </div>
@@ -78,31 +254,115 @@
     <div class="tasks__column-color">
       <span>🖌</span>
       <div class="tasks__colors">
-        <div *ngFor="let color of colorSet" >
-          <div [ngStyle]="{'background-color': color}" class="tasks__color" (click)="changeColor('inprogress', color)"></div>
+        <div *ngFor="let color of colorSet">
+          <div
+            [ngStyle]="{ 'background-color': color }"
+            class="tasks__color"
+            (click)="changeColor('inprogress', color)"
+          ></div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="tasks__column" [ngStyle]="{'background-color': doneColor}">
+  <div class="tasks__column" [ngStyle]="{ 'background-color': doneColor }">
     <h2 class="tasks__title">DONE</h2>
-    <button class="tasks__btn" (click)="canAdd[2]=true">+</button>
-    <form *ngIf="canAdd[2]" #name = "ngForm" class="tasks__edit" (ngSubmit)="addTask(name.value, 'Done')">
-      <input class="tasks__input" placeholder="Task name" name="name" ngModel>
+    <button class="tasks__btn" (click)="canAdd[2] = true">+</button>
+    <form
+      *ngIf="canAdd[2]"
+      #name="ngForm"
+      class="tasks__edit"
+      (ngSubmit)="addTask(name.value, 'Done')"
+    >
+      <input class="tasks__input" placeholder="Task name" name="name" ngModel />
       <button class="tasks__btn" type="submit">Add</button>
-      <button class="tasks__btn" type="button" (click)="canAdd[2] = false">Cansel</button>
+      <button class="tasks__btn" type="button" (click)="canAdd[2] = false">
+        Cansel
+      </button>
     </form>
-    <div class="tasks__block" [ngStyle]="{'height': canAdd[2] ? '38.4vh': '45vh'}">
-      <div *ngFor="let task of doneTasks$ | async | filter: filterByName | sort: sort: direction" class="tasks__item">
+    <div
+      class="tasks__block"
+      [ngStyle]="{ height: canAdd[2] ? '38.4vh' : '45vh' }"
+    >
+      <div
+        *ngFor="
+          let task of doneTasks$
+            | async
+            | filter: filterByName
+            | sort: sort:direction
+        "
+        class="tasks__item"
+      >
         <div>
           <h2>{{ task.name }}</h2>
-          <form *ngIf="task.canEdit" #name = "ngForm" class="tasks__edit" (ngSubmit)="saveChanges(name.value, task._id)">
-            <input class="tasks__input" placeholder="Task name" name="name" ngModel>
+          <form
+            *ngIf="task.canEdit"
+            #name="ngForm"
+            class="tasks__edit"
+            (ngSubmit)="saveChanges(name.value, task._id)"
+          >
+            <input
+              class="tasks__input"
+              placeholder="Task name"
+              name="name"
+              ngModel
+            />
             <button class="tasks__btn" type="submit">Save</button>
-            <button class="tasks__btn" type="button" (click)="task.canEdit = false">Close</button>
-          </form>          
-          <p>{{ task.createdAt | date: 'dd.MM.YYYY' }}</p>
+            <button
+              class="tasks__btn"
+              type="button"
+              (click)="task.canEdit = false"
+            >
+              Close
+            </button>
+          </form>
+          <div class="tasks__date">
+            <p>{{ task.createdAt | date: 'dd.MM.YYYY' }}</p>
+            <img
+              src="./assets/images/message.png"
+              width="30"
+              (click)="task.canComment = true"
+            />
+            <span>{{ task.comments.length }}</span>
+          </div>
+          <form
+            *ngIf="task.canComment"
+            #message="ngForm"
+            class="tasks__comments"
+            (ngSubmit)="addComment(task._id, message.value)"
+          >
+            <p
+              *ngIf="!task.comments.length"
+              else
+              comments
+              class="tasks__comment"
+            >
+              There are no comments yet
+            </p>
+            <div class="tasks__comment">
+              <div #comments *ngFor="let comment of task.comments">
+                <p>- {{ comment.message }}</p>
+              </div>
+              <span  *ngIf="task.comments.length" class="tasks__comment-bin" (click)="deleteComment(task._id)">🗑</span>
+            </div>
+
+            <div class="tasks__edit">
+              <input
+                class="tasks__input"
+                placeholder="New comment"
+                name="message"
+                ngModel
+              />
+              <button class="tasks__btn" type="submit">Add</button>
+              <button
+                class="tasks__btn"
+                type="button"
+                (click)="task.canComment = false"
+              >
+                Close
+              </button>
+            </div>
+          </form>
         </div>
         <div class="tasks__menu">
           <div class="circle"></div>
@@ -112,8 +372,12 @@
         <div class="task__menu">
           <ul class="task__menu-list">
             <li class="task__menu-item" (click)="task.canEdit = true">Edit</li>
-            <li class="task__menu-item" (click)="deleteTask(task._id)">Delete</li>
-            <li class="task__menu-item" (click)="archiveTask(task._id)">Archive</li>
+            <li class="task__menu-item" (click)="deleteTask(task._id)">
+              Delete
+            </li>
+            <li class="task__menu-item" (click)="archiveTask(task._id)">
+              Archive
+            </li>
           </ul>
         </div>
       </div>
@@ -121,8 +385,12 @@
     <div class="tasks__column-color">
       <span>🖌</span>
       <div class="tasks__colors">
-        <div *ngFor="let color of colorSet" >
-          <div [ngStyle]="{'background-color': color}" class="tasks__color" (click)="changeColor('done', color)"></div>
+        <div *ngFor="let color of colorSet">
+          <div
+            [ngStyle]="{ 'background-color': color }"
+            class="tasks__color"
+            (click)="changeColor('done', color)"
+          ></div>
         </div>
       </div>
     </div>

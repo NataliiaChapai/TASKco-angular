@@ -41,9 +41,7 @@ export class TasksComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.reloadTasks();
-    console.log(this.filterByName);
-    
+    this.reloadTasks();  
   }
 
   reloadTasks() {
@@ -112,6 +110,17 @@ export class TasksComponent implements OnInit {
 
   getDirectionValue(direction: string) {
     this.direction = direction;
+  }
+
+  addComment(id: string, message: any) {
+    if (!message.message) {
+      return;
+    }
+    this.store.addComment(id, message).subscribe();
+  }
+
+  deleteComment(id: string) {
+    this.store.deleteComment(id).subscribe();
   }
 
 }

@@ -172,6 +172,7 @@
     padding: 3px;
     right: 30px;
     top: 0;
+    box-shadow: 5px 5px 10px rgba(103, 108, 120, 0.4);
 }
 
 .tasks__color {
@@ -190,4 +191,52 @@
 
 .tasks__column-color span:hover + .tasks__colors, .tasks__colors:hover {
     display: flex;
+}
+
+.tasks__date {
+    display: flex;
+    align-items: center;
+}
+
+.tasks__date img {
+    margin-left: 30px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.tasks__date span {
+    color: lightseagreen;
+}
+
+.tasks__comments {
+    margin-top: 10px;
+    border-top: 1px solid gainsboro;
+    border-bottom: 1px solid gainsboro;
+    border-radius: 20px;
+    padding: 10px 5px;
+}
+
+.tasks__comment {
+    margin-bottom: 5px;
+    position: relative;
+}
+
+.tasks__comment p {
+    border: 1px solid gainsboro;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: azure;
+    margin-bottom: 5px;
+}
+
+.tasks__comment-bin {
+    display: none;
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.tasks__comment:hover .tasks__comment-bin, .tasks__comment-bin:hover {
+    display: inline;
 }

@@ -58,4 +58,14 @@ export class BoardService {
     return this.http.patch<any>(url, {column, color});
   }
 
+  addComment(id: string, message: Partial<Task>) {
+    const url = environment.apiUrl + `/board/comments/${id}`;
+    return this.http.post<any>(url, message);
+  }
+
+  deleteComment(id: string) {
+    const url = environment.apiUrl + `/board/comments/${id}`;
+    return this.http.delete<any>(url);
+  }
+
 }

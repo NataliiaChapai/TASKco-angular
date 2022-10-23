@@ -166,6 +166,54 @@ export class BoardStore {
     );
   }
 
+  addComment(id: string, message: any) {
+    const tasks = this.subject.getValue();
+    const index = tasks.findIndex(task => task._id == id);
+    const newComments = [
+      ...tasks[index].comments,
+      message
+    ]
+    const updatedTask: any = {
+      ...tasks[index],
+      comments: newComments
+    };
+    const updateTasks: Task[] = tasks.slice(0);
+    updateTasks[index] = updatedTask;
+    this.subject.next(updateTasks);
+    return this.board.addComment(id, message).pipe(
+      catchError(err => {
+        const message = 'Could not change status';
+        this.messages.showErrors(message);
+        console.log(message, err);
+        return throwError(err);
+      }),
+      shareReplay()
+    );
+  }
+
+  deleteComment(id: string) {
+    const tasks = this.subject.getValue();
+    const index = tasks.findIndex(task => task._id == id);
+    const comments = tasks[index].comments.slice(0, -1);
+    const updatedTask: any = {
+      ...tasks[index],
+      comments
+    }
+    const updateTasks: Task[] = tasks.slice(0);
+    updateTasks[index] = updatedTask;
+    this.subject.next(updateTasks);
+
+    return this.board.deleteComment(id).pipe(
+      catchError(err => {
+        const message = 'Could not change status';
+        this.messages.showErrors(message);
+        console.log(message, err);
+        return throwError(err);
+      }),
+      shareReplay()
+    );
+  }
+
   filterByStatus(status: string): Observable<Task[]> {
     return this.tasks$.pipe(
       map(tasks => tasks.filter(task => task.status == status))
