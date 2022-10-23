@@ -8,8 +8,12 @@ import { Observable } from 'rxjs';
 })
 export class ToolbarComponent implements OnInit {
 
+  sortBy = '';
+
   @Input() boardName$: Observable<string>;
   @Output() filterByName = new EventEmitter<string>();
+  @Output() sort = new EventEmitter<string>();
+  @Output() direction = new EventEmitter<string>();
   
   constructor() { }
 
@@ -19,5 +23,14 @@ export class ToolbarComponent implements OnInit {
   addFilterValue(value: string) {
     this.filterByName.emit(value);
   }
+  
+  addSortValue(value: string) {
+    this.sort.emit(value);
+  }
+
+  addDirectionValue(value: string) {
+    this.direction.emit(value);
+  }
+
 
 }

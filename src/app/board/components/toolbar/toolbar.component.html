@@ -3,12 +3,12 @@
 
   <div class="toolbar__group">
     <input type="text" class="toolbar__input" placeholder="Filter tasks..." #name (input)="addFilterValue(name.value)"/>
-    <select name="sort">
+    <select name="sort" [ngModel]="sortBy" (ngModelChange)="addSortValue($event)">
       <option value="" hidden>Sort by ...</option>
       <option value="name">name</option>
-      <option value="date">date</option>
+      <option value="createdAt">date</option>
     </select>
-    <button class="toolbar__btn">ASC</button>
-    <button class="toolbar__btn">DESC</button>
+    <button class="toolbar__btn" appSortParams (click)="addDirectionValue('asc')">ASC</button>
+    <button class="toolbar__btn" appSortParams (click)="addDirectionValue('desc')">DESC</button>
   </div>
 </div>

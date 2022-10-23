@@ -6,7 +6,7 @@ import { Board } from 'src/app/dashboard/models/board.interface';
   pure: true,
 })
 export class SortPipe implements PipeTransform {
-  transform(list: Board[] | null, sort: string, direction: string): Board[] | null {
+  transform(list: any[] | null, sort: string, direction: string): any[] | null {
     let sortedItems: any = [];
     if (list) {
       sortedItems =
@@ -17,7 +17,7 @@ export class SortPipe implements PipeTransform {
     return sortedItems;
   }
 
-  sortAscending(list: Board[], sort: string) {
+  sortAscending(list: any[], sort: string) {
     if (sort === 'name' || sort === 'createdAt') {
       list.sort((a, b) => {
         if (a[sort] === b[sort]) {
@@ -39,7 +39,7 @@ export class SortPipe implements PipeTransform {
     return list;
   }
 
-  sortDescending(list: Board[], sort: string) {
+  sortDescending(list: any[], sort: string) {
     if (sort === 'name' || sort === 'createdAt') {
       list.sort((a, b) => {
         if (a[sort] === b[sort]) {

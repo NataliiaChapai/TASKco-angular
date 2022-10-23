@@ -30,7 +30,8 @@ export class TasksComponent implements OnInit {
   doneColor: string;
 
   filterByName = '';
-
+  sort = '';
+  direction = 'asc';
 
   constructor(
     private board: BoardService,
@@ -104,4 +105,13 @@ export class TasksComponent implements OnInit {
   getFilterValue(value: string) {
     this.filterByName = value;
   }
+
+  getSortValue(sort: string) {
+    this.sort = sort;
+  }
+
+  getDirectionValue(direction: string) {
+    this.direction = direction;
+  }
+
 }
