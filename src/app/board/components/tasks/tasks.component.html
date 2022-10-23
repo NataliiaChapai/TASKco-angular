@@ -62,7 +62,7 @@
             <img
               src="./assets/images/message.png"
               width="30"
-              (click)="task.canComment = true"
+              (click)="task.canComment = !task.canComment"
             />
             <span>{{ task.comments.length }}</span>
           </div>
@@ -193,7 +193,7 @@
             <img
               src="./assets/images/message.png"
               width="30"
-              (click)="task.canComment = true"
+              (click)="task.canComment = !task.canComment"
             />
             <span>{{ task.comments.length }}</span>
           </div>
@@ -321,7 +321,7 @@
             <img
               src="./assets/images/message.png"
               width="30"
-              (click)="task.canComment = true"
+              (click)="task.canComment = !task.canComment"
             />
             <span>{{ task.comments.length }}</span>
           </div>
