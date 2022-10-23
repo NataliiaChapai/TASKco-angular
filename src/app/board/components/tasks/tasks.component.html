@@ -1,4 +1,4 @@
-<app-toolbar [boardName$]="boardName$"></app-toolbar>
+<app-toolbar [boardName$]="boardName$" (filterByName)="getFilterValue($event)"></app-toolbar>
 <app-loader class="loader"></app-loader>
 <div class="tasks__list">
   <div class="tasks__column" [ngStyle]="{'background-color': todoColor}">
@@ -10,7 +10,7 @@
       <button class="tasks__btn" type="button" (click)="canAdd[0] = false">Cansel</button>
     </form>
     <div class="tasks__block" [ngStyle]="{'height': canAdd[0] ? '38.4vh': '45vh'}">
-      <div *ngFor="let task of todoTasks$ | async" class="tasks__item">
+      <div *ngFor="let task of todoTasks$ | async | filter: filterByName" class="tasks__item">
         <div>
           <h2>{{ task.name }}</h2>
           <form *ngIf="task.canEdit" #name = "ngForm" class="tasks__edit" (ngSubmit)="saveChanges(name.value, task._id)">
@@ -52,7 +52,7 @@
         <button class="tasks__btn" type="button" (click)="canAdd[1] = false">Cansel</button>
       </form>
     <div class="tasks__block" [ngStyle]="{'height': canAdd[1] ? '38.4vh': '45vh'}">
-      <div *ngFor="let task of inProgressTasks$ | async" class="tasks__item">
+      <div *ngFor="let task of inProgressTasks$ | async | filter: filterByName" class="tasks__item">
         <div>
           <h2>{{ task.name }}</h2>
           <form *ngIf="task.canEdit" #name = "ngForm" class="tasks__edit" (ngSubmit)="saveChanges(name.value, task._id)">
@@ -94,7 +94,7 @@
       <button class="tasks__btn" type="button" (click)="canAdd[2] = false">Cansel</button>
     </form>
     <div class="tasks__block" [ngStyle]="{'height': canAdd[2] ? '38.4vh': '45vh'}">
-      <div *ngFor="let task of doneTasks$ | async" class="tasks__item">
+      <div *ngFor="let task of doneTasks$ | async | filter: filterByName" class="tasks__item">
         <div>
           <h2>{{ task.name }}</h2>
           <form *ngIf="task.canEdit" #name = "ngForm" class="tasks__edit" (ngSubmit)="saveChanges(name.value, task._id)">

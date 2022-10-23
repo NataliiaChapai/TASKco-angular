@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { map, Observable, tap } from 'rxjs';
 
@@ -29,6 +29,9 @@ export class TasksComponent implements OnInit {
   inprogressColor: string;
   doneColor: string;
 
+  filterByName = '';
+
+
   constructor(
     private board: BoardService,
     private route: ActivatedRoute,
@@ -38,6 +41,8 @@ export class TasksComponent implements OnInit {
 
   ngOnInit() {
     this.reloadTasks();
+    console.log(this.filterByName);
+    
   }
 
   reloadTasks() {
@@ -94,5 +99,9 @@ export class TasksComponent implements OnInit {
 
   changeColor(column: string, color: string,) {
     this.store.changeColor(column, color).subscribe();
+  }
+
+  getFilterValue(value: string) {
+    this.filterByName = value;
   }
 }

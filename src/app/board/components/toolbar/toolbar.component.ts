@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -9,10 +9,15 @@ import { Observable } from 'rxjs';
 export class ToolbarComponent implements OnInit {
 
   @Input() boardName$: Observable<string>;
-
+  @Output() filterByName = new EventEmitter<string>();
+  
   constructor() { }
 
   ngOnInit(): void {    
+  }
+
+  addFilterValue(value: string) {
+    this.filterByName.emit(value);
   }
 
 }

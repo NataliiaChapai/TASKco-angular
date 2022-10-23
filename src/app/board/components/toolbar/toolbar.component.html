@@ -2,7 +2,7 @@
   <h3 class="toolbar__name">{{ boardName$ | async }}</h3>
 
   <div class="toolbar__group">
-    <input type="text" class="toolbar__input" placeholder="Filter tasks..." />
+    <input type="text" class="toolbar__input" placeholder="Filter tasks..." #name (input)="addFilterValue(name.value)"/>
     <select name="sort">
       <option value="" hidden>Sort by ...</option>
       <option value="name">name</option>

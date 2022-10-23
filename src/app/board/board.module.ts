@@ -11,6 +11,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { DashboardModule } from '../dashboard/dashboard.module';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { BoardStore } from './services/board.store';
+import { PipesModule } from '../shared/pipes/pipes.module';
 
 
 
@@ -26,7 +27,8 @@ import { BoardStore } from './services/board.store';
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
-    DashboardModule
+    DashboardModule,
+    PipesModule
   ],
   exports: [
     RouterModule,
