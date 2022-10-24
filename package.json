@@ -10,7 +10,6 @@
   },
   "private": true,
   "dependencies": {
-    "@angular-eslint/eslint-plugin": "^14.1.2",
     "@angular/animations": "^14.0.0",
     "@angular/common": "^14.0.0",
     "@angular/compiler": "^14.0.0",
@@ -25,6 +24,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^14.2.1",
+    "@angular-eslint/eslint-plugin": "^14.1.2",
     "@angular/cli": "~14.2.1",
     "@angular/compiler-cli": "^14.0.0",
     "@types/jasmine": "~4.0.0",

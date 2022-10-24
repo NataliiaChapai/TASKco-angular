@@ -123,4 +123,22 @@ export class TasksComponent implements OnInit {
     this.store.deleteComment(id).subscribe();
   }
 
+  drop(ev: DragEvent) {
+    ev.preventDefault();
+    const id = ev.dataTransfer?.getData("text") as string;
+    const container = ev.target as HTMLElement;
+    const type = container.dataset['type'] as string;
+    if (type === 'Todo' || type === 'In progress' || type === 'Done') {
+      this.store.changeStatus(id, type).subscribe();
+    }
+  }
+
+  allowDrop(ev: DragEvent) {
+    ev.preventDefault();
+  }
+
+  drag(ev: DragEvent, id: string) {
+    ev.dataTransfer?.setData("text", id);
+  }
+
 }

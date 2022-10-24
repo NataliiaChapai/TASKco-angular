@@ -5,7 +5,10 @@
   (direction)="getDirectionValue($event)"
 ></app-toolbar>
 <app-loader class="loader"></app-loader>
-<div class="tasks__list">
+<div class="tasks__list"
+
+(dragover)="allowDrop($event)"
+>
   <div class="tasks__column" [ngStyle]="{ 'background-color': todoColor }">
     <h2 class="tasks__title">TODO</h2>
     <button class="tasks__btn" (click)="canAdd[0] = true">+</button>
@@ -24,6 +27,8 @@
     <div
       class="tasks__block"
       [ngStyle]="{ height: canAdd[0] ? '38.4vh' : '45vh' }"
+      (drop)="drop($event)" 
+      data-type="Todo"
     >
       <div
         *ngFor="
@@ -33,6 +38,10 @@
             | sort: sort:direction
         "
         class="tasks__item"
+        draggable="true"
+        (dragstart)="drag($event, task._id)" 
+        [id]="task._id"
+        data-type="Todo"
       >
         <div>
           <h2>{{ task.name }}</h2>
@@ -155,6 +164,8 @@
     <div
       class="tasks__block"
       [ngStyle]="{ height: canAdd[1] ? '38.4vh' : '45vh' }"
+      (drop)="drop($event)" 
+      data-type="In progress"
     >
       <div
         *ngFor="
@@ -164,6 +175,10 @@
             | sort: sort:direction
         "
         class="tasks__item"
+        draggable="true"
+        (dragstart)="drag($event, task._id)" 
+        [id]="task._id"
+        data-type="In progress"
       >
         <div>
           <h2>{{ task.name }}</h2>
@@ -283,6 +298,8 @@
     <div
       class="tasks__block"
       [ngStyle]="{ height: canAdd[2] ? '38.4vh' : '45vh' }"
+      (drop)="drop($event)" 
+      data-type="Done"
     >
       <div
         *ngFor="
@@ -292,6 +309,10 @@
             | sort: sort:direction
         "
         class="tasks__item"
+        draggable="true"
+        (dragstart)="drag($event, task._id)" 
+        [id]="task._id"
+        data-type="Done"
       >
         <div>
           <h2>{{ task.name }}</h2>
