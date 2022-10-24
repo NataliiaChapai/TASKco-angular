@@ -166,12 +166,12 @@ export class BoardStore {
     );
   }
 
-  addComment(id: string, message: any) {
+  addComment(id: string, comment: any) {
     const tasks = this.subject.getValue();
     const index = tasks.findIndex(task => task._id == id);
     const newComments = [
       ...tasks[index].comments,
-      message
+      comment
     ]
     const updatedTask: any = {
       ...tasks[index],
@@ -180,7 +180,7 @@ export class BoardStore {
     const updateTasks: Task[] = tasks.slice(0);
     updateTasks[index] = updatedTask;
     this.subject.next(updateTasks);
-    return this.board.addComment(id, message).pipe(
+    return this.board.addComment(id, comment).pipe(
       catchError(err => {
         const message = 'Could not change status';
         this.messages.showErrors(message);

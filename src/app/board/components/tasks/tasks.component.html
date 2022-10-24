@@ -68,9 +68,9 @@
           </div>
           <form
             *ngIf="task.canComment"
-            #message="ngForm"
+            #comment="ngForm"
             class="tasks__comments"
-            (ngSubmit)="addComment(task._id, message.value)"
+            (ngSubmit)="addComment(task._id, comment.value)"
           >
             <p
               *ngIf="!task.comments.length"
@@ -82,7 +82,7 @@
             </p>
             <div class="tasks__comment">
               <div #comments *ngFor="let comment of task.comments">
-                <p>- {{ comment.message }}</p>
+                <p>- {{ comment.comment }}</p>
               </div>
               <span  *ngIf="task.comments.length" class="tasks__comment-bin" (click)="deleteComment(task._id)">🗑</span>
             </div>
@@ -91,7 +91,7 @@
               <input
                 class="tasks__input"
                 placeholder="New comment"
-                name="message"
+                name="comment"
                 ngModel
               />
               <button class="tasks__btn" type="submit">Add</button>
@@ -199,9 +199,9 @@
           </div>
           <form
             *ngIf="task.canComment"
-            #message="ngForm"
+            #comment="ngForm"
             class="tasks__comments"
-            (ngSubmit)="addComment(task._id, message.value)"
+            (ngSubmit)="addComment(task._id, comment.value)"
           >
             <p
               *ngIf="!task.comments.length"
@@ -213,7 +213,7 @@
             </p>
             <div class="tasks__comment">
               <div #comments *ngFor="let comment of task.comments">
-                <p>- {{ comment.message }}</p>
+                <p>- {{ comment.comment }}</p>
               </div>
               <span  *ngIf="task.comments.length" class="tasks__comment-bin" (click)="deleteComment(task._id)">🗑</span>
             </div>
@@ -222,7 +222,7 @@
               <input
                 class="tasks__input"
                 placeholder="New comment"
-                name="message"
+                name="comment"
                 ngModel
               />
               <button class="tasks__btn" type="submit">Add</button>
@@ -327,9 +327,9 @@
           </div>
           <form
             *ngIf="task.canComment"
-            #message="ngForm"
+            #comment="ngForm"
             class="tasks__comments"
-            (ngSubmit)="addComment(task._id, message.value)"
+            (ngSubmit)="addComment(task._id, comment.value)"
           >
             <p
               *ngIf="!task.comments.length"
@@ -341,7 +341,7 @@
             </p>
             <div class="tasks__comment">
               <div #comments *ngFor="let comment of task.comments">
-                <p>- {{ comment.message }}</p>
+                <p>- {{ comment.comment }}</p>
               </div>
               <span  *ngIf="task.comments.length" class="tasks__comment-bin" (click)="deleteComment(task._id)">🗑</span>
             </div>
@@ -350,7 +350,7 @@
               <input
                 class="tasks__input"
                 placeholder="New comment"
-                name="message"
+                name="comment"
                 ngModel
               />
               <button class="tasks__btn" type="submit">Add</button>

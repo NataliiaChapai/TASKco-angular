@@ -112,11 +112,11 @@ export class TasksComponent implements OnInit {
     this.direction = direction;
   }
 
-  addComment(id: string, message: any) {
-    if (!message.message) {
+  addComment(id: string, comment: any) {
+    if (!comment.comment) {
       return;
     }
-    this.store.addComment(id, message).subscribe();
+    this.store.addComment(id, comment).subscribe();
   }
 
   deleteComment(id: string) {
