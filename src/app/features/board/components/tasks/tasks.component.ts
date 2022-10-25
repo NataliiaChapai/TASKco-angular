@@ -28,6 +28,7 @@ export class TasksComponent implements OnInit {
   todoColor: string;
   inprogressColor: string;
   doneColor: string;
+  oldType: string;
 
   filterByName = '';
   sort = '';
@@ -128,6 +129,9 @@ export class TasksComponent implements OnInit {
     const id = ev.dataTransfer?.getData("text") as string;
     const container = ev.target as HTMLElement;
     const type = container.dataset['type'] as string;
+    if (this.oldType === type) {
+      return;
+    }
     if (type === 'Todo' || type === 'In progress' || type === 'Done') {
       this.store.changeStatus(id, type).subscribe();
     }
@@ -139,6 +143,8 @@ export class TasksComponent implements OnInit {
 
   drag(ev: DragEvent, id: string) {
     ev.dataTransfer?.setData("text", id);
+    const container = ev.target as HTMLElement;
+    this.oldType = container.dataset['type'] as string;
   }
 
 }
