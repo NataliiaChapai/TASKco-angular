@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from '../../shared/shared.module';
 import { TasksComponent } from './components/tasks/tasks.component';
 // import { ToolbarComponent } from '../shared/components/toolbar/toolbar.component';
 import { RouterModule } from '@angular/router';
@@ -11,7 +11,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { DashboardModule } from '../dashboard/dashboard.module';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { BoardStore } from './services/board.store';
-import { PipesModule } from '../shared/pipes/pipes.module';
+import { PipesModule } from '../../shared/pipes/pipes.module';
 
 
 

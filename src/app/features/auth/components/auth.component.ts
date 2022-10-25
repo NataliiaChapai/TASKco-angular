@@ -3,8 +3,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessagesService } from 'src/app/shared/services/messages.service';
 import { environment } from 'src/environments/environment';
-import { CurrentUser } from '../../models/currentUser';
-import { AuthService } from '../../services/auth.service';
+import { CurrentUser } from '../models/currentUser';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-auth',

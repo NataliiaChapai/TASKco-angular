@@ -1,6 +1,4 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Board } from 'src/app/dashboard/models/board.interface';
-import { Task } from 'src/app/board/models/task.interface'; 
 
 @Pipe({
   name: 'filter',

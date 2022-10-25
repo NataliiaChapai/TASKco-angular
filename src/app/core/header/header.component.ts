@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { filter, Observable, pipe } from 'rxjs';
-import { User } from 'src/app/auth/models/user';
-import { AuthService } from 'src/app/auth/services/auth.service';
+import { User } from 'src/app/features/auth/models/user';
+import { AuthService } from 'src/app/features/auth/services/auth.service';
 import { map } from 'rxjs';
-import { CurrentUser } from 'src/app/auth/models/currentUser';
+import { CurrentUser } from 'src/app/features/auth/models/currentUser';
 
 @Component({
   selector: 'app-header',

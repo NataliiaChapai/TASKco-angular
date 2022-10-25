@@ -7,10 +7,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from '../auth/services/auth.service';
 import { BoardComponent } from './components/board/board.component';
-import { PipesModule } from '../shared/pipes/pipes.module';
+import { PipesModule } from '../../shared/pipes/pipes.module';
 import { ModalComponent } from './components/modal/modal.component';
 import { EditModalComponent } from './components/edit-modal/edit-modal.component';
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from '../../shared/shared.module';
 import { SortParamsDirective } from './directives/sort-params.directive';
 import { TasksComponent } from '../board/components/tasks/tasks.component';
 

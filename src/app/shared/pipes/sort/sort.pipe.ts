@@ -1,5 +1,4 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Board } from 'src/app/dashboard/models/board.interface';
 
 @Pipe({
   name: 'sort',
