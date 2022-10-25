@@ -7,6 +7,7 @@
     font-size: 20px;
     color: azure;
     box-shadow: 0px 10px 20px rgba(103, 108, 120, 0.4);
+    min-height: 45px;
 }
 
 .header__link {
@@ -29,7 +30,7 @@
     color: black;
     text-align: center;
     font-weight: bold;
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.411);
     box-shadow: 0px 10px 20px rgba(103, 108, 120, 0.6);
     border-radius: 40px;
     transition: all 1s ease-out;

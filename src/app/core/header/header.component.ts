@@ -4,6 +4,7 @@ import { User } from 'src/app/features/auth/models/user';
 import { AuthService } from 'src/app/features/auth/services/auth.service';
 import { map } from 'rxjs';
 import { CurrentUser } from 'src/app/features/auth/models/currentUser';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -18,7 +19,8 @@ export class HeaderComponent implements OnInit {
     avatarUrl$: Observable<string|null>;
 
   constructor(
-    public auth: AuthService
+    public auth: AuthService,
+    private router: Router
   ) { 
     this.isLoggedIn$ = this.auth.isLoggedIn$.pipe(map(res => res));
     this.isLoggedOut$ = this.auth.isLoggedOut$.pipe(map(res => res));
@@ -37,6 +39,7 @@ export class HeaderComponent implements OnInit {
   logout(event: Event) {
     event.preventDefault();
     this.auth.logout();
+    this.router.navigate(['/auth']);
   }
 
 }

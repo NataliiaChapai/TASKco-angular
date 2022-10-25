@@ -10,12 +10,14 @@ import { DashboardModule } from './features/dashboard/dashboard.module';
 import { BoardModule } from './features/board/board.module';
 import { SharedModule } from './shared/shared.module';
 import { BoardStore } from './features/board/services/board.store';
+import { HomeComponent } from './features/home/home.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

@@ -3,12 +3,16 @@ import { catchError, map } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
 import { AuthService } from '../../features/auth/services/auth.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TokenInterceptorService implements HttpInterceptor {
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router
+    ) {}
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler
@@ -26,6 +30,7 @@ export class TokenInterceptorService implements HttpInterceptor {
       catchError((err) => {
         if (err.status === 401) {
           this.authService.logout();
+          this.router.navigate(['/auth']);
         }
         const error = err.error.message || err.statusText;
         return throwError(error);
