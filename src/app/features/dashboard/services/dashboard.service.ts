@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable, tap } from 'rxjs';
+
 import { environment } from 'src/environments/environment';
 import { Board } from '../models/board.interface';
-import { BoardReq } from '../models/boardReq.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -23,13 +23,13 @@ export class DashboardService {
     return this.http.delete<void>(url)
   }
 
-  addBoard(board: BoardReq): Observable<Board> {
+  addBoard(board: Partial<Board>) {
     const url = environment.apiUrl + `/boards`;
-    return this.http.post<Board>(url, board).pipe(
-      tap(board => board))
+    return this.http.post<any>(url, board).pipe(
+      tap(board => board.board))
   }
 
-  updateBoard(id: string, board: Board): Observable<Board> {
+  updateBoard(id: string, board: Partial<Board>): Observable<Board> {
     const url = environment.apiUrl + `/boards/${id}`;
     return this.http.put<Board>(url, board).pipe(
       tap(board => board))

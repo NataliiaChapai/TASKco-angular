@@ -1,15 +1,9 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Observable, of as observableOf } from 'rxjs';
-import {
-  catchError,
-  filter,
-  finalize,
-  tap,
-} from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core';
+import { map, Observable } from 'rxjs';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 
 import { Board } from '../../models/board.interface';
-import { DashboardService } from '../../services/dashboard.service';
+import { DashboardStore } from '../../services/dashboard.store';
 import { ModalService } from '../../services/modal.service';
 
 @Component({
@@ -26,27 +20,23 @@ export class BoardComponent implements OnInit {
   submitted = false;
   direction = 'asc';
 
-  constructor(private dashboard: DashboardService, public modal: ModalService, private loader: LoadingService) {}
+  constructor(
+    public modal: ModalService,
+    private loader: LoadingService,
+    public store: DashboardStore
+  ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.reloadBoards();
+  }
+
+  reloadBoards() {
     this.loader.loadingOn();
-    this.boards$ = this.dashboard.getBoards().pipe(
-      finalize(() => (this.loader.loadingOff())),
-      catchError(err => observableOf([]))
-    );
+    this.boards$ = this.store.boards$.pipe(map(res => res));
   }
 
   deleteBoard(id: string) {
-    this.loader.loadingOn();
-    this.dashboard
-      .deleteBoard(id)
-      .subscribe(
-        () =>
-          (this.boards$ = this.boards$.pipe(
-            filter(board => board[0]._id !== id),
-            finalize(() => this.loader.loadingOff())
-          ))
-      );
+    this.store.deleteBoard(id).subscribe();
   }
 
   editBoard(id: string) {
@@ -55,17 +45,10 @@ export class BoardComponent implements OnInit {
   }
 
   updateBoard(name: any) {
-    this.dashboard.updateBoard(this.boardId, name).subscribe(
+    this.store.updateBoard(this.boardId, name).subscribe(
       () => {
         this.submitted = false;
         this.modal.closeEdit();
-        this.boards$ = this.boards$.pipe(
-          tap(board => {
-            if (board[0]._id === this.boardId) {
-              board[0].name = name;
-            }
-          })
-        );
       },
       () => (this.submitted = false)
     );

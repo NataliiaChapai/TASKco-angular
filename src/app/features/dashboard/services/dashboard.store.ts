@@ -1,80 +1,99 @@
-// import {Injectable} from '@angular/core';
-// import {BehaviorSubject, Observable, throwError} from 'rxjs';
-// import {catchError, map, shareReplay, tap} from 'rxjs/operators';
-// import {HttpClient} from '@angular/common/http';
-// import { MessagesService } from 'src/app/shared/services/messages.service';
-// import { Board } from '../models/board.interface';
+import { Injectable } from '@angular/core';
+import {
+  BehaviorSubject,
+  catchError,
+  finalize,
+  map,
+  Observable,
+  shareReplay,
+  tap,
+  throwError,
+} from 'rxjs';
 
+import { LoadingService } from 'src/app/shared/services/loading.service';
+import { MessagesService } from 'src/app/shared/services/messages.service';
+import { Board } from '../models/board.interface';
+import { DashboardService } from './dashboard.service';
 
+@Injectable({
+  providedIn: 'root',
+})
+export class DashboardStore {
+  private subject = new BehaviorSubject<Board[]>([]);
 
-// @Injectable({
-//     providedIn: 'root'
-// })
-// export class CoursesStore {
+  boards$: Observable<Board[]> = this.subject.asObservable();
 
-//     private subject = new BehaviorSubject<Board[]>([]);
+  constructor(
+    private loader: LoadingService,
+    private messages: MessagesService,
+    private dashboard: DashboardService
+  ) {
+    this.loadAllBoards();
+  }
 
-//     boards$ : Observable<Board[]> = this.subject.asObservable();
+  public loadAllBoards() {
+    const loadBoards$ = this.dashboard.getBoards().pipe(
+      map(res => res),
+      catchError(err => {
+        const message = 'Could not load boards';
+        this.messages.showErrors(message);
+        console.log(message, err);
+        return throwError(err);
+      }),
+      tap(boards => this.subject.next(boards))
+    );
+    this.loader.showLoaderUntilCompleted(loadBoards$).subscribe();
+  }
 
-//     constructor(
-//         private http:HttpClient,
-//         private messages: MessagesService) {
+  updateBoard(id: string, changes: Partial<Board>): Observable<any> {
+    const boards = this.subject.getValue();
+    const index = boards.findIndex(doard => doard._id == id);
+    const updatedBoard: Board = {
+      ...boards[index],
+      ...changes,
+    };
+    const updateBoards: Board[] = boards.slice(0);
+    updateBoards[index] = updatedBoard;
+    this.subject.next(updateBoards);
+    return this.dashboard.updateBoard(id, changes).pipe(
+      catchError(err => {
+        const message = 'Could not save board';
+        this.messages.showErrors(message);
+        console.log(message, err);
+        return throwError(err);
+      }),
+      shareReplay()
+    );
+  }
 
-//         this.getAllBoards();
+  addBoard(board: Partial<Board>): Observable<any> {
+    const boards = this.subject.getValue();
+    let updatedBoards: Board[] = [];
+    return this.dashboard.addBoard(board).pipe(
+      tap(res => (updatedBoards = [...boards, res.board])),
+      catchError(err => {
+        const message = 'Could not add board';
+        this.messages.showErrors(message);
+        console.log(message, err);
+        return throwError(err);
+      }),
+      finalize(() => this.subject.next(updatedBoards)),
+      shareReplay()
+    );
+  }
 
-//     }
-
-//     private getAllBoards() {
-
-//         const loadBoards$ = this.http.get<Board[]>('/api/boards')
-//             .pipe(
-//                 map(response => response.),
-//                 catchError(err => {
-//                     this.messages.showErrors(err);
-//                     return throwError(err);
-//                 }),
-//                 tap(boards => this.subject.next(boards))
-//             );
-
-//     }
-
-//     saveCourse(courseId:string, changes: Partial<Course>): Observable<any> {
-
-//         const courses = this.subject.getValue();
-
-//         const index = courses.findIndex(course => course.id == courseId);
-
-//         const newCourse: Course = {
-//           ...courses[index],
-//           ...changes
-//         };
-
-//         const newCourses: Course[] = courses.slice(0);
-
-//         newCourses[index] = newCourse;
-
-//         this.subject.next(newCourses);
-
-//         return this.http.put(`/api/courses/${courseId}`, changes)
-//             .pipe(
-//                 catchError(err => {
-//                     const message = "Could not save course";
-//                     console.log(message, err);
-//                     this.messages.showErrors(message);
-//                     return throwError(err);
-//                 }),
-//                 shareReplay()
-//             );
-//     }
-
-//     filterByCategory(category: string): Observable<Course[]> {
-//         return this.courses$
-//             .pipe(
-//                 map(courses =>
-//                     courses.filter(course => course.category == category)
-//                         .sort(sortCoursesBySeqNo)
-//                 )
-//             )
-//     }
-
-// }
+  deleteBoard(id: string) {
+    const boards = this.subject.getValue();
+    const updatedBoards = boards.filter(board => board._id != id);
+    this.subject.next(updatedBoards);
+    return this.dashboard.deleteBoard(id).pipe(
+      catchError(err => {
+        const message = 'Could not delete doard';
+        this.messages.showErrors(message);
+        console.log(message, err);
+        return throwError(err);
+      }),
+      shareReplay()
+    );
+  }
+}
