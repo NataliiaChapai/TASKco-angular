@@ -31,7 +31,6 @@ export class BoardComponent implements OnInit {
   }
 
   reloadBoards() {
-    this.loader.loadingOn();
     this.boards$ = this.store.boards$.pipe(map(res => res));
   }
 
