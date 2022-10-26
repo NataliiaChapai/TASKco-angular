@@ -29,7 +29,6 @@ export class TasksComponent implements OnInit {
   inprogressColor: string;
   doneColor: string;
   oldType: string;
-
   filterByName = '';
   sort = '';
   direction = 'asc';

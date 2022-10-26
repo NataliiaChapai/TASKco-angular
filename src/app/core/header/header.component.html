@@ -4,8 +4,10 @@
     </div>
     <div class="header__container" >
         <a *ngIf="isLoggedIn$ | async" [routerLink]="['/dashboard']" routerLinkActive="active" class="header__link">Dashboard</a>
-        <a *ngIf="(avatarUrl$ | async) as avatarUrl" class="header__link"><img class="header__avatar" width="40" alt="avatar" [src]="avatarUrl"></a>
-        <a *ngIf="(user$ | async) as user" class="header__link" >{{user.email}}</a>
+        <a *ngIf="(avatarUrl$ | async) as avatarUrl" [routerLink]="['/user']" class="header__link">
+            <img class="header__avatar" width="40" alt="avatar" [src]="avatarUrl">
+            <span *ngIf="(user$ | async) as user" routerLinkActive="active">{{user.email}}</span>
+        </a>
         <a *ngIf="isLoggedOut$ | async" [routerLink]="['/auth']" class="header__link" routerLinkActive="active">Auth</a>
         <a *ngIf="isLoggedIn$ | async" [routerLink]="['/auth']" (click)="logout($event)" class="header__link">Logout</a>
     </div>

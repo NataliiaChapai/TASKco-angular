@@ -1,5 +1,6 @@
 <div class="toolbar">
-  <h3 class="toolbar__name">{{ boardName$ | async }}</h3>
+  <button class="toolbar__btn" [routerLink]="['/dashboard']">← Back</button>
+  <h2>{{ boardName$ | async }}</h2>
 
   <div class="toolbar__group">
     <input type="text" class="toolbar__input" placeholder="Filter tasks..." #name (input)="addFilterValue(name.value)"/>

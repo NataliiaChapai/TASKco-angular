@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthComponent } from './features/auth/components/auth.component';
-import { DashboardComponent } from './features/dashboard/components/dashboard/dashboard.component';
 import { HomeComponent } from './features/home/home.component';
 
 const routes: Routes = [
@@ -15,10 +14,12 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    // component: DashboardComponent
     loadChildren: () => import('./features/dashboard/dashboard.module').then(_ => _.DashboardModule)
+  },
+  {
+    path: 'user',
+    loadChildren: () => import('./features/user/user.module').then(_ => _.UserModule)
   }
-
 ];
 
 @NgModule({
