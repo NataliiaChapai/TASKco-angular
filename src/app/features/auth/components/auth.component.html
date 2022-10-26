@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="forgot-password">
-                <p *ngIf="messages.errors$ | async as error">Forgot password?</p>
+                <p *ngIf="messages.errors$ | async as error" (click)="forgotPassword()">Forgot password</p>
             </div>
         <button (click)="register()" [disabled]="!form.valid || submitted" class="register__btn">Register</button>
         <button (click)="login()" [disabled]="!form.valid || submitted" class="login__btn">Login</button>

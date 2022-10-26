@@ -85,4 +85,18 @@ export class AuthService {
     const token = localStorage.getItem('token');
     return token;
   }
+
+  sendPassword(email: Partial<User>) {
+    const url = environment.apiUrl + '/auth/forgot-password';
+    return this.http.patch<any>(url, email).pipe(
+      catchError(err => {
+        this.messages.showErrors('Fill in the email field');
+        return throwError(err);
+      }),
+      tap(res => {
+        this.messages.showSuccess(res.message);
+      }),
+      shareReplay()
+    );
+  }
 }

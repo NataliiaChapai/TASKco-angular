@@ -74,4 +74,12 @@ export class AuthComponent implements OnInit {
       () => this.submitted = false
     );
   }
+
+  forgotPassword() {
+    const email = {
+      email: this.form.value.email
+    }
+    this.auth.sendPassword(email).subscribe()
+
+  }
 }

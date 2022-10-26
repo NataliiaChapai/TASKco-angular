@@ -118,4 +118,9 @@
 
 .forgot-password p {
     margin: 0;
+    cursor: pointer;
+}
+
+.forgot-password p:hover {
+    text-decoration: underline;
 }
