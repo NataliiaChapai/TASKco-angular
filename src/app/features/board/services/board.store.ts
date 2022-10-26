@@ -23,10 +23,10 @@ import { Colors } from '../models/colors.interface';
 export class BoardStore {
   private subject = new BehaviorSubject<Task[]>([]);
   public colorSubject = new BehaviorSubject<Colors>({
-    todo: 'azure',
-    inprogress: 'azure',
-    done: 'azure',
-    archive: 'azure',
+    todo: '#20b2ab33',
+    inprogress: '#20b2ab33',
+    done: '#20b2ab33',
+    archive: '#20b2ab33',
   });
 
   tasks$: Observable<Task[]> = this.subject.asObservable();

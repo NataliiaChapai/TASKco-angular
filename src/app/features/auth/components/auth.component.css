@@ -12,7 +12,7 @@
     height: 400px;
     padding: 50px;
     border-radius: 40px;
-    background-color: azure;
+    background-color: #20b2ab33;
 }
 
 .login__google {
@@ -70,7 +70,6 @@
 
 .validation {
     color: red;
-
     text-align: left;
     padding-left: 50px;
 }

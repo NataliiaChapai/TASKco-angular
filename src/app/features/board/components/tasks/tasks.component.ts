@@ -24,7 +24,7 @@ export class TasksComponent implements OnInit {
   canAddTodo = false;
   canAdd = [false, false, false];
   colorSet = ['white', 'beige', 'yellow', 'orange', 'orangered','lightsalmon',  'lightpink', 'deeppink', 'red', 'purple', 
-  'azure', 'lightgreen', 'green', 'mediumslateblue', 'blue'];
+  '#20b2ab33', 'lightgreen', 'green', 'mediumslateblue', 'blue'];
   todoColor: string;
   inprogressColor: string;
   doneColor: string;

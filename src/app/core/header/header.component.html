@@ -8,7 +8,7 @@
             <img class="header__avatar" width="40" alt="avatar" [src]="avatarUrl">
             <span *ngIf="(user$ | async) as user" routerLinkActive="active">{{user.email}}</span>
         </a>
-        <a *ngIf="isLoggedOut$ | async" [routerLink]="['/auth']" class="header__link" routerLinkActive="active">Auth</a>
+        <a *ngIf="isLoggedOut$ | async" [routerLink]="['/auth']" class="header__link" routerLinkActive="active">Authorization</a>
         <a *ngIf="isLoggedIn$ | async" [routerLink]="['/auth']" (click)="logout($event)" class="header__link">Logout</a>
     </div>
 </section>
