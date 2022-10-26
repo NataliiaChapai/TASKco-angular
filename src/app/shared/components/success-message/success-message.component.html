@@ -1,0 +1,7 @@
+<ng-container *ngIf="(success$ | async) as success">
+    <div class="success__container" *ngIf="showMessages">
+        <div *ngFor="let s of success">
+            <p class="success__message">{{s}}</p>
+        </div>
+    </div>
+</ng-container>

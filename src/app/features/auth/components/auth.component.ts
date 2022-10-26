@@ -51,10 +51,8 @@ export class AuthComponent implements OnInit {
   register(): void {
     const value = this.form.value;
     this.submitted = true;
-
     this.auth.register(value).subscribe(
       () => {
-        this.router.navigateByUrl('/');
         this.submitted = false;
       },
       () => (this.submitted = false)

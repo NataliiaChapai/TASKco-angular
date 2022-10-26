@@ -5,6 +5,7 @@ import { ButtonComponent } from './components/button/button.component';
 import { ErrorMessageComponent } from './components/error-message/error-message.component';
 import { InputComponent } from './components/input/input.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { SuccessMessageComponent } from './components/success-message/success-message.component';
 
 
 
@@ -15,13 +16,15 @@ import { LoaderComponent } from './components/loader/loader.component';
     BackdropComponent,
     ErrorMessageComponent,
     LoaderComponent,
+    SuccessMessageComponent,
   ],
   imports: [
     CommonModule
   ], 
   exports: [ 
     LoaderComponent,
-    ErrorMessageComponent
+    ErrorMessageComponent,
+    SuccessMessageComponent
   ]
 })
 export class SharedModule { }

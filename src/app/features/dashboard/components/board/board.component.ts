@@ -4,7 +4,6 @@ import {
   catchError,
   filter,
   finalize,
-  ignoreElements,
   tap,
 } from 'rxjs/operators';
 import { LoadingService } from 'src/app/shared/services/loading.service';
