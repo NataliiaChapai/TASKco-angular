@@ -38,13 +38,15 @@ export class AuthComponent implements OnInit {
       if (params['token']) {
         localStorage.setItem('token', JSON.stringify(params['token']))
       }
-      if (params['email'] && params['avatarURL']) {
+      if (params['email']) {
         user.email = params['email'];
-        user.avatarUrl = params['avatarURL'];
-        localStorage.setItem('user', JSON.stringify(user))
-        this.router.navigate(['/dashboard']);  
       }
-      this.auth.subject.next(user)
+      if (params['avatarURL']) {
+        user.avatarUrl = params['avatarURL'];
+      }
+      this.auth.subject.next(user);
+      localStorage.setItem('user', JSON.stringify(user))
+      this.router.navigate(['/dashboard']); 
     })
   }
 
