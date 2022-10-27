@@ -28,10 +28,12 @@ export class TasksComponent implements OnInit {
   todoColor: string;
   inprogressColor: string;
   doneColor: string;
+  archiveColor: string;
   oldType: string;
   filterByName = '';
   sort = '';
   direction = 'asc';
+  archive = false;
 
   constructor(
     private board: BoardService,
@@ -66,6 +68,7 @@ export class TasksComponent implements OnInit {
       this.todoColor = colors.todo;
       this.inprogressColor = colors.inprogress;
       this.doneColor = colors.done;
+      this.archiveColor = colors.archive;
       });
   }
 

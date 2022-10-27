@@ -12,6 +12,7 @@ import { DashboardModule } from '../dashboard/dashboard.module';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { BoardStore } from './services/board.store';
 import { PipesModule } from '../../shared/pipes/pipes.module';
+import { SliderButtonComponent } from 'src/app/shared/components/slider-button/slider-button.component';
 
 
 
@@ -28,7 +29,7 @@ import { PipesModule } from '../../shared/pipes/pipes.module';
     HttpClientModule,
     FormsModule,
     DashboardModule,
-    PipesModule
+    PipesModule,
   ],
   exports: [
     RouterModule,

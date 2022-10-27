@@ -4,10 +4,10 @@
   (sort)="getSortValue($event)"
   (direction)="getDirectionValue($event)"
 ></app-toolbar>
+
 <app-loader class="loader"></app-loader>
-<div class="tasks__list"
-(dragover)="allowDrop($event)"
->
+
+<div *ngIf="!archive" class="tasks__list" (dragover)="allowDrop($event)">
   <div class="tasks__column" [ngStyle]="{ 'background-color': todoColor }">
     <h2 class="tasks__title">TODO</h2>
     <button class="tasks__btn" (click)="canAdd[0] = true">+</button>
@@ -26,7 +26,7 @@
     <div
       class="tasks__block"
       [ngStyle]="{ height: canAdd[0] ? '38.4vh' : '45vh' }"
-      (drop)="drop($event)" 
+      (drop)="drop($event)"
       data-type="Todo"
     >
       <div
@@ -38,7 +38,7 @@
         "
         class="tasks__item"
         draggable="true"
-        (dragstart)="drag($event, task._id)" 
+        (dragstart)="drag($event, task._id)"
         [id]="task._id"
         data-type="Todo"
       >
@@ -92,7 +92,12 @@
               <div #comments *ngFor="let comment of task.comments">
                 <p>- {{ comment.comment }}</p>
               </div>
-              <span  *ngIf="task.comments.length" class="tasks__comment-bin" (click)="deleteComment(task._id)">🗑</span>
+              <span
+                *ngIf="task.comments.length"
+                class="tasks__comment-bin"
+                (click)="deleteComment(task._id)"
+                >🗑</span
+              >
             </div>
 
             <div class="tasks__edit">
@@ -163,7 +168,7 @@
     <div
       class="tasks__block"
       [ngStyle]="{ height: canAdd[1] ? '38.4vh' : '45vh' }"
-      (drop)="drop($event)" 
+      (drop)="drop($event)"
       data-type="In progress"
     >
       <div
@@ -175,7 +180,7 @@
         "
         class="tasks__item"
         draggable="true"
-        (dragstart)="drag($event, task._id)" 
+        (dragstart)="drag($event, task._id)"
         [id]="task._id"
         data-type="In progress"
       >
@@ -229,7 +234,12 @@
               <div #comments *ngFor="let comment of task.comments">
                 <p>- {{ comment.comment }}</p>
               </div>
-              <span  *ngIf="task.comments.length" class="tasks__comment-bin" (click)="deleteComment(task._id)">🗑</span>
+              <span
+                *ngIf="task.comments.length"
+                class="tasks__comment-bin"
+                (click)="deleteComment(task._id)"
+                >🗑</span
+              >
             </div>
 
             <div class="tasks__edit">
@@ -297,7 +307,7 @@
     <div
       class="tasks__block"
       [ngStyle]="{ height: canAdd[2] ? '38.4vh' : '45vh' }"
-      (drop)="drop($event)" 
+      (drop)="drop($event)"
       data-type="Done"
     >
       <div
@@ -309,7 +319,7 @@
         "
         class="tasks__item"
         draggable="true"
-        (dragstart)="drag($event, task._id)" 
+        (dragstart)="drag($event, task._id)"
         [id]="task._id"
         data-type="Done"
       >
@@ -363,7 +373,12 @@
               <div #comments *ngFor="let comment of task.comments">
                 <p>- {{ comment.comment }}</p>
               </div>
-              <span  *ngIf="task.comments.length" class="tasks__comment-bin" (click)="deleteComment(task._id)">🗑</span>
+              <span
+                *ngIf="task.comments.length"
+                class="tasks__comment-bin"
+                (click)="deleteComment(task._id)"
+                >🗑</span
+              >
             </div>
 
             <div class="tasks__edit">
@@ -415,4 +430,55 @@
       </div>
     </div>
   </div>
+
+  <app-slider-button class="slider__btn right" content="→" (click)="archive=true"></app-slider-button>
+</div>
+
+<div *ngIf="archive" class="tasks__list">
+  <div class="tasks__column" [ngStyle]="{ 'background-color': archiveColor }">
+    <h2 class="tasks__title">ARCHIVE</h2>
+    <div class="tasks__block" [ngStyle]="{ height: '52.7vh' }">
+      <div
+        *ngFor="
+          let task of archiveTasks$
+            | async
+            | filter: filterByName
+            | sort: sort:direction
+        "
+        class="tasks__item archive"
+      >
+        <div>
+          <h2>{{ task.name }}</h2>
+          <div class="tasks__date">
+            <p>{{ task.createdAt | date: 'dd.MM.YYYY' }}</p>
+            <img
+              src="./assets/images/message.png"
+              width="30"
+              (click)="task.canComment = !task.canComment"
+            />
+            <span>{{ task.comments.length }}</span>
+          </div>
+          <div class="tasks__comments" *ngIf="task.canComment">
+            <div #comments *ngFor="let comment of task.comments" class="tasks__comment ">
+              <p>- {{ comment.comment }}</p>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+    <div class="tasks__column-color">
+      <span>🖌</span>
+      <div class="tasks__colors">
+        <div *ngFor="let color of colorSet">
+          <div
+            [ngStyle]="{ 'background-color': color }"
+            class="tasks__color"
+            (click)="changeColor('archive', color)"
+          ></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-slider-button class="slider__btn left" content="←" (click)="archive=false"></app-slider-button>
 </div>

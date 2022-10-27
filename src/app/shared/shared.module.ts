@@ -6,6 +6,7 @@ import { ErrorMessageComponent } from './components/error-message/error-message.
 import { InputComponent } from './components/input/input.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { SuccessMessageComponent } from './components/success-message/success-message.component';
+import { SliderButtonComponent } from './components/slider-button/slider-button.component';
 
 
 
@@ -17,6 +18,7 @@ import { SuccessMessageComponent } from './components/success-message/success-me
     ErrorMessageComponent,
     LoaderComponent,
     SuccessMessageComponent,
+    SliderButtonComponent,
   ],
   imports: [
     CommonModule
@@ -24,7 +26,8 @@ import { SuccessMessageComponent } from './components/success-message/success-me
   exports: [ 
     LoaderComponent,
     ErrorMessageComponent,
-    SuccessMessageComponent
+    SuccessMessageComponent,
+    SliderButtonComponent
   ]
 })
 export class SharedModule { }
