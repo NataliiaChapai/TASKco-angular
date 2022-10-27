@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { LoadingService } from 'src/app/shared/services/loading.service';
 
 import { Board } from '../../models/board.interface';
 import { DashboardStore } from '../../services/dashboard.store';
@@ -22,7 +21,6 @@ export class BoardComponent implements OnInit {
 
   constructor(
     public modal: ModalService,
-    private loader: LoadingService,
     public store: DashboardStore
   ) {}
 

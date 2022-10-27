@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { map, Observable } from 'rxjs';
-import { AuthService } from '../auth/services/auth.service';
+
+import { AuthStore } from '../auth/services/auth.store';
 
 @Component({
   selector: 'app-home',
@@ -14,12 +14,12 @@ export class HomeComponent implements OnInit {
   isLoggedOut$: Observable<boolean>;
 
   constructor(
-    public auth: AuthService,
+    public store: AuthStore,
   ) { }
 
   ngOnInit(): void {
-    this.isLoggedIn$ = this.auth.isLoggedIn$.pipe(map(res => res));
-    this.isLoggedOut$ = this.auth.isLoggedOut$.pipe(map(res => res));
+    this.isLoggedIn$ = this.store.isLoggedIn$.pipe(map(res => res));
+    this.isLoggedOut$ = this.store.isLoggedOut$.pipe(map(res => res));
   }
 
 }

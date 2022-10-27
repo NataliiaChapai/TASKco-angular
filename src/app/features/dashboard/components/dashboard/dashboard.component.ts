@@ -7,12 +7,6 @@ import { ModalService } from '../../services/modal.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  // boards$ = [];
-  // filter = {
-  //   filterByName: '',
-  //   sort: ''
-  // };
-  // isLoaded = false;
 
   constructor(public modal: ModalService) {
    }

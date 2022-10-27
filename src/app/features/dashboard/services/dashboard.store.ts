@@ -96,4 +96,8 @@ export class DashboardStore {
       shareReplay()
     );
   }
+
+  clearData() {
+    this.subject.next([]);
+  }
 }

@@ -3,8 +3,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessagesService } from 'src/app/shared/services/messages.service';
 import { environment } from 'src/environments/environment';
-import { CurrentUser } from '../models/currentUser';
-import { AuthService } from '../services/auth.service';
+import { DashboardStore } from '../../dashboard/services/dashboard.store';
+import { User } from '../models/user';
+import { AuthStore } from '../services/auth.store';
 
 @Component({
   selector: 'app-auth',
@@ -19,7 +20,8 @@ export class AuthComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    public auth: AuthService,
+    public auth: AuthStore,
+    private dashboard: DashboardStore,
     private route: ActivatedRoute,
     public messages: MessagesService
   ) {
@@ -34,7 +36,7 @@ export class AuthComponent implements OnInit {
       return
     }
     this.route.queryParams.subscribe(params => {
-      const user: CurrentUser = {email: null, avatarUrl: null};
+      const user: User = {email: '', avatarUrl: null};
       if (params['token']) {
         localStorage.setItem('token', JSON.stringify(params['token']))
       }
@@ -68,6 +70,7 @@ export class AuthComponent implements OnInit {
 
     this.auth.login(value).subscribe(
       () => {
+        this.dashboard.loadAllBoards()
         this.router.navigateByUrl('/dashboard');
         this.submitted = false;
       },

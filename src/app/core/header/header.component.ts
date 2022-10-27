@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { filter, Observable, pipe } from 'rxjs';
-import { User } from 'src/app/features/auth/models/user';
-import { AuthService } from 'src/app/features/auth/services/auth.service';
-import { map } from 'rxjs';
-import { CurrentUser } from 'src/app/features/auth/models/currentUser';
+import { Observable, map } from 'rxjs';
 import { Router } from '@angular/router';
+import { User } from 'src/app/features/auth/models/user';
+
+import { AuthStore } from 'src/app/features/auth/services/auth.store';
+import { DashboardStore } from 'src/app/features/dashboard/services/dashboard.store';
 
 @Component({
   selector: 'app-header',
@@ -15,17 +15,18 @@ export class HeaderComponent implements OnInit {
 
     isLoggedIn$: Observable<boolean>;
     isLoggedOut$: Observable<boolean>;
-    user$: Observable<CurrentUser>;
+    user$: Observable<User>;
     avatarUrl$: Observable<string|null>;
 
   constructor(
-    public auth: AuthService,
+    public store: AuthStore,
+    private dashboardStore: DashboardStore,
     private router: Router
   ) { 
-    this.isLoggedIn$ = this.auth.isLoggedIn$.pipe(map(res => res));
-    this.isLoggedOut$ = this.auth.isLoggedOut$.pipe(map(res => res));
-    this.user$ = this.auth.user$.pipe(map(res => res));
-    this.avatarUrl$ = this.auth.user$.pipe(map(res => {
+    this.isLoggedIn$ = this.store.isLoggedIn$.pipe(map(res => res));
+    this.isLoggedOut$ = this.store.isLoggedOut$.pipe(map(res => res));
+    this.user$ = this.store.user$.pipe(map(res => res));
+    this.avatarUrl$ = this.store.user$.pipe(map(res => {
       if(!res.avatarUrl && res.email) {
         return './assets/images/avatarka.png';
       }
@@ -38,7 +39,8 @@ export class HeaderComponent implements OnInit {
 
   logout(event: Event) {
     event.preventDefault();
-    this.auth.logout();
+    this.store.logout();
+    this.dashboardStore.clearData();
     this.router.navigate(['/auth']);
   }
 
