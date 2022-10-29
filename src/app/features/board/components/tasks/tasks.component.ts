@@ -47,7 +47,6 @@ export class TasksComponent implements OnInit {
   }
 
   reloadTasks() {
-    this.loader.loadingOn();
     this.route.params.subscribe(params => (this.boardId = params['id']));
 
     const name$ = this.board

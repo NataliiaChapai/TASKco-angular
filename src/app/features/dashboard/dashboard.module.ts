@@ -48,6 +48,6 @@ const routes: Routes = [
   exports: [
     RouterModule,
   ],
-  providers: [AuthGuard, AuthService]
+  providers: [AuthGuard]
 })
 export class DashboardModule { }

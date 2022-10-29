@@ -8,7 +8,7 @@ import { UserService } from './user.service';
 @Injectable({
   providedIn: 'root'
 })
-export class StoreService {
+export class UserStore {
 
   defaultUser = {
     email: '',

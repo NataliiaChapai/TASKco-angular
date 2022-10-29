@@ -40,7 +40,7 @@ export class HeaderComponent implements OnInit {
   logout(event: Event) {
     event.preventDefault();
     this.store.logout();
-    this.dashboardStore.clearData();
+    // this.dashboardStore.clearData();
     this.router.navigate(['/auth']);
   }
 

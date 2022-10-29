@@ -28,7 +28,9 @@ export class DashboardStore {
     private messages: MessagesService,
     private dashboard: DashboardService
   ) {
-    this.loadAllBoards();
+    if (localStorage.getItem('user')) {
+      this.loadAllBoards();
+    }
   }
 
   public loadAllBoards() {

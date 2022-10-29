@@ -6,6 +6,7 @@ import { AuthGuard } from '../auth/services/auth.guard';
 import { AuthService } from '../auth/services/auth.service';
 import { ProfileComponent } from './components/profile/profile.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 const routes: Routes = [
   {
@@ -24,6 +25,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     ReactiveFormsModule,
     FormsModule,
+    SharedModule
   ],
   exports: [
     RouterModule,
