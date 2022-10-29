@@ -12,7 +12,7 @@ export class StoreService {
 
   defaultUser = {
     email: '',
-    avatarUrl: '',
+    avatarURL: '',
     createdAt: ''
   }
 
@@ -47,12 +47,12 @@ export class StoreService {
     let updateUser: CurrentUser = this.defaultUser;
     return this.user.updateAvatar(avatar).pipe(
       catchError(err => {
-        const message = 'Could not save board';
+        const message = 'Could not update avatar';
         this.messages.showErrors(message);
         console.log(message, err);
         return throwError(err);
       }),
-      tap(res => updateUser = {...user, avatarUrl: res.user.avatarURL}),
+      tap(res => updateUser = {...user, avatarURL: res}),
       finalize(() => this.subject.next(updateUser)),
       shareReplay()
     );

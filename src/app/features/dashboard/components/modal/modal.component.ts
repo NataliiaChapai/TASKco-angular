@@ -18,7 +18,7 @@ export class ModalComponent implements OnInit {
     public modal: ModalService,
     private store: DashboardStore
   ) {
-    this.form = fb.group({
+    this.form = this.fb.group({
       name: ['', [Validators.required]],
       description: '',
     });

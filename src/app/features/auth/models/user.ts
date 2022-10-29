@@ -1,6 +1,6 @@
 export interface User {
   email: string;
   password?: string;
-  avatarUrl: string | null;
+  avatarURL: string | null;
   token?: string
 }

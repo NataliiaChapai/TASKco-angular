@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
     isLoggedIn$: Observable<boolean>;
     isLoggedOut$: Observable<boolean>;
     user$: Observable<User>;
-    avatarUrl$: Observable<string|null>;
+    avatarURL$: Observable<string|null>;
 
   constructor(
     public store: AuthStore,
@@ -26,11 +26,11 @@ export class HeaderComponent implements OnInit {
     this.isLoggedIn$ = this.store.isLoggedIn$.pipe(map(res => res));
     this.isLoggedOut$ = this.store.isLoggedOut$.pipe(map(res => res));
     this.user$ = this.store.user$.pipe(map(res => res));
-    this.avatarUrl$ = this.store.user$.pipe(map(res => {
-      if(!res.avatarUrl && res.email) {
+    this.avatarURL$ = this.store.user$.pipe(map(res => {
+      if(!res.avatarURL && res.email) {
         return './assets/images/avatarka.png';
       }
-      return res.avatarUrl;
+      return res.avatarURL;
     }));
   }
 

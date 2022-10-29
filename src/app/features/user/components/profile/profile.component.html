@@ -1,16 +1,14 @@
 <div class="profile">
   <div class="profile-container">
     <img
-      *ngIf="user.avatarUrl"
-      else
-      defaultUrl
+      *ngIf="user.avatarURL"
       alt="avatar"
-      [src]="user.avatarUrl"
+      [src]="user.avatarURL"
     />
-    <img #defaultUrl alt="avatar" src="./assets/images/avatarka.png" />
+    <img *ngIf="!user.avatarURL" alt="avatar" src="./assets/images/avatarka.png" />
     <div class="btn">
       <label for="files">Select image</label>
-      <input id="files" name="avatar" style="display: none" type="file" />
+      <input id="files" name="avatar" style="display: none" type="file" (change)="addAvatar($event)"/>
     </div>
     <div class="profile__info">
       <h3>Email: {{ user.email }}</h3>

@@ -25,7 +25,7 @@ export class AuthComponent implements OnInit {
     private route: ActivatedRoute,
     public messages: MessagesService
   ) {
-    this.form = fb.group({
+    this.form = this.fb.group({
       email: [null, [Validators.required, Validators.email]],
       password: [null, [Validators.required, Validators.minLength(8)]],
     });
@@ -36,12 +36,12 @@ export class AuthComponent implements OnInit {
       return
     }
     this.route.queryParams.subscribe(params => {
-      const user: User = {email: '', avatarUrl: null};
+      const user: User = {email: '', avatarURL: null};
       if (params['token']) {
         localStorage.setItem('token', JSON.stringify(params['token']))
       }
       if (params['avatarURL']) {
-        user.avatarUrl = params['avatarURL'];
+        user.avatarURL = params['avatarURL'];
       }
       if (params['email']) {
         user.email = params['email'];

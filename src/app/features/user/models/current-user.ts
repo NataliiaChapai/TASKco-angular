@@ -1,6 +1,6 @@
 export interface CurrentUser {
     email: string;
-    avatarUrl: string;
+    avatarURL: string;
     password?: string;
     createdAt: string;
 }

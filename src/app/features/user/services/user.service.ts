@@ -26,8 +26,10 @@ export class UserService {
   }
 
   updateAvatar(avatar: File) {
+    let formParams = new FormData();
+   formParams.append('avatar', avatar)
     const url = environment.apiUrl + '/users/avatars';
-    return this.http.patch<any>(url, avatar).pipe(
+    return this.http.patch<any>(url, formParams).pipe(
       map(res => res.user.avatarURL))
   }
 

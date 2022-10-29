@@ -8,7 +8,7 @@ import { User } from '../models/user';
 
 const ANONYMOUS_USER: User = {
   email: '',
-  avatarUrl: null,
+  avatarURL: null,
 };
 
 @Injectable({
@@ -50,8 +50,8 @@ export class AuthStore {
       tap(res => {
         const { token } = res;
         const { user } = res;
-        const { email, avatarUrl } = user;
-        const currentUser = { email, avatarUrl };
+        const { email, avatarURL } = user;
+        const currentUser = { email, avatarURL };
         this.subject.next(currentUser);
         localStorage.setItem('token', JSON.stringify(token));
         localStorage.setItem('user', JSON.stringify(currentUser));
