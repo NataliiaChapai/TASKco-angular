@@ -1,11 +1,86 @@
 <div class="profile">
-    <div class="profile-container">
-        <img alt="avatar" src="./assets/images/avatarka.png">
-    <div>
-        <label for="files" class="btn">Select image</label>
-        <input id="files" name="avatar" style="display: none;" type="file">
-      </div>
-    <h3>Name</h3>
+  <div class="profile-container">
+    <img
+      *ngIf="user.avatarUrl"
+      else
+      defaultUrl
+      alt="avatar"
+      [src]="user.avatarUrl"
+    />
+    <img #defaultUrl alt="avatar" src="./assets/images/avatarka.png" />
+    <div class="btn">
+      <label for="files">Select image</label>
+      <input id="files" name="avatar" style="display: none" type="file" />
     </div>
-    
+    <div class="profile__info">
+      <h3>Email: {{ user.email }}</h3>
+      <p>Registration date: {{ user.createdAt | date: 'dd.MM.YYYY' }}</p>
+      <p class="profile__password">Сhange password:</p>
+      <form [formGroup]="form" class="form">
+        <div
+          [ngClass]="{
+            invalid:
+              form.controls['password'].touched &&
+              form.controls['password'].invalid
+          }"
+        >
+          <input
+            formControlName="password"
+            type="password"
+            class="form__input"
+            placeholder="Password"
+          />
+          <div
+            class="validation"
+            *ngIf="
+              form.controls['password'].touched &&
+              form.controls['password'].invalid
+            "
+          >
+            <small *ngIf="form.controls['password']"
+              >Password length must be at least 8 characters</small
+            >
+          </div>
+        </div>
+        <div
+          [ngClass]="{
+            invalid:
+              form.controls['confirmPassword'].touched &&
+              form.controls['confirmPassword'].invalid
+          }"
+        >
+          <input
+            formControlName="confirmPassword"
+            type="password"
+            class="form__input"
+            placeholder="Confirm password"
+          />
+          <div
+            class="validation"
+            *ngIf="
+              form.controls['confirmPassword'].touched &&
+              form.controls['confirmPassword'].invalid
+            "
+          >
+            <small *ngIf="form.controls['confirmPassword']"
+              >Password length must be at least 8 characters</small
+            >
+          </div>
+        </div>
+        <div>
+            <button
+          (click)="changePassword()"
+          [disabled]="!form.valid || submitted"
+          class="btn"
+        >
+          Save
+        </button>
+        </div>
+        
+      </form>
+      <small *ngIf="error" class="validation"
+              >Both password must be equal</small
+            >
+    </div>
+  </div>
 </div>

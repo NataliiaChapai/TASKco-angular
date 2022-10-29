@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../auth/services/auth.guard';
 import { AuthService } from '../auth/services/auth.service';
 import { ProfileComponent } from './components/profile/profile.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -21,6 +22,8 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
+    ReactiveFormsModule,
+    FormsModule
   ],
   exports: [
     RouterModule,

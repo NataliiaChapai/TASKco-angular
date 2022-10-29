@@ -17,7 +17,7 @@
             <div [ngClass]="{invalid: form.controls['password'].touched && form.controls['password'].invalid}">
                 <input formControlName="password" type="password" class="login__input" placeholder="Password">                
                 <div class="validation" *ngIf="form.controls['password'].touched && form.controls['password'].invalid">
-                    <small *ngIf="form.controls['email']">Password length must be at least 8 characters</small>
+                    <small *ngIf="form.controls['password']">Password length must be at least 8 characters</small>
                 </div>
             </div>
             <div class="forgot-password">
