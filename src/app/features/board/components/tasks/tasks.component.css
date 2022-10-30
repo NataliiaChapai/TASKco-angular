@@ -163,9 +163,7 @@
 
 .tasks__colors {
     display: none;
-    justify-content: center;
-    width: 120px;
-    flex-wrap: wrap;
+    height: 50px;
     position: absolute;
     background-color: #fff;
     border-radius: 10px;
@@ -176,22 +174,8 @@
     box-shadow: 5px 5px 10px rgba(103, 108, 120, 0.4);
 }
 
-.tasks__color {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    border: 1px solid;
-    margin-right: 2px;
-    margin-bottom: 2px;
-    cursor: pointer;
-}
-
-.tasks__color:hover {
-    border: 1px solid #fff;
-}
-
 .tasks__column-color span:hover + .tasks__colors, .tasks__colors:hover {
-    display: flex;
+    display: block;
 }
 
 .tasks__date {

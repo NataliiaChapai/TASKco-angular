@@ -135,15 +135,7 @@
     </div>
     <div class="tasks__column-color">
       <span>🖌</span>
-      <div class="tasks__colors">
-        <div *ngFor="let color of colorSet">
-          <div
-            [ngStyle]="{ 'background-color': color }"
-            class="tasks__color"
-            (click)="changeColor('todo', color)"
-          ></div>
-        </div>
-      </div>
+      <input class="tasks__colors" type="color" [value]="todoColor" (change)="changeColor('todo', $event)">
     </div>
   </div>
 
@@ -277,15 +269,7 @@
     </div>
     <div class="tasks__column-color">
       <span>🖌</span>
-      <div class="tasks__colors">
-        <div *ngFor="let color of colorSet">
-          <div
-            [ngStyle]="{ 'background-color': color }"
-            class="tasks__color"
-            (click)="changeColor('inprogress', color)"
-          ></div>
-        </div>
-      </div>
+      <input class="tasks__colors" type="color" [value]="inprogressColor" (change)="changeColor('inprogress', $event)">
     </div>
   </div>
 
@@ -419,15 +403,7 @@
     </div>
     <div class="tasks__column-color">
       <span>🖌</span>
-      <div class="tasks__colors">
-        <div *ngFor="let color of colorSet">
-          <div
-            [ngStyle]="{ 'background-color': color }"
-            class="tasks__color"
-            (click)="changeColor('done', color)"
-          ></div>
-        </div>
-      </div>
+      <input class="tasks__colors" type="color" [value]="doneColor" (change)="changeColor('done', $event)">
     </div>
   </div>
 
@@ -469,15 +445,7 @@
     </div>
     <div class="tasks__column-color">
       <span>🖌</span>
-      <div class="tasks__colors">
-        <div *ngFor="let color of colorSet">
-          <div
-            [ngStyle]="{ 'background-color': color }"
-            class="tasks__color"
-            (click)="changeColor('archive', color)"
-          ></div>
-        </div>
-      </div>
+      <input class="tasks__colors" type="color" [value]="archiveColor" (change)="changeColor('archive', $event)">
     </div>
   </div>
   <app-slider-button class="slider__btn left" content="←" (click)="archive=false"></app-slider-button>

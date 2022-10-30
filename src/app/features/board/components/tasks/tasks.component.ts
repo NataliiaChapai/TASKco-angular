@@ -98,8 +98,8 @@ export class TasksComponent implements OnInit {
     this.store.changeStatus(id, 'Archive').subscribe();
   }
 
-  changeColor(column: string, color: string,) {
-    this.store.changeColor(column, color).subscribe();
+  changeColor(column: string, color: any,) {
+    this.store.changeColor(column, color.target.value).subscribe();
   }
 
   getFilterValue(value: string) {
