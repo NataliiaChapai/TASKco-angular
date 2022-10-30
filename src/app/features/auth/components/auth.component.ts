@@ -73,7 +73,8 @@ export class AuthComponent implements OnInit {
 
     this.auth.login(value).subscribe(
       () => {
-        this.dashboard.loadAllBoards()
+        this.dashboard.loadAllBoards();
+        this.user.loadCurrentUser();
         this.router.navigateByUrl('/dashboard');
         this.submitted = false;
       },
