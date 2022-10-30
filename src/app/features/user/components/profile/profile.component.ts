@@ -60,8 +60,8 @@ export class ProfileComponent implements OnInit {
   addAvatar(event: any) {
     this.loader.loadingOn();
     this.avatarFile = event.target.files[0];
-    const userStorage = localStorage.getItem('user');
-    let updateStorage;
+    // const userStorage = localStorage.getItem('user');
+    // let updateStorage;
     const authData = this.auth.subject.getValue();
     const updateAuthData = {
       ...authData,
@@ -70,13 +70,13 @@ export class ProfileComponent implements OnInit {
     if (this.avatarFile) {
       return this.store.updateAvatar(this.avatarFile).subscribe(() => {
         this.auth.subject.next(updateAuthData);
-        localStorage.setItem('user', JSON.stringify(updateAuthData));
-        if (userStorage) {
-          updateStorage = {
-            ...JSON.parse(userStorage),
-            avatarURL: this.user.avatarURL,
-          };
-        }
+        // if (userStorage) {
+        //   updateStorage = {
+        //     ...JSON.parse(userStorage),
+        //     avatarURL: this.user.avatarURL,
+        //   };
+        //   localStorage.setItem('user', JSON.stringify(updateStorage));
+        // }
         this.loader.loadingOff();
       });
     }

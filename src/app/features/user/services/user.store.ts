@@ -25,7 +25,9 @@ export class UserStore {
     private messages: MessagesService,
     private loader: LoadingService
   ) { 
-    this.loadCurrentUser();  
+    if (localStorage.getItem('user')) {
+      this.loadCurrentUser(); 
+    } 
   }
 
   loadCurrentUser() {
@@ -71,5 +73,27 @@ export class UserStore {
       }),
       shareReplay()
     );
+  }
+
+  saveAvatarUrl(avatarURL: string) {
+    const user = this.subject.getValue();
+    if (!user.avatarURL) {
+    const updateUser = {
+      ...user,
+      avatarURL
+    }
+    this.subject.next(updateUser);
+    return this.user.saveAvatarUrl(avatarURL).pipe(
+      catchError(err => {
+        const message = 'Could not save url';
+        console.log(message, err);
+        return throwError(err);
+      }),
+      shareReplay()
+    )};
+  }
+
+  clearUserData() {
+    this.subject.next(this.defaultUser)
   }
 }

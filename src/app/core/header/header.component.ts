@@ -5,6 +5,7 @@ import { User } from 'src/app/features/auth/models/user';
 
 import { AuthStore } from 'src/app/features/auth/services/auth.store';
 import { DashboardStore } from 'src/app/features/dashboard/services/dashboard.store';
+import { UserStore } from 'src/app/features/user/services/user.store';
 
 @Component({
   selector: 'app-header',
@@ -16,22 +17,22 @@ export class HeaderComponent implements OnInit {
     isLoggedIn$: Observable<boolean>;
     isLoggedOut$: Observable<boolean>;
     user$: Observable<User>;
-    avatarURL$: Observable<string|null>;
+    avatarURL: string;
 
   constructor(
     public store: AuthStore,
-    private dashboardStore: DashboardStore,
+    private user: UserStore,
     private router: Router
   ) { 
     this.isLoggedIn$ = this.store.isLoggedIn$.pipe(map(res => res));
     this.isLoggedOut$ = this.store.isLoggedOut$.pipe(map(res => res));
     this.user$ = this.store.user$.pipe(map(res => res));
-    this.avatarURL$ = this.store.user$.pipe(map(res => {
-      if(!res.avatarURL && res.email) {
-        return './assets/images/avatarka.png';
+    this.user.currentUser$.subscribe(res => {
+      if(!res.avatarURL) {
+        this.avatarURL = './assets/images/avatarka.png';
       }
-      return res.avatarURL;
-    }));
+      this.avatarURL = res.avatarURL;
+    });
   }
 
   ngOnInit(): void {
@@ -40,7 +41,7 @@ export class HeaderComponent implements OnInit {
   logout(event: Event) {
     event.preventDefault();
     this.store.logout();
-    // this.dashboardStore.clearData();
+    this.user.clearUserData();
     this.router.navigate(['/auth']);
   }
 

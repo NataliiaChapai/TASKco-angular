@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MessagesService } from 'src/app/shared/services/messages.service';
 import { environment } from 'src/environments/environment';
 import { DashboardStore } from '../../dashboard/services/dashboard.store';
+import { UserStore } from '../../user/services/user.store';
 import { User } from '../models/user';
 import { AuthStore } from '../services/auth.store';
 
@@ -21,6 +22,7 @@ export class AuthComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     public auth: AuthStore,
+    private user: UserStore,
     private dashboard: DashboardStore,
     private route: ActivatedRoute,
     public messages: MessagesService
@@ -42,6 +44,7 @@ export class AuthComponent implements OnInit {
       }
       if (params['avatarURL']) {
         user.avatarURL = params['avatarURL'];
+        this.user.saveAvatarUrl(params['avatarURL']);
       }
       if (params['email']) {
         user.email = params['email'];

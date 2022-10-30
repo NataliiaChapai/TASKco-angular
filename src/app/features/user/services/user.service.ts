@@ -33,4 +33,10 @@ export class UserService {
       map(res => res.user.avatarURL))
   }
 
+  saveAvatarUrl(avatarURL: string) {
+    const url = environment.apiUrl + '/users/google-avatar';
+    return this.http.patch<any>(url, {avatarURL}).pipe(
+      map(res => res.avatarURL))
+  }
+
 }
