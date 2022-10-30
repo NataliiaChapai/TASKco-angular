@@ -29,9 +29,9 @@ export class HeaderComponent implements OnInit {
     this.user$ = this.store.user$.pipe(map(res => res));
     this.user.currentUser$.subscribe(res => {
       if(!res.avatarURL) {
-        this.avatarURL = './assets/images/avatarka.png';
+        return this.avatarURL = './assets/images/avatarka.png';
       }
-      this.avatarURL = res.avatarURL;
+      return this.avatarURL = res.avatarURL;
     });
   }
 
@@ -41,7 +41,6 @@ export class HeaderComponent implements OnInit {
   logout(event: Event) {
     event.preventDefault();
     this.store.logout();
-    this.user.clearUserData();
     this.router.navigate(['/auth']);
   }
 

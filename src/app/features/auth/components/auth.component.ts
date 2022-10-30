@@ -44,6 +44,8 @@ export class AuthComponent implements OnInit {
       }
       if (params['avatarURL']) {
         user.avatarURL = params['avatarURL'];
+        this.dashboard.loadAllBoards();
+        this.user.loadCurrentUser();
         this.user.saveAvatarUrl(params['avatarURL']);
       }
       if (params['email']) {
