@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { Board } from '../../models/board.interface';
@@ -8,6 +8,7 @@ import { ModalService } from '../../services/modal.service';
   selector: 'app-edit-modal',
   templateUrl: './edit-modal.component.html',
   styleUrls: ['./edit-modal.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EditModalComponent implements OnInit {
   form: FormGroup;

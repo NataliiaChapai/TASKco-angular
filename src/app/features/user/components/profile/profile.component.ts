@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+;
 import { AuthStore } from 'src/app/features/auth/services/auth.store';
-import { LoadingService } from 'src/app/shared/services/loading.service';
-
+import { LoadingService } from 'src/app/shared/services/loading.service'
 import { MessagesService } from 'src/app/shared/services/messages.service';
 import { CurrentUser } from '../../models/current-user';
 import { UserStore } from '../../services/user.store';
@@ -11,6 +11,7 @@ import { UserStore } from '../../services/user.store';
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileComponent implements OnInit {
   form: FormGroup;
@@ -60,8 +61,6 @@ export class ProfileComponent implements OnInit {
   addAvatar(event: any) {
     this.loader.loadingOn();
     this.avatarFile = event.target.files[0];
-    // const userStorage = localStorage.getItem('user');
-    // let updateStorage;
     const authData = this.auth.subject.getValue();
     const updateAuthData = {
       ...authData,
@@ -70,13 +69,6 @@ export class ProfileComponent implements OnInit {
     if (this.avatarFile) {
       return this.store.updateAvatar(this.avatarFile).subscribe(() => {
         this.auth.subject.next(updateAuthData);
-        // if (userStorage) {
-        //   updateStorage = {
-        //     ...JSON.parse(userStorage),
-        //     avatarURL: this.user.avatarURL,
-        //   };
-        //   localStorage.setItem('user', JSON.stringify(updateStorage));
-        // }
         this.loader.loadingOff();
       });
     }
