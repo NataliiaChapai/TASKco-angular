@@ -13,6 +13,7 @@ import { EditModalComponent } from './components/edit-modal/edit-modal.component
 import { SharedModule } from '../../shared/shared.module';
 import { SortParamsDirective } from './directives/sort-params.directive';
 import { TasksComponent } from '../board/components/tasks/tasks.component';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
 
 
 const routes: Routes = [
@@ -35,6 +36,7 @@ const routes: Routes = [
     ModalComponent,
     EditModalComponent,
     SortParamsDirective,
+    ToolbarComponent,
   ],
   imports: [
     CommonModule,

@@ -13,6 +13,9 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { BoardStore } from './services/board.store';
 import { PipesModule } from '../../shared/pipes/pipes.module';
 import { SliderButtonComponent } from 'src/app/shared/components/slider-button/slider-button.component';
+import { ArchiveTaskComponent } from './components/archive-task/archive-task.component';
+import { TaskComponent } from './components/task/task.component';
+import { TaskColumnComponent } from './components/task-column/task-column.component';
 
 
 
@@ -20,6 +23,9 @@ import { SliderButtonComponent } from 'src/app/shared/components/slider-button/s
   declarations: [
     TasksComponent,
     ToolbarComponent,
+    ArchiveTaskComponent,
+    TaskComponent,
+    TaskColumnComponent,
   ],
   imports: [
     RouterModule,

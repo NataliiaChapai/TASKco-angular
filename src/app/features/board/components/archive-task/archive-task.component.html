@@ -1,0 +1,46 @@
+<div
+  class="tasks__column"
+  [ngStyle]="{ 'background-color': color }"
+>
+  <h2 class="tasks__title">ARCHIVE</h2>
+  <div class="tasks__block" [ngStyle]="{ height: '52.7vh' }">
+    <div
+      *ngFor="
+        let task of archiveTasks | filter: filterByName | sort: sort:direction
+      "
+      class="tasks__item archive"
+    >
+      <div>
+        <h2>{{ task.name }}</h2>
+        <div class="tasks__date">
+          <p>{{ task.createdAt | date: 'dd.MM.YYYY' }}</p>
+          <img
+            src="./assets/images/message.png"
+            width="30"
+            (click)="task.canComment = !task.canComment"
+          />
+          <span>{{ task.comments.length }}</span>
+        </div>
+        <div class="tasks__comments" *ngIf="task.canComment">
+          <div
+            #comments
+            *ngFor="let comment of task.comments"
+            class="tasks__comment"
+          >
+            <p>- {{ comment.comment }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tasks__column-color">
+    <span>🖌</span>
+    <input
+      class="tasks__colors"
+      type="color"
+      [value]="color"
+      [(ngModel)]="color"
+      (change)="changeColor('archive', $event)"
+    />
+  </div>
+</div>

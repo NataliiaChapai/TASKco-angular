@@ -6,6 +6,7 @@ import { BoardService } from '../../services/board.service';
 import { Task } from '../../models/task.interface';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { BoardStore } from '../../services/board.store';
+import { Colors } from '../../models/colors.interface';
 
 @Component({
   selector: 'app-tasks',
@@ -19,17 +20,14 @@ export class TasksComponent implements OnInit {
   inProgressTasks$: Observable<Task[]>;
   doneTasks$: Observable<Task[]>;
   archiveTasks$: Observable<Task[]>;
-  boardId: string;
   boardName$: Observable<string>;
-  canAddTodo = false;
+  todoColor$: Observable<string>;
+  inProgressColor$: Observable<string>;
+  doneColor$: Observable<string>;
+  archiveColor$: Observable<string>;
+
+  boardId: string;
   canAdd = [false, false, false];
-  colorSet = ['white', 'beige', 'yellow', 'orange', 'orangered','lightsalmon',  'lightpink', 'deeppink', 'red', 'purple', 
-  '#20b2ab33', 'lightgreen', 'green', 'mediumslateblue', 'blue'];
-  todoColor: string;
-  inprogressColor: string;
-  doneColor: string;
-  archiveColor: string;
-  oldType: string;
   filterByName = '';
   sort = '';
   direction = 'asc';
@@ -38,7 +36,6 @@ export class TasksComponent implements OnInit {
   constructor(
     private board: BoardService,
     private route: ActivatedRoute,
-    private loader: LoadingService,
     private store: BoardStore
   ) {}
 
@@ -54,21 +51,16 @@ export class TasksComponent implements OnInit {
       .pipe(map(board => board));
 
     this.todoTasks$ = this.store.filterByStatus('Todo');
-
     this.inProgressTasks$ = this.store.filterByStatus('In progress');
-
     this.doneTasks$ = this.store.filterByStatus('Done');
-
     this.archiveTasks$ = this.store.filterByStatus('Archive');
 
     this.boardName$ = name$.pipe(map(board => board.name));
-    
-    this.store.colors$.subscribe(colors => {
-      this.todoColor = colors.todo;
-      this.inprogressColor = colors.inprogress;
-      this.doneColor = colors.done;
-      this.archiveColor = colors.archive;
-      });
+
+    this.todoColor$ = this.store.filterColorsByStatus('todo');
+    this.inProgressColor$ = this.store.filterColorsByStatus('inprogress');
+    this.doneColor$ = this.store.filterColorsByStatus('done');
+    this.archiveColor$ = this.store.filterColorsByStatus('archive');
   }
 
   saveChanges(changes: Partial<Task>, id: string) {
@@ -76,30 +68,6 @@ export class TasksComponent implements OnInit {
       return;
     }
     this.store.saveChanges(id, changes).subscribe();
-  }
-
-  addTask(changes: Partial<Task>, status: string) {
-    if (changes.name === '') {
-      return;
-    }
-    const task = {
-      ...changes,
-      status
-    }
-    this.store.addTask(task).subscribe();
-    this.canAdd = [false, false, false];
-  }
-
-  deleteTask(id: string) {
-    this.store.deleteTask(id).subscribe();
-  }
-
-  archiveTask(id: string) {
-    this.store.changeStatus(id, 'Archive').subscribe();
-  }
-
-  changeColor(column: string, color: any,) {
-    this.store.changeColor(column, color.target.value).subscribe();
   }
 
   getFilterValue(value: string) {
@@ -114,38 +82,8 @@ export class TasksComponent implements OnInit {
     this.direction = direction;
   }
 
-  addComment(id: string, comment: any) {
-    if (!comment.comment) {
-      return;
-    }
-    this.store.addComment(id, comment).subscribe();
-  }
-
-  deleteComment(id: string) {
-    this.store.deleteComment(id).subscribe();
-  }
-
-  drop(ev: DragEvent) {
-    ev.preventDefault();
-    const id = ev.dataTransfer?.getData("text") as string;
-    const container = ev.target as HTMLElement;
-    const type = container.dataset['type'] as string;
-    if (this.oldType === type) {
-      return;
-    }
-    if (type === 'Todo' || type === 'In progress' || type === 'Done') {
-      this.store.changeStatus(id, type).subscribe();
-    }
-  }
-
   allowDrop(ev: DragEvent) {
     ev.preventDefault();
-  }
-
-  drag(ev: DragEvent, id: string) {
-    ev.dataTransfer?.setData("text", id);
-    const container = ev.target as HTMLElement;
-    this.oldType = container.dataset['type'] as string;
   }
 
 }

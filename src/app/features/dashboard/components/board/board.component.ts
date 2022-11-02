@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { map, Observable } from 'rxjs';
 
 import { Board } from '../../models/board.interface';
@@ -12,12 +12,12 @@ import { ModalService } from '../../services/modal.service';
 })
 export class BoardComponent implements OnInit {
   boards$: Observable<Board[]>;
-  filterByName = '';
-  sort = '';
+  @Input() filterByName = '';
+  @Input() sort = '';
+  @Input() direction = 'asc';
   showModal = false;
   boardId = '';
   submitted = false;
-  direction = 'asc';
 
   constructor(
     public modal: ModalService,
@@ -49,5 +49,17 @@ export class BoardComponent implements OnInit {
       },
       () => (this.submitted = false)
     );
+  }
+
+  getFilterValue(value: string) {
+    this.filterByName = value;
+  }
+
+  getSortValue(sort: string) {
+    this.sort = sort;
+  }
+
+  getDirectionValue(direction: string) {
+    this.direction = direction;
   }
 }

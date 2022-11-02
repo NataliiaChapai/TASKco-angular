@@ -20,12 +20,16 @@ export class AuthStore {
   user$: Observable<User> = this.subject
     .asObservable()
     .pipe(filter(user => !!user));
-  isLoggedIn$: Observable<boolean> = this.user$.pipe(map(user => !!user.email));
-  isLoggedOut$: Observable<boolean> = this.isLoggedIn$.pipe(
+    
+  isLoggedIn$: Observable<boolean>;
+  isLoggedOut$: Observable<boolean>;
+  
+  constructor(private auth: AuthService, private messages: MessagesService) {
+    this.isLoggedIn$ = this.user$.pipe(map(user => !!user.email));
+    this.isLoggedOut$ = this.isLoggedIn$.pipe(
     map(loggedIn => !loggedIn)
   );
-
-  constructor(private auth: AuthService, private messages: MessagesService) {
+    
     const user = localStorage.getItem('user');
     if (user) {
       this.subject.next(JSON.parse(user));

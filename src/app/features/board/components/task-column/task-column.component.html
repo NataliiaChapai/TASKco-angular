@@ -1,0 +1,38 @@
+<div class="tasks__column" [ngStyle]="{ 'background-color': color }">
+    <h2 class="tasks__title">{{taskType.toUpperCase()}}</h2>
+    <button class="tasks__btn" (click)="canAdd[i] = true">+</button>
+    <form
+      *ngIf="canAdd[i]"
+      #name="ngForm"
+      class="tasks__edit"
+      (ngSubmit)="addTask(name.value, taskType)"
+    >
+      <input class="tasks__input" placeholder="Task name" name="name" ngModel />
+      <button class="tasks__btn" type="submit">Add</button>
+      <button class="tasks__btn" type="button" (click)="canAdd[i] = false">
+        Cansel
+      </button>
+    </form>
+    <div
+      class="tasks__block"
+      [ngStyle]="{ height: canAdd[i] ? '38.4vh' : '45vh' }"
+      (drop)="drop($event)"
+      [attr.data-type]="taskType"
+    >
+    <app-task
+      [tasks]="tasks" 
+      [filterByName]="filterByName" 
+      [sort]="sort"
+      [direction]="direction"
+      [oldType]="oldType"
+    ></app-task>
+      
+    </div>
+    <div class="tasks__column-color">
+      <span>🖌</span>
+      <input class="tasks__colors" type="color" 
+      [value]="color" 
+      [(ngModel)]="color" 
+      (change)="changeColor(taskType, $event)">
+    </div>
+</div>

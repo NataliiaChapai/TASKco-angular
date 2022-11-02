@@ -1,0 +1,105 @@
+<div
+        *ngFor="
+          let task of tasks
+            | filter: filterByName
+            | sort: sort:direction
+        "
+        class="tasks__item"
+        draggable="true"
+        (dragstart)="drag($event, task._id)"
+        [id]="task._id"
+        data-type="Todo"
+      >
+        <div>
+          <h2>{{ task.name }}</h2>
+          <form
+            *ngIf="task.canEdit"
+            #name="ngForm"
+            class="tasks__edit"
+            (ngSubmit)="saveChanges(name.value, task._id)"
+          >
+            <input
+              class="tasks__input"
+              placeholder="Task name"
+              name="name"
+              ngModel
+            />
+            <button class="tasks__btn" type="submit">Save</button>
+            <button
+              class="tasks__btn"
+              type="button"
+              (click)="task.canEdit = false"
+            >
+              Close
+            </button>
+          </form>
+          <div class="tasks__date">
+            <p>{{ task.createdAt | date: 'dd.MM.YYYY' }}</p>
+            <img
+              src="./assets/images/message.png"
+              width="30"
+              (click)="task.canComment = !task.canComment"
+            />
+            <span>{{ task.comments.length }}</span>
+          </div>
+          <form
+            *ngIf="task.canComment"
+            #comment="ngForm"
+            class="tasks__comments"
+            (ngSubmit)="addComment(task._id, comment.value)"
+          >
+            <p
+              *ngIf="!task.comments.length"
+              else
+              comments
+              class="tasks__comment"
+            >
+              There are no comments yet
+            </p>
+            <div class="tasks__comment">
+              <div #comments *ngFor="let comment of task.comments">
+                <p>- {{ comment.comment }}</p>
+              </div>
+              <span
+                *ngIf="task.comments.length"
+                class="tasks__comment-bin"
+                (click)="deleteComment(task._id)"
+                >🗑</span
+              >
+            </div>
+
+            <div class="tasks__edit">
+              <input
+                class="tasks__input"
+                placeholder="New comment"
+                name="comment"
+                ngModel
+              />
+              <button class="tasks__btn" type="submit">Add</button>
+              <button
+                class="tasks__btn"
+                type="button"
+                (click)="task.canComment = false"
+              >
+                Close
+              </button>
+            </div>
+          </form>
+        </div>
+        <div class="tasks__menu">
+          <div class="circle"></div>
+          <div class="circle"></div>
+          <div class="circle"></div>
+        </div>
+        <div class="task__menu">
+          <ul class="task__menu-list">
+            <li class="task__menu-item" (click)="task.canEdit = true">Edit</li>
+            <li class="task__menu-item" (click)="deleteTask(task._id)">
+              Delete
+            </li>
+            <li *ngIf="done" class="task__menu-item" (click)="archiveTask(task._id)">
+                Archive
+              </li>
+          </ul>
+        </div>
+      </div>

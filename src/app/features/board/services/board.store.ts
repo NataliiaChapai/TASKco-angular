@@ -219,4 +219,10 @@ export class BoardStore {
       map(tasks => tasks.filter(task => task.status == status))
     );
   }
+
+  filterColorsByStatus(status: string): Observable<string> {
+    return this.colors$.pipe(
+      map(colors => colors[status as keyof Colors])
+    );
+  }
 }

@@ -1,57 +1,51 @@
-<div class="toolbar">
-  <button class="toolbar__btn" (click)="modal.show()">+</button>
-  <div class="toolbar__group">
-    <input
-      type="text"
-      class="toolbar__input"
-      placeholder="Filter boards..."
-      [(ngModel)]="filterByName"
-    />
-    <select name="sort" [(ngModel)]="sort">
-      <option value="" hidden>Sort by ...</option>
-      <option value="name">name</option>
-      <option value="createdAt" >date</option>
-      <option value="todo">"Todo"</option>
-      <option value="inprogress">"In progress"</option>
-      <option value="done">"Done"</option>
-    </select>
-    <button class="toolbar__btn" appSortParams (click)="direction='asc'">ASC</button>
-    <button class="toolbar__btn" appSortParams (click)="direction='desc'">DESC</button>
-  </div>
-</div>
+<app-toolbar
+  (filterByName)="getFilterValue($event)"
+  (sort)="getSortValue($event)"
+  (direction)="getDirectionValue($event)"
+></app-toolbar>
+
 <app-loader class="loader"></app-loader>
-<div class="boards" >
+
+<div class="boards">
   <div
-    *ngFor="let board of boards$ | async | filter: filterByName | sort: sort: direction"
-    class="board" 
+    *ngFor="
+      let board of boards$ | async | filter: filterByName | sort: sort:direction
+    "
+    class="board"
   >
-    <h3 [routerLink]="['/board', board._id]" class="board__name">{{ board.name }}</h3>
+    <h3 [routerLink]="['/board', board._id]" class="board__name">
+      {{ board.name }}
+    </h3>
     <p class="board__description">{{ board.description }}</p>
-    
+
     <div class="board__tools">
-      <div class="board__stat" >
-        <ul class="stat__list" >
+      <div class="board__stat">
+        <ul class="stat__list">
           <li class="stat__item">
-            <span>Todo: {{board.taskCount.todo}}</span>
+            <span>Todo: {{ board.taskCount.todo }}</span>
           </li>
           <li class="stat__item">
-            <span>In progress: {{board.taskCount.inprogress}}</span>
+            <span>In progress: {{ board.taskCount.inprogress }}</span>
           </li>
           <li class="stat__item">
-            <span>Done: {{board.taskCount.done}}</span>
+            <span>Done: {{ board.taskCount.done }}</span>
           </li>
         </ul>
       </div>
       <div class="board__btn-wrapper">
         <p class="board__date">{{ board.createdAt | date: 'dd.MM.YYYY' }}</p>
         <div>
-          <button class="board__btn" (click)="editBoard(board._id)" >&#9998;</button>
+          <button class="board__btn" (click)="editBoard(board._id)">
+            &#9998;
+          </button>
           <button class="board__btn" (click)="deleteBoard(board._id)">🗑</button>
         </div>
-        
       </div>
-     
     </div>
   </div>
 </div>
-<app-edit-modal (onUpdate)="updateBoard($event)" *ngIf="modal.showEditModal"></app-edit-modal>
+
+<app-edit-modal
+  (onUpdate)="updateBoard($event)"
+  *ngIf="modal.showEditModal"
+></app-edit-modal>
