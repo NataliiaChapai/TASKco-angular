@@ -1,7 +1,4 @@
-<div
-  class="tasks__column"
-  [ngStyle]="{ 'background-color': color }"
->
+<div class="tasks__column" [ngStyle]="{ 'background-color': color }">
   <h2 class="tasks__title">ARCHIVE</h2>
   <div class="tasks__block" [ngStyle]="{ height: '52.7vh' }">
     <div
@@ -22,12 +19,20 @@
           <span>{{ task.comments.length }}</span>
         </div>
         <div class="tasks__comments" *ngIf="task.canComment">
+          <p
+              *ngIf="!task.comments.length"
+              else
+              comments
+              class="tasks__comment"
+            >
+              There are no comments
+            </p>
           <div
             #comments
             *ngFor="let comment of task.comments"
             class="tasks__comment"
           >
-            <p>- {{ comment.comment }}</p>
+            <p #comments>- {{ comment.comment }}</p>
           </div>
         </div>
       </div>

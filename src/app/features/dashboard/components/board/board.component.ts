@@ -11,10 +11,12 @@ import { ModalService } from '../../services/modal.service';
   styleUrls: ['./board.component.css'],
 })
 export class BoardComponent implements OnInit {
-  boards$: Observable<Board[]>;
+
   @Input() filterByName = '';
   @Input() sort = '';
   @Input() direction = 'asc';
+
+  boards$: Observable<Board[]>;
   showModal = false;
   boardId = '';
   submitted = false;

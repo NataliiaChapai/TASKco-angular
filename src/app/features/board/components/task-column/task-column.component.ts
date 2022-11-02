@@ -1,11 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { Task } from '../../models/task.interface';
 import { BoardStore } from '../../services/board.store';
 
 @Component({
   selector: 'app-task-column',
   templateUrl: './task-column.component.html',
-  styleUrls: ['./task-column.component.css']
+  styleUrls: ['./task-column.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaskColumnComponent implements OnInit {
 
@@ -18,6 +19,7 @@ export class TaskColumnComponent implements OnInit {
   @Input() taskType: string = '';
   @Input() i: 0|1|2;
   @Input() canAdd = [false, false, false];
+  @Input() done?: boolean = false;
 
   oldType: string;
 

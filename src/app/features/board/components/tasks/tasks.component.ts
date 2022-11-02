@@ -1,18 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { map, Observable, tap } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 import { BoardService } from '../../services/board.service';
 import { Task } from '../../models/task.interface';
-import { LoadingService } from 'src/app/shared/services/loading.service';
 import { BoardStore } from '../../services/board.store';
-import { Colors } from '../../models/colors.interface';
 
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.css'],
   providers: [BoardStore],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
 export class TasksComponent implements OnInit {

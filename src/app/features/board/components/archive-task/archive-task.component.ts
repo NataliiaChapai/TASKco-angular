@@ -1,12 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+
 import { Task } from '../../models/task.interface';
 import { BoardStore } from '../../services/board.store';
 
 @Component({
   selector: 'app-archive-task',
   templateUrl: './archive-task.component.html',
-  styleUrls: ['./archive-task.component.css']
+  styleUrls: ['./archive-task.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArchiveTaskComponent implements OnInit {
 
@@ -15,7 +16,7 @@ export class ArchiveTaskComponent implements OnInit {
   @Input() sort = '';
   @Input() direction = 'asc';
   @Input() color: string | null;
-  @Input() archive = false;
+  // @Input() archive = false;
 
   constructor(
     private store: BoardStore
