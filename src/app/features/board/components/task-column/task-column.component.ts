@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Task } from '../../models/task.interface';
 import { BoardStore } from '../../services/board.store';
 
@@ -21,25 +22,33 @@ export class TaskColumnComponent implements OnInit {
   @Input() canAdd = [false, false, false];
   @Input() done?: boolean = false;
 
+  addForm: FormGroup;
+
   oldType: string;
 
   constructor(
-    private store: BoardStore
+    private store: BoardStore,
+    private fb: FormBuilder
   ) { }
 
   ngOnInit(): void {
+    this.addForm = this.fb.group({
+      content: [null],
+    });
   }
 
-  addTask(changes: Partial<Task>, status: string) {
-    if (changes.name === '') {
+  addTask(status: string) {
+    const {content} = this.addForm.value;
+    if (!content) {
       return;
     }
     const task = {
-      ...changes,
+      name: content,
       status
     }
     this.store.addTask(task).subscribe();
     this.canAdd = [false, false, false];
+    this.addForm.reset();
   }
 
   changeColor(column: string, color: any,) {

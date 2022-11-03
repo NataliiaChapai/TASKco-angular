@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ModalService } from '../../services/modal.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-toolbar',
@@ -11,15 +11,17 @@ export class ToolbarComponent implements OnInit {
 
   sortBy = '';
 
+  @Input() boardName$: Observable<string>;
+  @Input() placeholder: string;
+  @Input() dashboard: string;
+
   @Output() filterByName = new EventEmitter<string>();
   @Output() sort = new EventEmitter<string>();
   @Output() direction = new EventEmitter<string>();
+    
+  constructor() { }
 
-  constructor(
-    public modal: ModalService,
-  ) { }
-
-  ngOnInit(): void {
+  ngOnInit(): void {    
   }
 
   addFilterValue(value: string) {
@@ -33,5 +35,6 @@ export class ToolbarComponent implements OnInit {
   addDirectionValue(value: string) {
     this.direction.emit(value);
   }
+
 
 }

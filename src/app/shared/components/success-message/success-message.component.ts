@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { MessagesService } from '../../services/messages.service';
 
 @Component({
   selector: 'app-success-message',
   templateUrl: './success-message.component.html',
-  styleUrls: ['./success-message.component.css']
+  styleUrls: ['./success-message.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SuccessMessageComponent implements OnInit {
 

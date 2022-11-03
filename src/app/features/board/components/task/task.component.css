@@ -28,6 +28,7 @@
 .tasks__date {
     display: flex;
     align-items: center;
+    margin-top: 10px;
 }
 
 .tasks__date img {
@@ -105,20 +106,6 @@
     color: lightseagreen;
 }
 
-
-.tasks__input {
-    border-radius: 20px;
-    border: 1px solid lightseagreen;
-    padding: 10px;
-    outline: none;
-    box-shadow: 5px 5px 10px rgba(103, 108, 120, 0.2);
-    margin-bottom: 10px;
-}
-
-.tasks__input:focus {
-    outline: 2px solid lightseagreen;
-}
-
 .tasks__edit {
     display: flex;
 }
@@ -142,18 +129,5 @@
 }
 
 .tasks__btn {
-    width: 100%;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    background-color: #fff;
-    box-shadow: inset 0px 10px 20px rgba(103, 108, 120, 0.3);
-    border-radius: 20px;
-    font-size: 22px;
-    margin-bottom: 10px;
-    transition: all 60s ease-out;
-}
-
-.tasks__btn:hover {
-    cursor: pointer;
-    box-shadow: 0px 10px 20px rgba(103, 108, 120, 0.3);
+    margin-left: 5px;
 }

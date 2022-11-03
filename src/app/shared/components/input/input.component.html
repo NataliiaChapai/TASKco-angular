@@ -1,1 +1,7 @@
-<input class="login__input">
+<input
+  [placeholder]="placeholder"
+  [type]="type"
+  #name
+  (input)="passValue(name.value)"
+  class="input"
+/>

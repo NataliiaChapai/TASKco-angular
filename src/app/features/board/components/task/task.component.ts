@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { Task } from '../../models/task.interface';
 import { BoardStore } from '../../services/board.store';
@@ -17,19 +18,32 @@ export class TaskComponent implements OnInit {
   @Input() direction = 'asc';
   @Input() done?: boolean = false;
   @Input() oldType: string;
+  @Input() model: string;
+  
+  editForm: FormGroup;
+  commentForm: FormGroup;
 
   constructor(
-    private store: BoardStore
+    private store: BoardStore,
+    private fb: FormBuilder
   ) { }
 
   ngOnInit(): void {
+    this.editForm = this.fb.group({
+      content: [null],
+    });
+    this.commentForm = this.fb.group({
+      content: [null],
+    });
   }
 
-  saveChanges(changes: Partial<Task>, id: string) {
-    if (!changes.name) {
+  saveChanges(id: string) {
+    const {content} = this.editForm.value;
+    if (!content) {
       return;
     }
-    this.store.saveChanges(id, changes).subscribe();
+    this.store.saveChanges(id, {name: content}).subscribe();
+    this.editForm.reset();
   }
 
   deleteTask(id: string) {
@@ -40,11 +54,13 @@ export class TaskComponent implements OnInit {
     this.store.changeStatus(id, 'Archive').subscribe();
   }
 
-  addComment(id: string, comment: any) {
-    if (!comment.comment) {
+  addComment(id: string) {
+    const {content} = this.commentForm.value;
+    if (!content) {
       return;
     }
-    this.store.addComment(id, comment).subscribe();
+    this.store.addComment(id, {comment: content}).subscribe();
+    this.commentForm.reset();
   }
 
   deleteComment(id: string) {

@@ -1,5 +1,4 @@
 .tasks__column {
-    /* width: 25%; */
     padding: 20px;
     text-align: center;
     border-radius: 10px;
@@ -34,26 +33,14 @@
     box-shadow: 0px 10px 20px rgba(103, 108, 120, 0.3);
 }
 
-.tasks__input {
-    border-radius: 20px;
-    border: 1px solid lightseagreen;
-    padding: 10px;
-    outline: none;
-    box-shadow: 5px 5px 10px rgba(103, 108, 120, 0.2);
-    margin-bottom: 10px;
-}
-
-.tasks__input:focus {
-    outline: 2px solid lightseagreen;
-}
-
 .tasks__edit {
     display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    width: 100%;
 }
 
-.tasks__edit button {
-    font-size: 14px;
-    padding: 10px;
+.btn {
     margin-left: 5px;
 }
 

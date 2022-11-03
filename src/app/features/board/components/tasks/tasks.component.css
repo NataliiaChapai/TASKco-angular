@@ -30,3 +30,35 @@
 .archive {
     display: block;
 }
+
+.toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.toolbar__name {
+    min-height: 25px;
+    padding: 10px 20px;
+    margin-right: 10px;
+    text-align: center;
+    background-color: #fff;
+    box-shadow: 0px 10px 20px rgba(103, 108, 120, 0.3);
+    border-radius: 40px;
+    font-size: 16px;
+}
+
+.toolbar__btn {
+    min-height: 25px;
+    padding: 10px 20px;
+    margin-right: 10px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 40px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 5px 5px 10px rgba(103, 108, 120, 0.4);
+    transition: all 0.5s ease-out;
+} 

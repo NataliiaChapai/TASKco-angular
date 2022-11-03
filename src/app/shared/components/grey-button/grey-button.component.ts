@@ -1,14 +1,15 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-slider-button',
-  templateUrl: './slider-button.component.html',
-  styleUrls: ['./slider-button.component.css'],
+  selector: 'app-grey-button',
+  templateUrl: './grey-button.component.html',
+  styleUrls: ['./grey-button.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SliderButtonComponent implements OnInit {
-
+export class GreyButtonComponent implements OnInit {
+  
   @Input() content: string;
+  @Input() type: string;
 
   constructor() { }
 

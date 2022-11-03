@@ -1,0 +1,15 @@
+.button {
+    width: 100%;
+    padding: 10px;
+    background-color: #fff;
+    box-shadow: inset 0px 10px 20px rgba(103, 108, 120, 0.3);
+    border-radius: 20px;
+    border: 1px solid gainsboro;
+    font-size: 14px;
+    transition: all 60s ease-out;
+}
+
+.button:hover {
+    cursor: pointer;
+    box-shadow: 0px 10px 20px rgba(103, 108, 120, 0.3);
+}

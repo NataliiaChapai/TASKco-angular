@@ -1,9 +1,16 @@
-<app-toolbar
+<div class="toolbar">
+  <button class="toolbar__btn" [routerLink]="['/dashboard']">← Back</button>
+  <h2>{{ boardName$ | async }}</h2>
+
+  <app-toolbar
   [boardName$]="boardName$"
   (filterByName)="getFilterValue($event)"
   (sort)="getSortValue($event)"
   (direction)="getDirectionValue($event)"
+  placeholder="Filter tasks..."
 ></app-toolbar>
+</div>
+
 
 <app-loader class="loader"></app-loader>
 

@@ -1,8 +1,14 @@
-<app-toolbar
-  (filterByName)="getFilterValue($event)"
-  (sort)="getSortValue($event)"
-  (direction)="getDirectionValue($event)"
-></app-toolbar>
+<div class="toolbar">
+  <button class="toolbar__btn" (click)="modal.show()">+</button>
+  <app-toolbar
+    (filterByName)="getFilterValue($event)"
+    (sort)="getSortValue($event)"
+    (direction)="getDirectionValue($event)"
+    placeholder="Filter boards..."
+    dashboard="true"
+  ></app-toolbar>
+</div>
+
 
 <div class="boards">
   <div

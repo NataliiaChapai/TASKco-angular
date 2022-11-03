@@ -1,15 +1,12 @@
-.toolbar {
+.toolbar__group {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
-    padding: 20px;
+    justify-content: center;
 }
 
-.toolbar__group {
-    width: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
+.toolbar__item {
+    margin-left: 10px;
+
 }
 
 .toolbar__btn, select {
@@ -22,27 +19,18 @@
     font-size: 16px;
     cursor: pointer;
     box-shadow: 5px 5px 10px rgba(103, 108, 120, 0.4);
+    border: 1px solid gainsboro;
     transition: all 0.5s ease-out;
+    color: gray;
 } 
 
 .toolbar__btn:hover {
-    box-shadow: 5px 5px 10px rgba(103, 108, 120, 0.6);
+    box-shadow: 5px 5px 10px rgba(103, 108, 120, 0.8);
+    color: darkgrey;
 }
 
 .toolbar__btn:active {
     box-shadow: inset 5px 5px 10px rgba(103, 108, 120, 0.4);
-}
-
-.toolbar__input {
-    border-radius: 20px;
-    border: 1px solid lightseagreen;
-    padding: 10px;
-    outline: none;
-    box-shadow: 5px 5px 10px rgba(103, 108, 120, 0.4);
-}
-
-.toolbar__input:focus {
-    outline: 2px solid lightseagreen;
 }
 
 select {
@@ -51,5 +39,6 @@ select {
 }
 
 select:hover {
-    box-shadow: 5px 5px 10px rgba(103, 108, 120, 0.6);
+    box-shadow: 5px 5px 10px rgba(103, 108, 120, 0.8);
+    color: darkgrey;
 }
