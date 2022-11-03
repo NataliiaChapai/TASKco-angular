@@ -1,6 +1,6 @@
 <div class="toolbar">
   <button class="toolbar__btn" [routerLink]="['/dashboard']">← Back</button>
-  <h2>{{ boardName$ | async }}</h2>
+  <h2 class="active">{{ boardName$ | async }}</h2>
 
   <app-toolbar
   [boardName$]="boardName$"
