@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { EditModalComponent } from './edit-modal.component';
 
@@ -8,7 +9,8 @@ describe('EditModalComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EditModalComponent ]
+      declarations: [ EditModalComponent ],
+      imports: [ReactiveFormsModule, FormsModule]
     })
     .compileComponents();
 

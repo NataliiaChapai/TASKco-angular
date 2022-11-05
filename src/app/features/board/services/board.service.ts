@@ -33,7 +33,7 @@ export class BoardService {
     return this.http.get<any>(url).pipe(map(data => data.board), shareReplay());
   }
 
-  updateBoard(id: string, changes: Partial<Task>) {
+  updateTask(id: string, changes: Partial<Task>) {
     const url = environment.apiUrl + `/board/tasks/${id}`;
     return this.http.put<any>(url, changes);
   }

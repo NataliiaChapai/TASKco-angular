@@ -82,7 +82,7 @@ export class BoardStore {
     const updateTasks: Task[] = tasks.slice(0);
     updateTasks[index] = updatedTask;
     this.subject.next(updateTasks);
-    return this.board.updateBoard(id, changes).pipe(
+    return this.board.updateTask(id, changes).pipe(
       catchError(err => {
         const message = 'Could not save task';
         this.messages.showErrors(message);

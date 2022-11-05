@@ -1,4 +1,6 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { TasksComponent } from './tasks.component';
 
@@ -8,7 +10,8 @@ describe('TasksComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TasksComponent ]
+      declarations: [ TasksComponent ],
+      imports: [HttpClientTestingModule, RouterTestingModule]
     })
     .compileComponents();
 
