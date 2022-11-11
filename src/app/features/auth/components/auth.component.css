@@ -123,3 +123,7 @@
 .forgot-password p:hover {
     text-decoration: underline;
 }
+
+.invalid:focus {
+    outline: 2px solid red;
+}

@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 import { MessagesService } from 'src/app/shared/services/messages.service';
 import { environment } from 'src/environments/environment';
@@ -15,10 +16,11 @@ import { AuthStore } from '../services/auth.store';
   styleUrls: ['./auth.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AuthComponent implements OnInit {
+export class AuthComponent implements OnInit, OnDestroy {
   form: FormGroup;
   submitted = false;
   url = environment.apiUrl + '/auth/google';
+  subscription: Subscription;
 
   constructor(
     private fb: FormBuilder,
@@ -39,7 +41,7 @@ export class AuthComponent implements OnInit {
     if (localStorage.getItem('token')) {
       return
     }
-    this.route.queryParams.subscribe(params => {
+    this.subscription = this.route.queryParams.subscribe(params => {
       const user: User = {email: '', avatarURL: null};
       if (params['token']) {
         localStorage.setItem('token', JSON.stringify(params['token']))
@@ -75,15 +77,15 @@ export class AuthComponent implements OnInit {
     const value = this.form.value;
     this.submitted = true;
 
-    this.auth.login(value).subscribe(
-      () => {
+    this.auth.login(value).subscribe({
+      next: () => {
         this.dashboard.loadAllBoards();
         this.user.loadCurrentUser();
         this.router.navigateByUrl('/dashboard');
         this.submitted = false;
       },
-      () => this.submitted = false
-    );
+      error: () => this.submitted = false
+    });
   }
 
   forgotPassword() {
@@ -92,5 +94,9 @@ export class AuthComponent implements OnInit {
     }
     this.auth.sendPassword(email).subscribe()
 
+  }
+  
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

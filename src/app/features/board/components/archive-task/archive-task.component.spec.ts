@@ -1,5 +1,6 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { PipesModule } from 'src/app/shared/pipes/pipes.module';
 
@@ -12,7 +13,7 @@ describe('ArchiveTaskComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ ArchiveTaskComponent ],
-      imports: [RouterTestingModule, HttpClientTestingModule, PipesModule]
+      imports: [RouterTestingModule, HttpClientTestingModule, PipesModule, FormsModule]
     })
     .compileComponents();
 

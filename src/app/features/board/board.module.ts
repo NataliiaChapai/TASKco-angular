@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
@@ -11,8 +11,15 @@ import { PipesModule } from '../../shared/pipes/pipes.module';
 import { ArchiveTaskComponent } from './components/archive-task/archive-task.component';
 import { TaskComponent } from './components/task/task.component';
 import { TaskColumnComponent } from './components/task-column/task-column.component';
+import { AuthGuard } from '../auth/services/auth.guard';
 
-
+const routes: Routes = [
+  {
+    path: ':id',
+    component: TasksComponent,
+    canActivate: [AuthGuard]
+  }
+];
 
 @NgModule({
   declarations: [
@@ -22,7 +29,7 @@ import { TaskColumnComponent } from './components/task-column/task-column.compon
     TaskColumnComponent,
   ],
   imports: [
-    RouterModule,
+    RouterModule.forChild(routes),
     CommonModule,
     SharedModule,
     ReactiveFormsModule,

@@ -8,14 +8,16 @@
     </div>
     <p>Or log in using an email and password, after registering:</p>
     <form [formGroup]="form" class="login__form">
-            <div [ngClass]="{invalid: form.controls['email'].touched && form.controls['email'].invalid}">
-                <input formControlName="email" type="email" class="login__input" placeholder="Email">
+            <div>
+                <input [ngClass]="{invalid: form.controls['email'].touched && form.controls['email'].invalid}" 
+                formControlName="email" type="email" class="login__input" placeholder="Email">
                 <div class="validation" *ngIf="form.controls['email'].touched && form.controls['email'].invalid">
                     <small *ngIf="form.controls['email']">Email address must be valid</small>
                 </div>
             </div>
-            <div [ngClass]="{invalid: form.controls['password'].touched && form.controls['password'].invalid}">
-                <input formControlName="password" type="password" class="login__input" placeholder="Password">                
+            <div>
+                <input [ngClass]="{invalid: form.controls['password'].touched && form.controls['password'].invalid}" 
+                formControlName="password" type="password" class="login__input" placeholder="Password">                
                 <div class="validation" *ngIf="form.controls['password'].touched && form.controls['password'].invalid">
                     <small *ngIf="form.controls['password']">Password length must be at least 8 characters</small>
                 </div>

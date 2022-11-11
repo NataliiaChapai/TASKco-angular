@@ -2,9 +2,9 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { map, Observable } from 'rxjs';
 
-import { BoardService } from '../../services/board.service';
 import { Task } from '../../models/task.interface';
 import { BoardStore } from '../../services/board.store';
+import { DashboardStore } from 'src/app/features/dashboard/services/dashboard.store';
 
 @Component({
   selector: 'app-tasks',
@@ -19,7 +19,7 @@ export class TasksComponent implements OnInit {
   inProgressTasks$: Observable<Task[]>;
   doneTasks$: Observable<Task[]>;
   archiveTasks$: Observable<Task[]>;
-  boardName$: Observable<string>;
+  boardName$: Observable<string | undefined>;
   todoColor$: Observable<string>;
   inProgressColor$: Observable<string>;
   doneColor$: Observable<string>;
@@ -33,9 +33,9 @@ export class TasksComponent implements OnInit {
   archive = false;
 
   constructor(
-    private board: BoardService,
     private route: ActivatedRoute,
-    private store: BoardStore
+    private store: BoardStore,
+    private dashboard: DashboardStore
   ) {}
 
   ngOnInit() {
@@ -43,18 +43,16 @@ export class TasksComponent implements OnInit {
   }
 
   reloadTasks() {
-    this.route.params.subscribe(params => (this.boardId = params['id']));
-
-    const name$ = this.board
-      .getBoardName(this.boardId)
-      .pipe(map(board => board));
+    this.boardId = this.route.snapshot.paramMap.get('id') ?? '';
 
     this.todoTasks$ = this.store.filterByStatus('Todo');
     this.inProgressTasks$ = this.store.filterByStatus('In progress');
     this.doneTasks$ = this.store.filterByStatus('Done');
     this.archiveTasks$ = this.store.filterByStatus('Archive');
 
-    this.boardName$ = name$.pipe(map(board => board.name));
+    this.boardName$ = this.dashboard.boards$
+    .pipe(map(boards => boards.find(board => board._id == this.boardId)))
+    .pipe(map(board => board?.name))
 
     this.todoColor$ = this.store.filterColorsByStatus('todo');
     this.inProgressColor$ = this.store.filterColorsByStatus('inprogress');
@@ -67,18 +65,6 @@ export class TasksComponent implements OnInit {
       return;
     }
     this.store.saveChanges(id, changes).subscribe();
-  }
-
-  getFilterValue(value: string) {
-    this.filterByName = value;
-  }
-
-  getSortValue(sort: string) {
-    this.sort = sort;
-  }
-
-  getDirectionValue(direction: string) {
-    this.direction = direction;
   }
 
   allowDrop(ev: DragEvent) {

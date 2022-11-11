@@ -19,9 +19,12 @@ export class TaskComponent implements OnInit {
   @Input() done?: boolean = false;
   @Input() oldType: string;
   @Input() model: string;
+  @Input() taskType: string = '';
   
   editForm: FormGroup;
   commentForm: FormGroup;
+  taskId = '';
+  toConfirm = false;
 
   constructor(
     private store: BoardStore,
@@ -46,9 +49,21 @@ export class TaskComponent implements OnInit {
     this.editForm.reset();
   }
 
-  deleteTask(id: string) {
-    this.store.deleteTask(id).subscribe();
+  toDelete(id: string) {
+    this.toConfirm = true;
+    this.taskId = id;
   }
+
+  deleteTask(confirmation: boolean) {
+    if (confirmation) {
+      this.store.deleteTask(this.taskId).subscribe();
+    }
+    this.toConfirm = false;    
+    this.taskId = ''
+  }
+  // deleteTask(id: string) {
+  //   this.store.deleteTask(id).subscribe();
+  // }
 
   archiveTask(id: string) {
     this.store.changeStatus(id, 'Archive').subscribe();

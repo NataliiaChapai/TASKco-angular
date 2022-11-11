@@ -5,8 +5,11 @@ export interface Task {
     boardId: string;
     createdAt: string;
     comments: [
-        message?: string,
-        time?: string 
+        {
+            comment?: string,
+            time?: string;
+            _id: string;
+        } 
     ];
     canEdit?: boolean;
     canComment?: boolean;

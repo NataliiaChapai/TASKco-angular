@@ -39,7 +39,7 @@ export class BoardStore {
     private route: ActivatedRoute,
     private board: BoardService
   ) {
-    this.route.params.subscribe(params => (this.boardId = params['id']));
+    this.boardId = this.route.snapshot.paramMap.get('id') ?? '';
     this.getColors().subscribe();
     this.loadAllTasks();
   }
@@ -119,6 +119,9 @@ export class BoardStore {
         this.messages.showErrors(message);
         console.log(message, err);
         return throwError(err);
+      }),
+      tap(res => {
+        this.messages.showSuccess(res.message);
       }),
       shareReplay()
     );

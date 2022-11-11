@@ -28,10 +28,10 @@ export class BoardService {
     return this.http.get<Colors>(url).pipe(map(data => data), shareReplay());
   }
 
-  getBoardName(id: string) {
-    const url = environment.apiUrl + `/boards/${id}`;
-    return this.http.get<any>(url).pipe(map(data => data.board), shareReplay());
-  }
+  // getBoardName(id: string) {
+  //   const url = environment.apiUrl + `/boards/${id}`;
+  //   return this.http.get<any>(url).pipe(map(data => data.board), shareReplay());
+  // }
 
   updateTask(id: string, changes: Partial<Task>) {
     const url = environment.apiUrl + `/board/tasks/${id}`;
@@ -58,7 +58,7 @@ export class BoardService {
     return this.http.patch<any>(url, {column, color});
   }
 
-  addComment(id: string, comment: Partial<Task>) {
+  addComment(id: string, comment: {comment: string}) {
     const url = environment.apiUrl + `/board/comments/${id}`;
     return this.http.post<any>(url, comment);
   }

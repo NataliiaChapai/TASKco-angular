@@ -1,0 +1,17 @@
+:host {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    padding: 50px;
+}
+
+h2 {
+    color: red;
+    padding: 20px;
+}
+
+img {
+    width: 300px;
+    margin-top: 20px;
+}

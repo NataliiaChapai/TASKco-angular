@@ -1,14 +1,22 @@
 <div class="toolbar">
-  <button class="toolbar__btn" (click)="modal.show()">+</button>
+  <button class="toolbar__btn" (click)="showAddModal = true">+</button>
   <app-toolbar
-    (filterByName)="getFilterValue($event)"
-    (sort)="getSortValue($event)"
-    (direction)="getDirectionValue($event)"
+    (filterByName)="filterByName = $event"
+    (sort)="sort = $event"
+    (direction)="direction = $event"
     placeholder="Filter boards..."
     dashboard="true"
   ></app-toolbar>
 </div>
-
+<app-modal
+  *ngIf="showAddModal"
+  [submitted]="submitted"
+  (formData)="addBoard($event)"
+  [description]="true"
+  title="Add new board"
+  action="Add"
+  (showModal)="showAddModal = $event"
+></app-modal>
 
 <div class="boards">
   <div
@@ -42,14 +50,26 @@
           <button class="board__btn" (click)="editBoard(board._id)">
             &#9998;
           </button>
-          <button class="board__btn" (click)="deleteBoard(board._id)">🗑</button>
+          <button class="board__btn" (click)="toDelete(board._id)">🗑</button>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<app-edit-modal
-  (onUpdate)="updateBoard($event)"
-  *ngIf="modal.showEditModal"
-></app-edit-modal>
+<app-modal
+  *ngIf="showModal"
+  [submitted]="submitted"
+  (formData)="updateBoard($event)"
+  [description]="false"
+  title="Edit board"
+  action="Save"
+  (showModal)="showModal = $event"
+></app-modal>
+
+<app-confirm-dialog
+  *ngIf="toConfirm"
+  title="board"
+  (confirmation)="deleteBoard($event)"
+  (showModal)="toConfirm = $event"
+></app-confirm-dialog>

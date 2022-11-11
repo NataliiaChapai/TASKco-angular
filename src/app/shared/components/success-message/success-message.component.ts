@@ -5,8 +5,7 @@ import { MessagesService } from '../../services/messages.service';
 @Component({
   selector: 'app-success-message',
   templateUrl: './success-message.component.html',
-  styleUrls: ['./success-message.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrls: ['./success-message.component.css']
 })
 export class SuccessMessageComponent implements OnInit {
 

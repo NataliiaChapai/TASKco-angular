@@ -18,6 +18,10 @@
   align-items: center;
 }
 
+.header__link:hover {
+  color: #000;
+}
+
 .header__link img {
   margin-right: 10px;
 }

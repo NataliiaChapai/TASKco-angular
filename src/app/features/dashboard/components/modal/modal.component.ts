@@ -1,8 +1,7 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { DashboardStore } from '../../services/dashboard.store';
-import { ModalService } from '../../services/modal.service';
+import { Board } from '../../models/board.interface';
 
 @Component({
   selector: 'app-modal',
@@ -11,13 +10,18 @@ import { ModalService } from '../../services/modal.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ModalComponent implements OnInit {
+
+  @Input() description = false;
+  @Input() submitted = false;
+  @Input() title: string;
+  @Input() action: string;
+  @Output() showModal = new EventEmitter<boolean>();
+  @Output() formData = new EventEmitter<Partial<Board>>();
+
   form: FormGroup;
-  submitted = false;
 
   constructor(
     private fb: FormBuilder,
-    public modal: ModalService,
-    private store: DashboardStore
   ) {
     this.form = this.fb.group({
       name: ['', [Validators.required]],
@@ -27,15 +31,13 @@ export class ModalComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  addBoard() {
-    const value = this.form.value;
-    this.submitted = true;
-    this.store.addBoard(value).subscribe(
-      () => {
-        this.submitted = false;
-        this.modal.close();
-      },
-      () => (this.submitted = false)
-    );
+  passFormData() {
+    const data = this.form.value;
+    this.formData.emit(data);
   }
+
+  closeModal() {
+    this.showModal.emit(false);
+  }
+
 }

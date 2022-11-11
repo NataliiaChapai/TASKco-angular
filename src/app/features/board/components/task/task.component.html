@@ -4,7 +4,7 @@
   draggable="true"
   (dragstart)="drag($event, task._id)"
   [id]="task._id"
-  data-type="Todo"
+  [attr.data-type]="taskType"
 >
   <div>
     <h2>{{ task.name }}</h2>
@@ -77,10 +77,17 @@
   <div class="task__menu">
     <ul class="task__menu-list">
       <li class="task__menu-item" (click)="task.canEdit = true">Edit</li>
-      <li class="task__menu-item" (click)="deleteTask(task._id)">Delete</li>
+      <li class="task__menu-item" (click)="toDelete(task._id)">Delete</li>
       <li *ngIf="done" class="task__menu-item" (click)="archiveTask(task._id)">
         Archive
       </li>
     </ul>
   </div>
 </div>
+
+<app-confirm-dialog
+  *ngIf="toConfirm"
+  title="task"
+  (confirmation)="deleteTask($event)"
+  (showModal)="toConfirm = $event"
+></app-confirm-dialog>

@@ -1,4 +1,4 @@
-:host {
+.backdrop {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -13,12 +13,10 @@
 .modal {
     position: relative;
     width: 30%;
-    height: 250px;
     border-radius: 10px;
     background-color: #fff;
     padding: 30px;
     text-align: center;
-    font-size: 20px;
 }
 
 .modal__close {
@@ -43,6 +41,7 @@
     border-radius: 20px;
     cursor: pointer;
     box-shadow: 0px 10px 20px rgba(103, 108, 120, 0.6);
+    margin-top: 20px;
 }
 
 .modal__btn:hover {
@@ -55,13 +54,35 @@
     border: 1px solid lightseagreen;
     padding: 20px;
     width: 80%;
-    margin-bottom: 10px;
+}
+
+.modal__input:focus {
+    outline: 2px solid lightseagreen;
 }
 
 .error {
     display: block;
     color: red;
-    margin-bottom: 10px;
     text-align: left;
     padding-left: 20px;
+}
+
+*:disabled, *:disabled:hover {
+    background-color: dimgrey;
+    color: linen;
+    opacity: 0.4;
+    box-shadow: 0px 10px 20px rgba(103, 108, 120, 0.4);
+    cursor: auto;
+}
+
+.invalid, .invalid:focus {
+    outline: 2px solid red;
+    border: 1px solid red;
+}
+
+.validation {
+    color: red;
+    text-align: left;
+    padding: 5px 30px;
+    min-height: 17px;
 }

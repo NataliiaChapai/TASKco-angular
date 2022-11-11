@@ -1,16 +1,19 @@
-<div class="modal">
-    <button class="modal__close" (click)="modal.close()">x</button>
-    <h3 class="modal__header">Add new board</h3>
+<div class="backdrop" (click)="closeModal()">
+    <div class="modal" (click)="$event.stopPropagation()">
+    <button class="modal__close" (click)="closeModal()">x</button>
+    <h3 class="modal__header">{{title}}</h3>
     <form [formGroup]="form" class="modal__form">
-            <div [ngClass]="{invalid: form.controls['name'].touched && form.controls['name'].invalid}">
-                <input formControlName="name" type="text" class="modal__input" placeholder="Board name">
-                <div class="validation" *ngIf="form.controls['name'].touched && form.controls['name'].invalid">
-                    <small *ngIf="form.controls['name']" class="error">Name is required</small>
+            <div>
+                <input [ngClass]="{invalid: form.controls['name'].touched && form.controls['name'].invalid}" formControlName="name" type="text" class="modal__input" placeholder="Board name">
+                <div class="validation">
+                    <small *ngIf="form.controls['name'].touched && form.controls['name'].invalid" class="error">Name is required</small>
                 </div>
             </div>
-            <div>
+            <div *ngIf="description">
                 <input formControlName="description" type="text" class="modal__input" placeholder="Board description">
             </div>
-        <button (click)="addBoard()" [disabled]="!form.valid || submitted" class="modal__btn">Add</button>
+        <button (click)="passFormData()" [disabled]="!form.valid || submitted" class="modal__btn">{{action}}</button>
     </form>
 </div>
+</div>
+

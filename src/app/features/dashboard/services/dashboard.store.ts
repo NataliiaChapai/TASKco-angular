@@ -95,6 +95,9 @@ export class DashboardStore {
         console.log(message, err);
         return throwError(err);
       }),
+      tap(res => {
+        this.messages.showSuccess(res.message);
+      }),
       shareReplay()
     );
   }

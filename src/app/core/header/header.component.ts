@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { Router } from '@angular/router';
-import { User } from 'src/app/features/auth/models/user';
 
+import { User } from 'src/app/features/auth/models/user';
 import { AuthStore } from 'src/app/features/auth/services/auth.store';
-import { DashboardStore } from 'src/app/features/dashboard/services/dashboard.store';
 import { UserStore } from 'src/app/features/user/services/user.store';
 
 @Component({

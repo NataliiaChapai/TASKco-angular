@@ -16,7 +16,6 @@ export class ArchiveTaskComponent implements OnInit {
   @Input() sort = '';
   @Input() direction = 'asc';
   @Input() color: string | null;
-  // @Input() archive = false;
 
   constructor(
     private store: BoardStore
@@ -28,5 +27,7 @@ export class ArchiveTaskComponent implements OnInit {
   changeColor(column: string, color: any,) {
     this.store.changeColor(column, color.target.value).subscribe();
   }
+
+  
 
 }

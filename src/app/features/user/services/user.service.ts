@@ -35,7 +35,7 @@ export class UserService {
 
   saveAvatarUrl(avatarURL: string) {
     const url = environment.apiUrl + '/users/google-avatar';
-    return this.http.patch<any>(url, {avatarURL}).pipe(
+    return this.http.patch<Partial<CurrentUser>>(url, {avatarURL}).pipe(
       map(res => res.avatarURL))
   }
 

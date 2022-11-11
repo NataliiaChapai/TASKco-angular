@@ -2,6 +2,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
+import { BoardModule } from '../../board.module';
 
 import { TaskColumnComponent } from './task-column.component';
 
@@ -12,7 +13,7 @@ describe('TaskColumnComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ TaskColumnComponent ],
-      imports: [RouterTestingModule, HttpClientTestingModule, FormsModule, ReactiveFormsModule]
+      imports: [RouterTestingModule, HttpClientTestingModule, FormsModule, ReactiveFormsModule, BoardModule]
     })
     .compileComponents();
 
@@ -20,8 +21,14 @@ describe('TaskColumnComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
+  
+  afterEach(() => {
+    fixture.destroy();
+  });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  
 });

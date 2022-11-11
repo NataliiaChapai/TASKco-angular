@@ -23,7 +23,6 @@ export class TaskColumnComponent implements OnInit {
   @Input() done?: boolean = false;
 
   addForm: FormGroup;
-
   oldType: string;
 
   constructor(

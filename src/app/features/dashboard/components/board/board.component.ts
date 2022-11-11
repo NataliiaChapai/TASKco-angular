@@ -3,7 +3,6 @@ import { map, Observable } from 'rxjs';
 
 import { Board } from '../../models/board.interface';
 import { DashboardStore } from '../../services/dashboard.store';
-import { ModalService } from '../../services/modal.service';
 
 @Component({
   selector: 'app-board',
@@ -18,11 +17,12 @@ export class BoardComponent implements OnInit {
 
   boards$: Observable<Board[]>;
   showModal = false;
+  showAddModal = false;
   boardId = '';
   submitted = false;
+  toConfirm = false;
 
   constructor(
-    public modal: ModalService,
     public store: DashboardStore
   ) {}
 
@@ -34,34 +34,44 @@ export class BoardComponent implements OnInit {
     this.boards$ = this.store.boards$.pipe(map(res => res));
   }
 
-  deleteBoard(id: string) {
-    this.store.deleteBoard(id).subscribe();
+  toDelete(id: string) {
+    this.toConfirm = true;
+    this.boardId = id;
+  }
+
+  deleteBoard(confirmation: boolean) {
+    if (confirmation) {
+      this.store.deleteBoard(this.boardId).subscribe();
+    }
+    this.toConfirm = false;    
+    this.boardId = ''
   }
 
   editBoard(id: string) {
     this.boardId = id;
-    this.modal.showEdit();
+    this.showModal = true;
   }
 
-  updateBoard(name: any) {
-    this.store.updateBoard(this.boardId, name).subscribe(
-      () => {
+  updateBoard(name: Partial<Board>) {
+    this.store.updateBoard(this.boardId, name).subscribe({
+      next: () => {
         this.submitted = false;
-        this.modal.closeEdit();
+        this.showModal = false;
+        this.boardId = '';
       },
-      () => (this.submitted = false)
-    );
+      error: () => (this.submitted = false)
+    });
   }
 
-  getFilterValue(value: string) {
-    this.filterByName = value;
+  addBoard(data: Partial<Board>) {
+    this.submitted = true;
+    this.store.addBoard(data).subscribe({
+      next: () => {
+        this.submitted = false;
+        this.showAddModal = false;
+      },
+      error: () => (this.submitted = false),
+    });
   }
 
-  getSortValue(sort: string) {
-    this.sort = sort;
-  }
-
-  getDirectionValue(direction: string) {
-    this.direction = direction;
-  }
 }

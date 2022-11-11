@@ -10,7 +10,7 @@
   position: relative;
 }
 
-.tasks__column {
+.tasks__column-main, tasks__column {
   width: 27%;
 }
 

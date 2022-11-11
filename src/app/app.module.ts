@@ -11,6 +11,7 @@ import { BoardModule } from './features/board/board.module';
 import { SharedModule } from './shared/shared.module';
 import { BoardStore } from './features/board/services/board.store';
 import { HomeComponent } from './features/home/home.component';
+import { NotFoundComponent } from './features/not-found/not-found.component';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { HomeComponent } from './features/home/home.component';
     AppComponent,
     HeaderComponent,
     HomeComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,

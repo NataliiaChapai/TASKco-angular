@@ -11,7 +11,6 @@ export class ToolbarComponent implements OnInit {
 
   sortBy = '';
 
-  @Input() boardName$: Observable<string>;
   @Input() placeholder: string;
   @Input() dashboard: string;
 

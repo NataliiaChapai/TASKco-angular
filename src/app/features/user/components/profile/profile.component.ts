@@ -49,13 +49,13 @@ export class ProfileComponent implements OnInit {
     const newPassword = {
       password: value.password,
     };
-    this.store.updatePassword(newPassword).subscribe(
-      () => {
+    this.store.updatePassword(newPassword).subscribe({
+      next: () => {
         this.submitted = false;
         this.form.reset();
       },
-      () => (this.submitted = false)
-    );
+      error: () => (this.submitted = false)
+    });
   }
 
   addAvatar(event: any) {

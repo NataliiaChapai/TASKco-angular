@@ -3,14 +3,12 @@
   <h2 class="active">{{ boardName$ | async }}</h2>
 
   <app-toolbar
-  [boardName$]="boardName$"
-  (filterByName)="getFilterValue($event)"
-  (sort)="getSortValue($event)"
-  (direction)="getDirectionValue($event)"
+  (filterByName)="filterByName=$event"
+  (sort)="sort=$event"
+  (direction)="direction=$event"
   placeholder="Filter tasks..."
 ></app-toolbar>
 </div>
-
 
 <app-loader class="loader"></app-loader>
 
@@ -25,7 +23,7 @@
     taskType="Todo"
     [i]="0"
     [canAdd]="canAdd"
-    class="tasks__column"
+    class="tasks__column-main"
   >
   </app-task-column>
 
@@ -39,7 +37,7 @@
     taskType="In progress"
     [i]="1"
     [canAdd]="canAdd"
-    class="tasks__column"
+    class="tasks__column-main"
   >
   </app-task-column>
 
@@ -54,7 +52,7 @@
     [i]="2"
     [canAdd]="canAdd"
     [done]="true"
-    class="tasks__column"
+    class="tasks__column-main"
   >
   </app-task-column>
 

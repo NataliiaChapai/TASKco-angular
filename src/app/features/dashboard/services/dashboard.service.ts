@@ -18,7 +18,7 @@ export class DashboardService {
       map(res => res.boards))
   }
 
-  deleteBoard(id: string): Observable<void> {
+  deleteBoard(id: string): Observable<any> {
     const url = environment.apiUrl + `/boards/${id}`;
     return this.http.delete<void>(url)
   }

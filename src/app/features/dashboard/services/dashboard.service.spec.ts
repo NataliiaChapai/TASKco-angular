@@ -99,7 +99,36 @@ const url = environment.apiUrl + `/boards/633c570cdfc7dbef15ca7958`;
     status: 500,
     statusText: 'Internal Server Error'
   })
-})
+});
+
+it('should add new board', () => {
+  const newBoard = {
+    name: 'New board',
+    description: 'Board description'
+  };
+  service.addBoard(newBoard).subscribe(board => {
+    expect(board).toBeTruthy();
+    expect(board.name).toBe('New board');
+    expect(board.description).toBe('Board description');
+  });
+  const url = environment.apiUrl + `/boards`;
+  const req = httpTestingController.expectOne(url);
+  const boardData = {
+    _id: '633c570cdfc7dbef15ca7953',
+    name: newBoard.name,
+    description: newBoard.description,
+    userId: '632f3ca29e67cccae37ab456',
+    taskCount: {
+      todo: 0,
+      inprogress: 0,
+      done: 0,
+      archive: 0,
+    },
+    createdAt: new Date,
+  };
+  expect(req.request.method).toBe('POST');
+  req.flush(boardData);
+});
   
   afterEach(() => {
     httpTestingController.verify();

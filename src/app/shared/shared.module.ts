@@ -9,6 +9,8 @@ import { GreyButtonComponent } from './components/grey-button/grey-button.compon
 import { FormInputComponent } from './components/form-input/form-input.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { ColorFillDirective } from './directives/color-fill.directive';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 
 @NgModule({
@@ -21,6 +23,8 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
     SliderButtonComponent,
     FormInputComponent,
     ToolbarComponent,
+    ColorFillDirective,
+    ConfirmDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -35,7 +39,9 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
     GreyButtonComponent,
     InputComponent,
     FormInputComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    ColorFillDirective,
+    ConfirmDialogComponent
   ]
 })
 export class SharedModule { }
