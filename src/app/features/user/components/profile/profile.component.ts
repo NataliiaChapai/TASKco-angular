@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthStore } from 'src/app/features/auth/services/auth.store';
 import { LoadingService } from 'src/app/shared/services/loading.service'
 import { MessagesService } from 'src/app/shared/services/messages.service';
+import { createPasswordStrengthValidator } from 'src/app/shared/validators/password-strength.validator';
 import { CurrentUser } from '../../models/current-user';
 import { UserStore } from '../../services/user.store';
 
@@ -35,8 +36,8 @@ export class ProfileComponent implements OnInit {
   loadUserData() {
     this.store.currentUser$.subscribe(res => (this.user = res));
     this.form = this.fb.group({
-      password: [null, [Validators.required, Validators.minLength(8)]],
-      confirmPassword: [null, [Validators.required, Validators.minLength(8)]],
+      password: [null, [Validators.required, Validators.minLength(8), createPasswordStrengthValidator()]],
+      confirmPassword: [null, [Validators.required, Validators.minLength(8), createPasswordStrengthValidator()]],
     });
   }
 

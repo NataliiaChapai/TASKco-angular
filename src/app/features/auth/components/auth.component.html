@@ -19,7 +19,7 @@
                 <input appPasswordToggle [ngClass]="{invalid: form.controls['password'].touched && form.controls['password'].invalid}" 
                 formControlName="password" type="password" class="login__input" placeholder="Password">                
                 <div class="validation" *ngIf="form.controls['password'].touched && form.controls['password'].invalid">
-                    <small *ngIf="form.controls['password']">Password length must be at least 8 characters</small>
+                    <small *ngIf="form.controls['password']">Password length must be at least 8 letters or numbers</small>
                 </div>
             </div>
             <div class="forgot-password">

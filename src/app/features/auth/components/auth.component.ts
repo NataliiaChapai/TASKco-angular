@@ -9,6 +9,8 @@ import { DashboardStore } from '../../dashboard/services/dashboard.store';
 import { UserStore } from '../../user/services/user.store';
 import { User } from '../models/user';
 import { AuthStore } from '../services/auth.store';
+import {createEmailStrengthValidator} from '../../../shared/validators/email-strength.validator';
+import {createPasswordStrengthValidator} from '../../../shared/validators/password-strength.validator';
 
 @Component({
   selector: 'app-auth',
@@ -32,8 +34,8 @@ export class AuthComponent implements OnInit, OnDestroy {
     public messages: MessagesService
   ) {
     this.form = this.fb.group({
-      email: [null, [Validators.required, Validators.email]],
-      password: [null, [Validators.required, Validators.minLength(8)]],
+      email: [null, [Validators.required, Validators.email, Validators.minLength(10), createEmailStrengthValidator()]],
+      password: [null, [Validators.required, Validators.minLength(8), createPasswordStrengthValidator()]],
     });
   }
 
