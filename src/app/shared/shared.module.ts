@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { ColorFillDirective } from './directives/color-fill.directive';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { PasswordToggleDirective } from './directives/password-toggle.directive';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     ToolbarComponent,
     ColorFillDirective,
     ConfirmDialogComponent,
+    PasswordToggleDirective,
   ],
   imports: [
     CommonModule,
@@ -41,7 +43,8 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     FormInputComponent,
     ToolbarComponent,
     ColorFillDirective,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    PasswordToggleDirective
   ]
 })
 export class SharedModule { }

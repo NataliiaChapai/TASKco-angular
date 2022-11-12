@@ -6,6 +6,7 @@ import { AuthComponent } from './components/auth.component';
 import { AuthService } from './services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './services/auth.guard';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 const routes: Routes = [
@@ -22,6 +23,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     ReactiveFormsModule,
     HttpClientModule,
+    SharedModule
   ],
   providers: [AuthService, AuthGuard],
 })

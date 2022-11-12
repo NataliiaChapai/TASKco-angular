@@ -15,8 +15,8 @@
                     <small *ngIf="form.controls['email']">Email address must be valid</small>
                 </div>
             </div>
-            <div>
-                <input [ngClass]="{invalid: form.controls['password'].touched && form.controls['password'].invalid}" 
+            <div class="password-wrapper">
+                <input appPasswordToggle [ngClass]="{invalid: form.controls['password'].touched && form.controls['password'].invalid}" 
                 formControlName="password" type="password" class="login__input" placeholder="Password">                
                 <div class="validation" *ngIf="form.controls['password'].touched && form.controls['password'].invalid">
                     <small *ngIf="form.controls['password']">Password length must be at least 8 characters</small>

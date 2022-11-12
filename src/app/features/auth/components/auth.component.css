@@ -62,6 +62,11 @@
     box-shadow: 0px 10px 20px rgba(103, 108, 120, 0.4);
     outline: none;
     font-size: 16px;
+    
+}
+
+.password-wrapper {
+    position: relative;
 }
 
 .login__input:focus {
@@ -126,4 +131,11 @@
 
 .invalid:focus {
     outline: 2px solid red;
+}
+
+.eye {
+    color: lightseagreen;
+    font-size: 20px;
+    position: absolute;
+    display: none;
 }
