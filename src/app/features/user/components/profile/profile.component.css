@@ -80,3 +80,8 @@
     display: flex;
     text-align: center;
 }
+
+.password-wrapper {
+    position: relative;
+    min-height: 70px;
+}

@@ -22,12 +22,14 @@
               form.controls['password'].touched &&
               form.controls['password'].invalid
           }"
+          class="password-wrapper"
         >
           <input
             formControlName="password"
             type="password"
             class="form__input"
             placeholder="Password"
+            appPasswordToggle
           />
           <div
             class="validation"
@@ -47,12 +49,14 @@
               form.controls['confirmPassword'].touched &&
               form.controls['confirmPassword'].invalid
           }"
+          class="password-wrapper"
         >
           <input
             formControlName="confirmPassword"
             type="password"
             class="form__input"
             placeholder="Confirm password"
+            appPasswordToggle
           />
           <div
             class="validation"
