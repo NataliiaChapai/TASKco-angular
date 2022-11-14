@@ -1,9 +1,8 @@
-import { DebugElement } from '@angular/core';
-import { User } from './app/features/auth/models/user';
-import { Colors } from './app/features/board/models/colors.interface';
-import { Board } from './app/features/dashboard/models/board.interface';
-import { Task } from './app/features/board/models/task.interface';
-import { CurrentUser } from './app/features/user/models/current-user';
+import { User } from '../app/features/auth/models/user';
+import { Colors } from '../app/features/board/models/colors.interface';
+import { Board } from '../app/features/dashboard/models/board.interface';
+import { Task } from '../app/features/board/models/task.interface';
+import { CurrentUser } from '../app/features/user/models/current-user';
 
 export const USER: User = {
   email: 'test@email.com',
@@ -163,19 +162,3 @@ export const CURRENT_USER: CurrentUser = {
   avatarURL: '',
   createdAt: '1664898828405',
 };
-
-export const ButtonClickEvents = {
-  left: { button: 1 },
-  right: { button: 0 },
-};
-
-export function click(
-  el: DebugElement | HTMLElement,
-  eventObj: any = ButtonClickEvents.right
-): void {
-  if (el instanceof HTMLElement) {
-    el.click();
-  } else {
-    el.triggerEventHandler('click', eventObj);
-  }
-}

@@ -10,7 +10,6 @@ export class PasswordToggleDirective {
     const parent = this.el.nativeElement.parentNode;
     const span = document.createElement('span');
     span.innerHTML = '👁';
-    span.classList.add('eye');
     span.style.fontSize = '24px';
     span.style.color = 'lightseagreen';
     span.style.position = 'absolute';

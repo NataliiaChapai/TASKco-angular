@@ -1,4 +1,4 @@
-import { BOARDS } from 'src/db-test-data';
+import { BOARDS } from 'src/mocks/db-test-data';
 import { SortPipe } from './sort.pipe';
 
 describe('SortPipe', () => {

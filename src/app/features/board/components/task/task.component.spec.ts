@@ -6,7 +6,7 @@ import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { PipesModule } from 'src/app/shared/pipes/pipes.module';
-import { TASKS } from 'src/db-test-data';
+import { TASKS } from 'src/mocks/db-test-data';
 import { TaskComponent } from './task.component';
 
 describe('TaskComponent', () => {

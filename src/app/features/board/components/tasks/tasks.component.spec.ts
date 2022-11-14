@@ -4,7 +4,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
-import { click, TASKS } from 'src/db-test-data';
+import { click, TASKS } from 'src/mocks/db-test-data';
 import { BoardModule } from '../../board.module';
 import { BoardStore } from '../../services/board.store';
 

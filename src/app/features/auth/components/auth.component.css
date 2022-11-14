@@ -132,10 +132,3 @@
 .invalid:focus {
     outline: 2px solid red;
 }
-
-.eye {
-    color: lightseagreen;
-    font-size: 20px;
-    position: absolute;
-    display: none;
-}

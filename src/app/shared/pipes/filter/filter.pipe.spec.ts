@@ -1,4 +1,4 @@
-import { TASKS } from 'src/db-test-data';
+import { TASKS } from 'src/mocks/db-test-data';
 import { FilterPipe } from './filter.pipe';
 
 describe('FilterPipe', () => {
