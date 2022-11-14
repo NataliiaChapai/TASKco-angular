@@ -8,7 +8,6 @@ import { BoardComponent } from './components/board/board.component';
 import { PipesModule } from '../../shared/pipes/pipes.module';
 import { ModalComponent } from './components/modal/modal.component';
 import { SharedModule } from '../../shared/shared.module';
-import { SortParamsDirective } from './directives/sort-params.directive';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AuthGuard } from '../auth/services/auth.guard';
 
@@ -25,7 +24,6 @@ const routes: Routes = [
     DashboardComponent,
     BoardComponent,
     ModalComponent,
-    SortParamsDirective,
   ],
   imports: [
     CommonModule,

@@ -27,8 +27,12 @@ export class PasswordToggleDirective {
     this.shown = !this.shown;
     if (this.shown) {
       this.el.nativeElement.setAttribute('type', 'text');
+      span.style.color = 'gainsboro';
+      span.style.textDecoration = 'line-through';
     } else {
       this.el.nativeElement.setAttribute('type', 'password');
+      span.style.color = 'lightseagreen';
+      span.style.textDecoration = 'none';
     }
   }
 
