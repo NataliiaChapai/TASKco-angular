@@ -54,3 +54,24 @@
   height: 45px;
   border: 1px solid #fff;
 }
+
+@media screen and (max-width: 480px) {
+  .header {
+    padding: 10px;
+  }
+  span {
+    display: none;
+  }
+  .header__link img {
+    margin-right: 0;
+  }
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  span {
+    display: none;
+  }
+  .header__link img {
+    margin-right: 0;
+  }
+}

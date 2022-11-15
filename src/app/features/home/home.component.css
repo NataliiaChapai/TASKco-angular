@@ -67,3 +67,30 @@ p:hover {
     background-color: rgba(32, 178, 171, 0.5);
     color: #fff;
 }
+
+@media screen and (max-width: 480px) {
+    .first, .second, img {
+        display: none;
+    }
+    h1, p {
+        font-size: 16px;
+    }
+    p {
+        bottom: -50%;
+    }
+  }
+  
+  @media screen and (min-width: 481px) and (max-width: 768px) {
+    .first, .second, img {
+        display: none;
+    }
+    p {
+        bottom: -50%;
+    }
+  }
+  
+  @media screen and (min-width: 769px) and (max-width: 1200px) {
+    .first, .second {
+        display: none;
+    }
+  }

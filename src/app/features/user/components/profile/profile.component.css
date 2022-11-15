@@ -85,3 +85,51 @@
     position: relative;
     min-height: 70px;
 }
+
+@media screen and (max-width: 480px) {
+    .profile {
+        padding: 10px;
+    }
+    .profile-container {
+        width: 90%;
+    }
+    .form {
+        flex-direction: column;
+    }
+    button {
+        display: block;
+        margin: 0 auto;
+    }
+  }
+  
+  @media screen and (min-width: 481px) and (max-width: 768px) {
+    .profile {
+        padding: 20px;
+    }
+    .profile-container {
+        width: 80%;
+    }
+    .form {
+        flex-direction: column;
+    }
+    button {
+        display: block;
+        margin: 0 auto;
+    }
+  }
+  
+  @media screen and (min-width: 769px) and (max-width: 1200px) {
+    .profile {
+        padding: 30px;
+    }
+    .profile-container {
+        width: 60%;
+    }
+    .form {
+        flex-direction: column;
+    }
+    button {
+        display: block;
+        margin: 0 auto;
+    }
+  }

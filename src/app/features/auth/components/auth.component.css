@@ -132,3 +132,36 @@
 .invalid:focus {
     outline: 2px solid red;
 }
+
+@media screen and (max-width: 480px) {
+    :host {
+        padding: 20px;
+    }
+
+    .login {
+        width: 90%;
+        padding: 20px;
+    }
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    :host {
+        padding: 30px;
+    }
+
+    .login {
+        width: 70%;
+        padding: 30px;
+    }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1200px) {
+    :host {
+        padding: 40px;
+    }
+
+    .login {
+        width: 40%;
+        padding: 40px;
+    }
+}

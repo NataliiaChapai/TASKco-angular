@@ -42,3 +42,17 @@ select:hover {
     box-shadow: 5px 5px 10px rgba(103, 108, 120, 0.8);
     color: darkgrey;
 }
+
+@media screen and (max-width: 480px) {
+    .toolbar__item {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    .toolbar__item {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+}

@@ -6,6 +6,7 @@
 .tasks__list {
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap;
   padding: 15px 10px;
   position: relative;
 }
@@ -66,4 +67,54 @@
   background-color: lightseagreen;
   display: block;
   bottom: -10px;
+}
+
+@media screen and (max-width: 480px) {
+  .toolbar {
+    flex-direction: column;
+    padding: 10px;
+  }
+  .toolbar__btn {
+    display: none;
+  }
+  .active {
+    margin-bottom: 15px;
+  }
+  .tasks__column-main, .tasks__column {
+    width: 90%;
+    margin-bottom: 20px;
+  }
+  .slider__btn {
+    position: fixed;
+  }
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  .toolbar {
+    flex-direction: column;
+    padding: 10px;
+  }
+  .toolbar__btn {
+    display: none;
+  }
+  .active {
+    margin-bottom: 15px;
+  }
+  .tasks__column-main, .tasks__column {
+    width: 60%;
+    margin-bottom: 20px;
+  }
+  .slider__btn {
+    position: fixed;
+  }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1200px) {
+  .tasks__column-main, .tasks__column {
+    width: 40%;
+    margin-bottom: 20px;
+  }
+  .slider__btn {
+    position: fixed;
+  }
 }
