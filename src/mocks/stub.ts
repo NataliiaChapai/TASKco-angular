@@ -21,3 +21,14 @@ export class UserFormStubComponent {}
 export class SliderButtonStubComponent {
     @Input() content: string;
 }
+
+@Component({
+    selector: 'app-grey-button',
+    template: `
+    <button class="button" [type]="type">{{content}}</button>
+    `
+  })
+export class GreyButtonStubComponent {
+    @Input() content: string;
+    @Input() type: string;
+}
