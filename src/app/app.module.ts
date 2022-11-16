@@ -26,7 +26,6 @@ import { NotFoundComponent } from './features/not-found/not-found.component';
     AppRoutingModule,
     AuthModule,
     HttpClientModule,
-
     BoardModule,
     SharedModule,
   ],

@@ -1,8 +1,9 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule, FormBuilder } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 
+import { PasswordToggleDirective } from 'src/app/shared/directives/password-toggle.directive';
 import { AuthComponent } from './auth.component';
 
 describe('AuthComponent', () => {
@@ -11,8 +12,9 @@ describe('AuthComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AuthComponent ],
-      imports: [ReactiveFormsModule, FormsModule, HttpClientTestingModule, RouterTestingModule]
+      declarations: [ AuthComponent, PasswordToggleDirective ],
+      imports: [ReactiveFormsModule, FormsModule, HttpClientTestingModule, RouterTestingModule],
+      providers: [FormBuilder]
     })
     .compileComponents();
 
@@ -21,7 +23,7 @@ describe('AuthComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create the component', () => {
     expect(component).toBeTruthy();
   });
 });

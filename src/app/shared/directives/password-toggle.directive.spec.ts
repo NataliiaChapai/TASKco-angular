@@ -1,5 +1,6 @@
 import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+
 import { UserFormStubComponent } from 'src/mocks/stub';
 import { PasswordToggleDirective } from './password-toggle.directive';
 
@@ -20,6 +21,7 @@ describe('PasswordToggleDirective', () => {
     fixture.detectChanges();
     el = fixture.debugElement;
   });
+  
   it('should create an instance', () => {
     expect(component).toBeTruthy();
   });
@@ -27,10 +29,8 @@ describe('PasswordToggleDirective', () => {
   it('should change input type', () => {
     const input = el.nativeElement.querySelector('input');
     const toggle = el.nativeElement.querySelector('span');
-
     toggle.click();
     fixture.detectChanges();
-
     expect(input.type).toBe('text');
   });
 });
