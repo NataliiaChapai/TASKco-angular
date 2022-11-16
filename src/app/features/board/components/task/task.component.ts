@@ -61,9 +61,6 @@ export class TaskComponent implements OnInit {
     this.toConfirm = false;    
     this.taskId = ''
   }
-  // deleteTask(id: string) {
-  //   this.store.deleteTask(id).subscribe();
-  // }
 
   archiveTask(id: string) {
     this.store.changeStatus(id, 'Archive').subscribe();
