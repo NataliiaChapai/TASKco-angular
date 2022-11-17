@@ -1,6 +1,6 @@
 :host {
     text-align: center;
-  }
+}
 
 .boards {
     display: flex;
@@ -122,9 +122,9 @@
     .board {
         width: 90%;
     }
-  }
+}
   
-  @media screen and (min-width: 481px) and (max-width: 768px) {
+@media screen and (min-width: 481px) and (max-width: 768px) {
     .toolbar {
       flex-direction: column;
       padding: 10px;
@@ -138,10 +138,10 @@
     .board {
         width: 60%;
     }
-  }
+}
   
-  @media screen and (min-width: 769px) and (max-width: 1200px) {
+@media screen and (min-width: 769px) and (max-width: 1200px) {
     .board {
         width: 40%;
     }
-  }
+}

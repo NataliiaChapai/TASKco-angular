@@ -1,7 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { BoardModule } from 'src/app/features/board/board.module';
 
+import { BoardModule } from 'src/app/features/board/board.module';
 import { DashboardComponent } from './dashboard.component';
 
 describe('DashboardComponent', () => {

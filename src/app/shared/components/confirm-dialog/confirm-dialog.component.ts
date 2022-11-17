@@ -1,6 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Board } from 'src/app/features/dashboard/models/board.interface';
 
 @Component({
   selector: 'app-confirm-dialog',

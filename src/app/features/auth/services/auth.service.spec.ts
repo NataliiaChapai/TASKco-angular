@@ -3,9 +3,9 @@ import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
+import { HttpErrorResponse } from '@angular/common/http';
 
 import { environment } from 'src/environments/environment';
-import { HttpErrorResponse } from '@angular/common/http';
 import { AuthService } from './auth.service';
 import { User } from '../models/user';
 

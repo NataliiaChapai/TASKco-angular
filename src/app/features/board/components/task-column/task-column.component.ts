@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+
 import { Task } from '../../models/task.interface';
 import { BoardStore } from '../../services/board.store';
 

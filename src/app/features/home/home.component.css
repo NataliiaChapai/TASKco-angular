@@ -78,19 +78,19 @@ p:hover {
     p {
         bottom: -50%;
     }
-  }
+}
   
-  @media screen and (min-width: 481px) and (max-width: 768px) {
+@media screen and (min-width: 481px) and (max-width: 768px) {
     .first, .second, img {
         display: none;
     }
     p {
         bottom: -50%;
     }
-  }
+}
   
-  @media screen and (min-width: 769px) and (max-width: 1200px) {
+@media screen and (min-width: 769px) and (max-width: 1200px) {
     .first, .second {
         display: none;
     }
-  }
+}

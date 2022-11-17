@@ -2,8 +2,8 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
-import { PipesModule } from 'src/app/shared/pipes/pipes.module';
 
+import { PipesModule } from 'src/app/shared/pipes/pipes.module';
 import { ArchiveTaskComponent } from './archive-task.component';
 
 describe('ArchiveTaskComponent', () => {

@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
 
 import { AuthStore } from 'src/app/features/auth/services/auth.store';
 
-
 @Injectable({
   providedIn: 'root',
 })

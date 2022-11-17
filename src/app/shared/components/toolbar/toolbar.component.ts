@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-toolbar',
@@ -34,6 +33,4 @@ export class ToolbarComponent implements OnInit {
   addDirectionValue(value: string) {
     this.direction.emit(value);
   }
-
-
 }

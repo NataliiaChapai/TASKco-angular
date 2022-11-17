@@ -52,8 +52,8 @@ export class BoardComponent implements OnInit {
     this.showModal = true;
   }
 
-  updateBoard(name: Partial<Board>) {
-    this.store.updateBoard(this.boardId, name).subscribe({
+  updateBoard({name}: Partial<Board>) {
+    this.store.updateBoard(this.boardId, {name}).subscribe({
       next: () => {
         this.submitted = false;
         this.showModal = false;

@@ -28,6 +28,4 @@ export class ArchiveTaskComponent implements OnInit {
     this.store.changeColor(column, color.target.value).subscribe();
   }
 
-  
-
 }

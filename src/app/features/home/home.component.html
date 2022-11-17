@@ -6,4 +6,3 @@
     <p [routerLink]="['/dashboard']" *ngIf="isLoggedIn$ | async">Your dashboard →</p>
     <p [routerLink]="['/auth']" *ngIf="isLoggedOut$ | async">Please login to get started →</p>
 </div>
-

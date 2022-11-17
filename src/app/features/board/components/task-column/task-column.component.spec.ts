@@ -2,8 +2,8 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
-import { BoardModule } from '../../board.module';
 
+import { BoardModule } from '../../board.module';
 import { TaskColumnComponent } from './task-column.component';
 
 describe('TaskColumnComponent', () => {
@@ -29,6 +29,5 @@ describe('TaskColumnComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
   
 });

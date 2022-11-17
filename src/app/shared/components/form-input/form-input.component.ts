@@ -9,12 +9,11 @@ import { FormGroup } from '@angular/forms';
 })
 export class FormInputComponent implements OnInit {
 
-@Input() parentForm: FormGroup;
-@Input() placeholder: string;
+  @Input() parentForm: FormGroup;
+  @Input() placeholder: string;
 
   constructor() { }
 
   ngOnInit(): void {
   }
-
 }

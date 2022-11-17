@@ -3,10 +3,10 @@ import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
+import { HttpErrorResponse } from '@angular/common/http';
 
 import { DashboardService } from './dashboard.service';
 import { environment } from 'src/environments/environment';
-import { HttpErrorResponse } from '@angular/common/http';
 
 const BOARDS = [
     {
