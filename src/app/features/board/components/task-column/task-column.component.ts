@@ -52,7 +52,7 @@ export class TaskColumnComponent implements OnInit {
   }
 
   changeColor(column: string, color: any,) {
-    this.store.changeColor(column.toLowerCase(), color.target.value).subscribe();
+    this.store.changeColor(column.split(' ').join('').toLowerCase(), color.target.value).subscribe();
   }
 
   drop(ev: DragEvent) {
