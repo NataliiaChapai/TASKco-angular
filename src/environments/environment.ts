@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://taskco.herokuapp.com/api'
+  // apiUrl: 'https://taskco.herokuapp.com/api'
+  apiUrl: 'https://taskco.onrender.com/api'
 };
 
 /*
